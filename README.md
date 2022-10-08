@@ -4,17 +4,17 @@ This is a batteries included template for using React Three Fiber (R3F) with Nex
 
 ## Features
 
-- ♻ Easily mix DOM and 3D Canvas
-- 🎨 Fragment and Vertex Shaders (with syntax highlighting)
-- 🎬 [React Spring](https://github.com/pmndrs/react-spring) for animation
-- 🎛 [Leva](https://github.com/pmndrs/leva) panel for debugging
-- ♿ [R3F A11y](https://github.com/pmndrs/react-three-a11y)
-- 🏪 [Zustand](https://github.com/pmndrs/zustand) store
-- 📁 Relative paths (`@/components/`)
-- 📴 Offline mode
-- 🍱 Bundle Analyzer
-- 👕 ESLint and Prettier
-- ☑ Typescript
+-   ♻ Easily mix DOM and 3D Canvas
+-   🎨 Fragment and Vertex Shaders (with syntax highlighting)
+-   🎬 [React Spring](https://github.com/pmndrs/react-spring) for animation
+-   🎛 [Leva](https://github.com/pmndrs/leva) panel for debugging
+-   ♿ [R3F A11y](https://github.com/pmndrs/react-three-a11y)
+-   🏪 [Zustand](https://github.com/pmndrs/zustand) store
+-   📁 Relative paths (`@/components/`)
+-   📴 Offline mode
+-   🍱 Bundle Analyzer
+-   👕 ESLint and Prettier
+-   ☑ Typescript
 
 ## Getting Started
 
@@ -54,31 +54,31 @@ Each page should export `<DOM />` and `<R3f />` components. DOM first, then R3F 
 
 // DOM elements here
 const DOM = () => {
-  return (
-    <>
-      <h1>Hello world</h1>
-    </>
-  );
-};
+	return (
+		<>
+			<h1>Hello world</h1>
+		</>
+	)
+}
 
 // Canvas/R3F components here
 const R3F = () => {
-  return (
-    <>
-      <YourR3FComponent />
-      <ThreeDBox />
-      <Sphere />
-    </>
-  );
-};
+	return (
+		<>
+			<YourR3FComponent />
+			<ThreeDBox />
+			<Sphere />
+		</>
+	)
+}
 
 export default function Page() {
-  return (
-    <>
-      <DOM />
-      <R3F r3f />
-    </>
-  );
+	return (
+		<>
+			<DOM />
+			<R3F r3f />
+		</>
+	)
 }
 ```
 
@@ -88,11 +88,11 @@ You can use `getStaticProps` to pass a `title` prop. This gets passed to the `<H
 
 ```tsx
 export async function getStaticProps() {
-  return {
-    props: {
-      title: "Welcome!",
-    },
-  };
+	return {
+		props: {
+			title: "Welcome!",
+		},
+	}
 }
 ```
 
@@ -105,13 +105,13 @@ If you need to have a **separate canvas per page** for any reason, you can just 
 ```tsx
 // src\pages\_app.tsx
 const AppLayout = ({ children }) => {
-  const newChildren = React.Children.map(children, (child, index) =>
-    // 👉 Remove the <Canvas> here (which I already did in this example)
-    index % 2 === 0 ? <Dom>{child}</Dom> : <>{child}</>
-  );
+	const newChildren = React.Children.map(children, (child, index) =>
+		// 👉 Remove the <Canvas> here (which I already did in this example)
+		index % 2 === 0 ? <Dom>{child}</Dom> : <>{child}</>
+	)
 
-  return newChildren;
-};
+	return newChildren
+}
 ```
 
 ### Importing R3F components
@@ -129,10 +129,10 @@ See the `/pages/` and `/components/canvas/` for examples.
 
 This project features VSCode snippets for quickly creating R3F components and patterns. You can find them and add more in `.vscode\r3f.code-snippets`.
 
-- `r3fc` - Create R3F mesh
-- `r3fg` - Create R3F group
-- `tsr3fc` - Create R3F mesh (with Typescript)
-- `tsr3fg` - Create R3F group (with Typescript)
+-   `r3fc` - Create R3F mesh
+-   `r3fg` - Create R3F group
+-   `tsr3fc` - Create R3F mesh (with Typescript)
+-   `tsr3fg` - Create R3F group (with Typescript)
 
 ## Tips
 
@@ -148,6 +148,6 @@ Check out [our guide on using R3F with Typescript.](./docs/typescript.md) And tr
 
 ## Credits
 
-- [NextJS ThreeJS/R3F Example](https://github.com/vercel/next.js/tree/canary/examples/with-three-js)
-- [create-r3f-app](https://github.com/utsuboco/create-r3f-app)
-- [Poimandres](https://github.com/pmndrs/)
+-   [NextJS ThreeJS/R3F Example](https://github.com/vercel/next.js/tree/canary/examples/with-three-js)
+-   [create-r3f-app](https://github.com/utsuboco/create-r3f-app)
+-   [Poimandres](https://github.com/pmndrs/)
