@@ -13,7 +13,7 @@ const Canvas = dynamic(() => import("@/components/layout/canvas"), {
 })
 
 const AppLayout = ({ children }) => {
-	// We assume the DOM comes first, then canvas
+	// We assume the DOM comes first, then canvas 
 	// And they can even alternate if they want (DOM, Canvas, DOM, Canvas)
 	const newChildren = React.Children.map(children, (child, index) =>
 		index % 2 === 0 ? <Dom>{child}</Dom> : <Canvas>{child}</Canvas>
