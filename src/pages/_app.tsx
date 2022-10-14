@@ -6,6 +6,7 @@ import { useEffect } from "react";
 import Header from "@/components/dom/Header";
 import Dom from "@/components/layout/dom";
 import dynamic from "next/dynamic";
+import { ThemeProvider } from "next-themes";
 import "@/styles/index.css";
 
 const Canvas = dynamic(() => import("@/components/layout/canvas"), {
@@ -36,8 +37,10 @@ function App({ Component, pageProps = { title: "index" } }: AppProps) {
 
   return (
     <>
-      <Header title={pageProps.title} />
-      <AppLayout>{children}</AppLayout>
+      <ThemeProvider>
+        <Header title={pageProps.title} />
+        <AppLayout>{children}</AppLayout>
+      </ThemeProvider>
     </>
   );
 }
