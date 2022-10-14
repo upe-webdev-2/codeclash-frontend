@@ -1,9 +1,9 @@
-import React from "react"
+import React from "react";
 
-type Props = {}
+type Props = {};
 
 const playground = (props: Props) => {
-	return <div>This is the playground</div>
-}
+  return <div>This is the playground</div>;
+};
 
-export default playground
+export default playground;
