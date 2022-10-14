@@ -15,11 +15,20 @@ This demo relies on two things:
 npx json-server --watch db.json --port 8000
 ```
 
-### 2. Run Development Server (port 3000)
+> Open JSON server: http://localhost:8000/
+
+#### Possible Routes
+
+- /problems
+- /problems/1
+
+### 2. Run Development Server (port 3001)
 
 ```bash
 npm run dev
 ```
+
+> Open Dev Enviroment: http://localhost:3001/
 
 <!-- # r3f-next-starter
 
