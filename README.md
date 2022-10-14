@@ -22,13 +22,11 @@ npx json-server --watch db.json --port 8000
 - /problems
 - /problems/1
 
-### 2. Run Development Server (port 3001)
+### 2. Run Development Server
 
 ```bash
 npm run dev
 ```
-
-> Open Dev Enviroment: http://localhost:3001/
 
 <!-- # r3f-next-starter
 
