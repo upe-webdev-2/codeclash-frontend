@@ -22,5 +22,4 @@ const Dom = ({ children }) => {
     </div>
   );
 };
-
 export default Dom;
