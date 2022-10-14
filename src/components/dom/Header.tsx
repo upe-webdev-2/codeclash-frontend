@@ -20,7 +20,7 @@ type HeaderProps = {
 
 const Header = ({ title, coverImage }: HeaderProps) => {
   const { author, url, title: defaultTitle, description, keywords } = config;
-  const pageTitle = title ? `${title} - ${defaultTitle}` : defaultTitle;
+  const pageTitle = title ? `${defaultTitle} | ${title}` : defaultTitle;
   const schema = generateSchema(url, title);
   return (
     <>
