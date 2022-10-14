@@ -1,4 +1,27 @@
-# r3f-next-starter
+# CodeClash Demo
+
+## How to use
+
+This demo relies on two things:
+
+1. JSON Server to fetch data
+2. Development server
+
+### 1. Start the JSON Server
+
+> Temporary JSON server. Fetches data from db.json
+
+```bash
+npx json-server --watch db.json --port 8000
+```
+
+### 2. Run Development Server
+
+```bash
+npm run dev
+```
+
+<!-- # r3f-next-starter
 
 This is a batteries included template for using React Three Fiber (R3F) with NextJS 🔋. Based on [create-r3f-app](https://github.com/utsuboco/create-r3f-app).
 
@@ -150,4 +173,4 @@ Check out [our guide on using R3F with Typescript.](./docs/typescript.md) And tr
 
 -   [NextJS ThreeJS/R3F Example](https://github.com/vercel/next.js/tree/canary/examples/with-three-js)
 -   [create-r3f-app](https://github.com/utsuboco/create-r3f-app)
--   [Poimandres](https://github.com/pmndrs/)
+-   [Poimandres](https://github.com/pmndrs/) -->

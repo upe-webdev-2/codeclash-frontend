@@ -47,6 +47,7 @@
 		"file-loader": "^6.2.0",
 		"glslify": "^7.1.1",
 		"glslify-loader": "^2.0.0",
+		"json-server": "^0.17.0",
 		"next-compose-plugins": "^2.2.1",
 		"next-offline": "^5.0.5",
 		"prettier": "^2.6.2",
