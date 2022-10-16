@@ -4,7 +4,6 @@ export default function Error404() {
   return (
     <>
       <h1 className="text-6xl font-bold mb-5 pt-10 px-6">404 - Not Found :/</h1>
-      <p className="text-xl text-pink-600">Working on it...</p>
     </>
   );
 }

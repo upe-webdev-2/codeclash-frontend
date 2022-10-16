@@ -6,7 +6,6 @@ import { useEffect } from "react";
 import Header from "@/components/dom/Header";
 import Dom from "@/components/layout/dom";
 import dynamic from "next/dynamic";
-import "@/styles/index.css";
 import "../styles/global.css";
 
 const Canvas = dynamic(() => import("@/components/layout/canvas"), {

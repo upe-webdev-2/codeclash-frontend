@@ -3,9 +3,9 @@ const config = {
   url: `https://github.com/upe-webdev-2`,
   description:
     "This is an interactive coding enviroment where players can battle it out through Data Structures and Alogorithms questions!",
-  author: "SparkDev Web Dev II",
+  author: "SparkDev - Web Dev II",
   keywords: ["CodeClash", "1vs1", "leetcode", "hackerrank"],
-  twitter: "NO TWITTER"
+  twitter: "@UPEFIU"
 };
 
 export default config;

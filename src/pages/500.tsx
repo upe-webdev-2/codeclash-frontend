@@ -6,7 +6,6 @@ export default function Error500() {
       <h1 className="text-6xl font-bold mb-5 pt-10 px-6">
         500 - Something went wrong :/
       </h1>
-      <p className="text-xl text-pink-600">Working on it...</p>
     </>
   );
 }

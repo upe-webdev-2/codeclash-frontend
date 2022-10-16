@@ -1,11 +1,9 @@
 import useStore from "@/helpers/store";
 import dynamic from "next/dynamic";
 import { useRouter } from "next/router";
-import Link from "next/link";
-import SimpleCard from "../components/SimpleCard";
 import PromptPanel from "../components/PromptPanel";
 import { useState, useEffect } from "react";
-import Editor, { useMonaco, loader } from "@monaco-editor/react";
+import Editor from "@monaco-editor/react";
 // import Shader from '@/components/canvas/ShaderExample/ShaderExample'
 
 // Prefer dynamic import for production builds
