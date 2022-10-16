@@ -1,5 +1,6 @@
-import requests
 import sys
+
+import requests
 
 url = "https://codex-api.herokuapp.com/"
 
