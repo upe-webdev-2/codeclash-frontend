@@ -77,7 +77,7 @@ const DOM = ({ problemData }) => {
 
     alert(`POST Body: ${JSON.stringify(body)}`);
 
-    const res = await fetch(`${URL}/submissions/1`, {
+    const res = await fetch(`${URL}/execute`, {
       method: "POST",
       headers: {
         Accept: "application/json",
