@@ -1,9 +1,9 @@
 import React from "react";
 
 type PrompPanelProps = {
-  id: string;
+  id: number;
   title: string;
-  difficulty: string;
+  difficulty: "Easy" | "Medium" | "Hard";
   objectives: [string];
   examples: [{ output: string; input: string; explanation?: string }];
 };

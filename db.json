@@ -1,9 +1,9 @@
 {
   "problems": [
     {
-      "id": "1",
+      "id": 1,
       "title": "Two Sum",
-      "difficulty": "Easy",
+      "difficulty": "Eaaasy",
       "objectives": [
         "Given an array of integers nums and an integer target, return indices of the two numbers such that they add up to target.",
         "You may assume that each input would have exactly one solution, and you may not use the same element twice.",
@@ -24,7 +24,8 @@
           "output": "[0,1]"
         }
       ],
-      "starterCode": "def twoSum(nums: List[int], target: int) -> List[int]:\n\t# Code here...\n\tpass"
+      "starterCode": "def twoSum(nums: List[int], target: int) -> List[int]:\n\t# Code here...\n\tpass",
+      "timeLimit": 5
     }
   ]
 }

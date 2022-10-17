@@ -33,12 +33,29 @@ const editorConfig = {
     smoothScrolling: true
   }
 };
+type PlaygroundProps = {
+  problemData: {
+    id: number;
+    title: string;
+    difficulty: "Easy" | "Medium" | "Hard";
+    objectives: [string];
+    examples: [
+      {
+        input: string;
+        output: string;
+        explanation?: string;
+      }
+    ];
+    starterCode: string;
+    timeLimit: number;
+  };
+};
 
 // DOM elements here
-const DOM = ({ problemData }) => {
+const DOM = ({ problemData }: PlaygroundProps) => {
   const [language, setLanguage] = useState("python");
 
-  const [minutesLeft, setMinutesLeft] = useState(2); // minutes
+  const [minutesLeft, setMinutesLeft] = useState(problemData.timeLimit); // minutes
   const [code, setCode] = useState(problemData.starterCode);
 
   useEffect(() => {
