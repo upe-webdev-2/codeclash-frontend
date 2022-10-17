@@ -1,16 +1,11 @@
 const config = {
-	title: `R3F Next Starter`,
-	url: `https://github.com/whoisryosuke/r3f-next-starter`,
-	description:
-		"This is a batteries included template for using React Three Fiber (R3F) with NextJS 🔋.",
-	author: "Ryosuke Hana",
-	keywords: [
-		"nextjs",
-		"react-three-fiber",
-		"r3f template",
-		"r3f next template",
-	],
-	twitter: "@whoisryosuke",
-}
+  title: `CodeClash`,
+  url: `https://github.com/upe-webdev-2`,
+  description:
+    "This is an interactive coding enviroment where players can battle it out through Data Structures and Alogorithms questions!",
+  author: "SparkDev - Web Dev II",
+  keywords: ["CodeClash", "1vs1", "leetcode", "hackerrank"],
+  twitter: "@UPEFIU"
+};
 
-export default config
+export default config;
