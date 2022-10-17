@@ -24,7 +24,7 @@
           "output": "[0,1]"
         }
       ],
-      "starterCode": "def twoSum(nums: List[int], target: int) -> List[int]:\n\t# Code here...\n\tpass",
+      "starterCode": "def solve(nums: List[int], target: int) -> List[int]:\n\t# Code here...\n\tpass",
       "timeLimit": 5
     }
   ]
