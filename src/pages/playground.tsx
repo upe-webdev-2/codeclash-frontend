@@ -17,7 +17,7 @@ const Shader = dynamic(
   }
 );
 
-const URL = "http://localhost:8000";
+const URL = "http://localhost:3000";
 
 const editorConfig = {
   theme: "vs",
