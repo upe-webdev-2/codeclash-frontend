@@ -24,8 +24,58 @@
           "output": "[0,1]"
         }
       ],
-      "starterCode": "def solve(nums: List[int], target: int) -> List[int]:\n\t# Code here...\n\tpass",
+      "starterCode": "def solve(nums: list, target: int) -> list:\n\t# Code here...",
       "timeLimit": 5
+    },
+    {
+      "id": 3,
+      "title": "Longest Substring Without Repeating Characters",
+      "difficulty": "Medium",
+      "objectives": [
+        "Given a string s, find the length of the longest substring without repeating characters."
+      ],
+      "examples": [
+        {
+          "input": "s = \"abcabcbb\"",
+          "output": "3",
+          "explanation": "The answer is \"abc\", with the length of 3."
+        },
+        {
+          "input": "s = \"bbbbb\"",
+          "output": "1",
+          "explanation": "The answer is \"b\", with the length of 1."
+        },
+        {
+          "input": "s = \"pwwkew\"",
+          "output": "3",
+          "explanation": "The answer is \"wke\", with the length of 3. Notice that the answer must be a substring, \"pwke\" is a subsequence and not a substring."
+        }
+      ],
+      "starterCode": "def solve(s: str) -> int:\n\t# Code here...",
+      "timeLimit": 15
+    },
+    {
+      "id": 4,
+      "title": "Median of Two Sorted Arrays",
+      "difficulty": "Hard",
+      "objectives": [
+        "Given two sorted arrays nums1 and nums2 of size m and n respectively, return the median of the two sorted arrays.",
+        "The overall run time complexity should be O(log (m+n))."
+      ],
+      "examples": [
+        {
+          "input": "nums1 = [1,3], nums2 = [2]",
+          "output": "2.00000",
+          "explanation": "merged array = [1,2,3] and median is 2."
+        },
+        {
+          "input": "nums1 = [1,2], nums2 = [3,4]",
+          "output": "2.50000",
+          "explanation": "merged array = [1,2,3,4] and median is (2 + 3) / 2 = 2.5."
+        }
+      ],
+      "starterCode": "def solve(nums1: list, nums2: list) -> float:\n\t# Code here...",
+      "timeLimit": 30
     }
   ]
 }
