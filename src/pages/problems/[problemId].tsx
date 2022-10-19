@@ -64,7 +64,7 @@ const DOM = ({ problemData }: ProblemProps) => {
 
     if (minutesLeft > 0) {
       timer = setInterval(() => {
-        setMinutesLeft(minutesLeft - 1);
+        setMinutesLeft(prevMinutesLeft => prevMinutesLeft - 1);
       }, 60000); // 60000ms / 1 min
     }
 
@@ -155,14 +155,46 @@ export default function problem(props) {
   );
 }
 
-export const getServerSideProps = async context => {
-  const res = await fetch(`${URL}/problems/${context.params.problemId}`);
+// export const getServerSideProps = async ({ params }) => {
+//   const res = await fetch(`${URL}/problems/${params.problemId}`);
+//   const problemData = await res.json();
+
+//   if (!problemData) {
+//     return {
+//       redirect: {
+//         destination: "/problems",
+//         permanent: false
+//       }
+//     };
+//   }
+
+//   return {
+//     props: {
+//       title: `Problem ${params.problemId}`,
+//       problemData
+//     }
+//   };
+// };
+
+export const getStaticProps = async ({ params }) => {
+  const res = await fetch(`${URL}/problems/${params.problemId}`);
   const problemData = await res.json();
 
   return {
     props: {
-      title: `Problem ${context.params.problemId}`,
+      title: `Problem ${params.problemId}`,
       problemData
     }
   };
+};
+
+export const getStaticPaths = async () => {
+  const res = await fetch(`${URL}/problems`);
+  const problems = await res.json();
+
+  const paths = problems.map(problem => ({
+    params: { problemId: "" + problem.id }
+  }));
+
+  return { paths, fallback: false };
 };
