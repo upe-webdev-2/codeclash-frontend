@@ -63,7 +63,7 @@ const DOM = ({ problemData }: PlaygroundProps) => {
 
     if (minutesLeft > 0) {
       timer = setInterval(() => {
-        setMinutesLeft(minutesLeft - 1);
+        setMinutesLeft(prevMinutesLeft => prevMinutesLeft - 1);
       }, 60000); // 60000ms / 1 min
     }
 
