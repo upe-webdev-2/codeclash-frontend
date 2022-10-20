@@ -67,15 +67,15 @@ def append_run_config(script: str, test_cases: list[dict]) -> str:
 if __name__ == "__main__":
     passed_count = 0
 
-    for index, test_case in enumerate(test_cases):
-        print(f"---------------- Test Case #{index + 1}: Terminal Output ----------------")
+    for index, test_case in enumerate(test_cases, start=1):
+        print(f"---------------- Test Case #{index}: Terminal Output ----------------")
         user_output = solve(*test_case["inputs"]) # spread all the params
 
         if user_output == test_case["output"]:
-            print(f"\nTest Case #{index + 1}: Passed!\n")
+            print(f"\nTest Case #{index}: Passed!\n")
             passed_count += 1
         else:
-            print(f"\nTest Case #{index + 1}: FAILED!\n")
+            print(f"\nTest Case #{index}: FAILED!\n")
             print(f"Input: {test_case['inputs']}")
             print(f"Output: {user_output}")
             print(f"Expected: {test_case['output']}")
