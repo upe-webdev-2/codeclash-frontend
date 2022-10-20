@@ -13,7 +13,7 @@ TEST_CASES_FROM_DB = [
     },
     {
         "inputs": [[3,2,4], 6],
-        "output": [1, 2, "k"]
+        "output": [1, 2]
     },
     {
         "inputs": [[3,3], 6],
