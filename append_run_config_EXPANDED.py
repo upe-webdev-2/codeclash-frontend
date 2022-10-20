@@ -16,15 +16,15 @@ def solve(nums: list, target: int) -> list:
 # test cases would come externally (NEEDS TO BE STRINGIFIED)
 test_cases = [
     {
-        "inputs": ([2,7,11,15], 9),
+        "inputs": [[2,7,11,15], 9],
         "output": [0, 1]
     },
     {
-        "inputs": ([3,2,4], 6),
+        "inputs": [[3,2,4], 6],
         "output": [1, 2, 'FAIL HERE'] # failing on purpose
     },
     {
-        "inputs": ([3,3], 6),
+        "inputs": [[3,3], 6],
         "output": [0,1]
     },
 ]
