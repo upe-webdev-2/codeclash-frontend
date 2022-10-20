@@ -32,9 +32,17 @@ def main():
     # this would be recieved from the front end
     script = "def solve(nums: list, target: int) -> list:\n\thash_map = dict()\n\n\tfor index, num in enumerate(nums):\n\t\tcomplement = target - num\n\n\t\tif complement in hash_map:\n\t\t\treturn [hash_map[complement], index]\n\n\t\thash_map[num] = index\n\n\treturn []"
 
+    language = "python" # from the frontend
+
+    if language == "python":
+        language = "py"
+    else:
+        print(f"Unsupported language '{language}'")
+        return
+
     data = {
         "code": append_run_config(script, TEST_CASES_FROM_DB), # script to be executed
-        "language": "py", # supports: py, java, js, c, cpp, cs, go
+        "language": language, # supports: py, java, js, c, cpp, cs, go
         "input": "" # any command line input needed
     }
 

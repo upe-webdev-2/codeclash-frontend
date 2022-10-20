@@ -21,7 +21,7 @@ test_cases = [
     },
     {
         "inputs": [[3,2,4], 6],
-        "output": [1, 2, 'FAIL HERE'] # failing on purpose
+        "output": [1, 2, "FAIL HERE"] # failing on purpose
     },
     {
         "inputs": [[3,3], 6],
@@ -50,4 +50,4 @@ if __name__ == "__main__":
     print(f"\nPassed: {passed_count} / {len(test_cases)}")
     if (passed_count == len(test_cases)): # ALL TEST CASES PASSED
         print("\nAdvancing to the next stage...")
-        print("WINNING SECRET... should be removed before printing to front end")
+        print("%%###---WINNING_SECRET---###%%") # should be removed before printing to front end
