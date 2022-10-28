@@ -2,14 +2,13 @@
 
 ## How to use
 
-This demo relies on two things:
+This demo relies on 3 things:
 
-1. JSON Server to fetch data
-2. Development server
+1. Installing packages using `yarn`
+2. Running a local JSON server to fetch data (mock REST API)
+3. Run the development server
 
-### 1. Run Development Server
-
-Install all the dependendicies
+### 1. Install all the dependendicies
 
 ```bash
 yarn
