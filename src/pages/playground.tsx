@@ -13,7 +13,7 @@ import Editor from "@monaco-editor/react";
 const Shader = dynamic(
   () => import("@/components/canvas/ShaderExample/ShaderExample"),
   {
-    ssr: false
+    ssr: false,
   }
 );
 
@@ -25,13 +25,13 @@ const editorConfig = {
   defaultLanguage: "python",
   options: {
     minimap: {
-      enabled: false
+      enabled: false,
     },
     fontFamily: "JetBrains Mono",
     fontSize: 14,
     readOnly: false,
-    smoothScrolling: true
-  }
+    smoothScrolling: true,
+  },
 };
 type PlaygroundProps = {
   problemData: {
@@ -63,7 +63,7 @@ const DOM = ({ problemData }: PlaygroundProps) => {
 
     if (minutesLeft > 0) {
       timer = setInterval(() => {
-        setMinutesLeft(prevMinutesLeft => prevMinutesLeft - 1);
+        setMinutesLeft((prevMinutesLeft) => prevMinutesLeft - 1);
       }, 60000); // 60000ms / 1 min
     }
 
@@ -80,14 +80,14 @@ const DOM = ({ problemData }: PlaygroundProps) => {
     }
   };
 
-  const handleEditorChange = value => {
+  const handleEditorChange = (value) => {
     setCode(value);
   };
 
   const handleSubmit = async () => {
     const body = {
       language: language,
-      script: code
+      script: code,
     };
 
     alert(`POST Body: ${JSON.stringify(body)}`);
@@ -96,9 +96,9 @@ const DOM = ({ problemData }: PlaygroundProps) => {
       method: "POST",
       headers: {
         Accept: "application/json",
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
       },
-      body: JSON.stringify(body)
+      body: JSON.stringify(body),
     });
   };
 
@@ -162,7 +162,7 @@ export async function getStaticProps() {
   return {
     props: {
       title: "Playground",
-      problemData: data
-    }
+      problemData: data,
+    },
   };
 }

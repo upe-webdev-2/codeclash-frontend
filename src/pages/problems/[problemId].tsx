@@ -14,7 +14,7 @@ import Link from "next/link";
 const Shader = dynamic(
   () => import("@/components/canvas/ShaderExample/ShaderExample"),
   {
-    ssr: false
+    ssr: false,
   }
 );
 const URL = "http://localhost:8000";
@@ -25,13 +25,13 @@ const editorConfig = {
   defaultLanguage: "python",
   options: {
     minimap: {
-      enabled: false
+      enabled: false,
     },
     fontFamily: "JetBrains Mono",
     fontSize: 14,
     readOnly: false,
-    smoothScrolling: true
-  }
+    smoothScrolling: true,
+  },
 };
 
 type ProblemProps = {
@@ -64,7 +64,7 @@ const DOM = ({ problemData }: ProblemProps) => {
 
     if (minutesLeft > 0) {
       timer = setInterval(() => {
-        setMinutesLeft(prevMinutesLeft => prevMinutesLeft - 1);
+        setMinutesLeft((prevMinutesLeft) => prevMinutesLeft - 1);
       }, 60000); // 60000ms / 1 min
     }
 
@@ -81,14 +81,14 @@ const DOM = ({ problemData }: ProblemProps) => {
     }
   };
 
-  const handleEditorChange = value => {
+  const handleEditorChange = (value) => {
     setCode(value);
   };
 
   const handleSubmit = async () => {
     const body = {
       language: language,
-      script: code
+      script: code,
     };
 
     alert(`POST Body: ${JSON.stringify(body)}`);
@@ -97,9 +97,9 @@ const DOM = ({ problemData }: ProblemProps) => {
       method: "POST",
       headers: {
         Accept: "application/json",
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
       },
-      body: JSON.stringify(body)
+      body: JSON.stringify(body),
     });
   };
 
@@ -183,8 +183,8 @@ export const getStaticProps = async ({ params }) => {
   return {
     props: {
       title: `Problem ${params.problemId}`,
-      problemData
-    }
+      problemData,
+    },
   };
 };
 
@@ -192,8 +192,8 @@ export const getStaticPaths = async () => {
   const res = await fetch(`${URL}/problems`);
   const problems = await res.json();
 
-  const paths = problems.map(problem => ({
-    params: { problemId: "" + problem.id }
+  const paths = problems.map((problem) => ({
+    params: { problemId: "" + problem.id },
   }));
 
   return { paths, fallback: false };

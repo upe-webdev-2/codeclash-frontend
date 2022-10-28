@@ -12,7 +12,7 @@ import SimpleCard from "../components/SimpleCard";
 const Shader = dynamic(
   () => import("@/components/canvas/ShaderExample/ShaderExample"),
   {
-    ssr: false
+    ssr: false,
   }
 );
 
@@ -83,6 +83,6 @@ export default function Home() {
 
 export async function getStaticProps() {
   return {
-    props: {}
+    props: {},
   };
 }

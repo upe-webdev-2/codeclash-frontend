@@ -9,7 +9,7 @@ import dynamic from "next/dynamic";
 import "../styles/global.css";
 
 const Canvas = dynamic(() => import("@/components/layout/canvas"), {
-  ssr: false
+  ssr: false,
 });
 
 const AppLayout = ({ children }) => {

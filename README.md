@@ -7,7 +7,15 @@ This demo relies on two things:
 1. JSON Server to fetch data
 2. Development server
 
-### 1. Start the JSON Server (port 8000)
+### 1. Run Development Server
+
+Install all the dependendicies
+
+```bash
+yarn
+```
+
+### 2. Start the JSON Server (port 8000)
 
 > Temporary JSON server. Fetches data from db.json
 
@@ -22,10 +30,10 @@ npx json-server --watch db.json --port 8000
 - /problems
 - /problems/1
 
-### 2. Run Development Server
+### 3. Run Development Server
 
 ```bash
-npm run dev
+yarn dev
 ```
 
 <!-- # r3f-next-starter

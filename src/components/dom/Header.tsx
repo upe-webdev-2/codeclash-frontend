@@ -5,7 +5,7 @@ const generateSchema = (url, title) => ({
   "@context": "http://schema.org",
   "@type": "WebSite",
   url,
-  name: title
+  name: title,
   //   alternateName: config.title,
 });
 

@@ -12,7 +12,7 @@ import Link from "next/link";
 const Shader = dynamic(
   () => import("@/components/canvas/ShaderExample/ShaderExample"),
   {
-    ssr: false
+    ssr: false,
   }
 );
 const URL = "http://localhost:8000";
@@ -92,7 +92,7 @@ export async function getStaticProps() {
   return {
     props: {
       title: "Problems",
-      problems: data
-    }
+      problems: data,
+    },
   };
 }
