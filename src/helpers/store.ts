@@ -20,14 +20,14 @@ export const useStore = create<AppState>()(
     // Good in some cases, but not in others, especially prototyping
     // persist(
 
-    (set) => ({
+    set => ({
       // We keep the NextJS router in state because it's undefined in most components
       router: null,
-      setRouter: (router) =>
-        set((state) => ({
+      setRouter: router =>
+        set(state => ({
           ...state,
-          router,
-        })),
+          router
+        }))
 
       // Add any default values for app-wide state here
       // e.g. game start logic, points/score, etc

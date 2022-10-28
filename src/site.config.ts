@@ -5,7 +5,7 @@ const config = {
     "This is an interactive coding enviroment where players can battle it out through Data Structures and Alogorithms questions!",
   author: "SparkDev - Web Dev II",
   keywords: ["CodeClash", "1vs1", "leetcode", "hackerrank"],
-  twitter: "@UPEFIU",
+  twitter: "@UPEFIU"
 };
 
 export default config;
