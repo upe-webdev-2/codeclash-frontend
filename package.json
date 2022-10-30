@@ -18,7 +18,8 @@
     "build": "next build",
     "export": "EXPORT=true next build && EXPORT=true next export",
     "analyze": "ANALYZE=true next build",
-    "start": "next start"
+    "start": "next start",
+    "mock-backend": "npx json-server --watch db.json --port 8000"
   },
   "dependencies": {
     "@react-spring/three": "^9.4.5",

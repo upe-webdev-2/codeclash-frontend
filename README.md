@@ -19,7 +19,7 @@ yarn
 > Temporary JSON server. Fetches data from db.json
 
 ```bash
-npx json-server --watch db.json --port 8000
+yarn mock-backend
 ```
 
 > Open JSON server: <http://localhost:8000/>
