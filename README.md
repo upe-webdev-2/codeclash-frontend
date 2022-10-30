@@ -22,7 +22,7 @@ yarn
 npx json-server --watch db.json --port 8000
 ```
 
-> Open JSON server: http://localhost:8000/
+> Open JSON server: <http://localhost:8000/>
 
 #### Possible Routes
 
