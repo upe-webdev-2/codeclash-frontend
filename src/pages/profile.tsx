@@ -10,7 +10,7 @@ import { useRouter } from "next/router";
 const Shader = dynamic(
   () => import("@/components/canvas/ShaderExample/ShaderExample"),
   {
-    ssr: false
+    ssr: false,
   }
 );
 
@@ -41,7 +41,7 @@ export default function leaderboard() {
 export async function getStaticProps() {
   return {
     props: {
-      title: "Profile"
-    }
+      title: "Profile",
+    },
   };
 }

@@ -18,7 +18,7 @@ function promptPanel(props: PrompPanelProps) {
 
       <br />
       <h4 className="font-bold">Objective:</h4>
-      {props.objectives.map(objective => (
+      {props.objectives.map((objective) => (
         <>
           <div className="text-sm">{objective}</div>
           <br />
