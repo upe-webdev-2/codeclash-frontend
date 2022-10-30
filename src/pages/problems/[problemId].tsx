@@ -3,7 +3,7 @@ import dynamic from "next/dynamic";
 import { useRouter } from "next/router";
 import PromptPanel from "../../components/PromptPanel";
 import { useState, useEffect } from "react";
-import Editor from "@monaco-editor/react";
+import Editor, { useMonaco } from "@monaco-editor/react";
 import Link from "next/link";
 // import Shader from '@/components/canvas/ShaderExample/ShaderExample'
 
@@ -20,8 +20,8 @@ const Shader = dynamic(
 const URL = "http://localhost:8000";
 
 const editorConfig = {
-  theme: "vs",
-  height: "80vh",
+  theme: "vs-dark",
+  height: "calc(100vh - 10rem)",
   defaultLanguage: "python",
   options: {
     minimap: {
@@ -54,6 +54,7 @@ type ProblemProps = {
 
 // DOM elements here
 const DOM = ({ problemData }: ProblemProps) => {
+  const monaco = useMonaco();
   const [language, setLanguage] = useState("python");
 
   const [minutesLeft, setMinutesLeft] = useState(problemData.timeLimit); // minutes
@@ -80,6 +81,64 @@ const DOM = ({ problemData }: ProblemProps) => {
       return "Times up!";
     }
   };
+
+  useEffect(() => {
+    if (!monaco) {
+      return;
+    }
+
+    enum COLORS {
+      black = "#191919",
+      white = "#D6D6DD",
+      grey = "#6D6D6D",
+      yellow = "#E5C07B",
+      pink = "#CC8ECD",
+      orange = "#EFB080",
+      cyan = "#83D6C5",
+      blue = "#7ABAEE",
+      purple = "#AAA0FA"
+    }
+
+    monaco.editor.defineTheme("code-clash", {
+      base: "vs-dark",
+      inherit: true,
+      rules: [
+        // global styling
+        {
+          token: "",
+          foreground: COLORS.white,
+          background: COLORS.black,
+          fontStyle: ""
+        },
+
+        // white
+        { token: "variable", foreground: COLORS.white },
+        { token: "variable", foreground: COLORS.white },
+        { token: "variable.predefined", foreground: COLORS.white },
+        { token: "variable.predefined", foreground: COLORS.white },
+        { token: "variable.parameter", foreground: COLORS.white },
+        { token: "delimiter", foreground: COLORS.white },
+        { token: "attribute.value", foreground: COLORS.white },
+        { token: "delimiter", foreground: COLORS.white },
+
+        // colorful
+        { token: "string", foreground: COLORS.pink },
+        { token: "keyword", foreground: COLORS.cyan },
+        { token: "type", foreground: COLORS.cyan },
+        { token: "number", foreground: COLORS.yellow },
+        { token: "comment", foreground: COLORS.grey },
+        { token: "constant", foreground: COLORS.orange },
+        { token: "attribute.name", foreground: COLORS.purple },
+        { token: "key", foreground: COLORS.purple }
+      ],
+      colors: {
+        "editor.background": COLORS.black,
+        "editor.foreground": COLORS.white
+      }
+    });
+
+    monaco.editor.setTheme("code-clash");
+  }, [monaco]);
 
   const handleEditorChange = value => {
     setCode(value);
