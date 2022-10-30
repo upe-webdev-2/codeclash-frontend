@@ -60,6 +60,7 @@ const DOM = ({ problemData }: ProblemProps) => {
   const [minutesLeft, setMinutesLeft] = useState(problemData.timeLimit); // minutes
   const [code, setCode] = useState(problemData.starterCode);
 
+  // updates the countdown timer
   useEffect(() => {
     let timer = null;
 
@@ -72,17 +73,9 @@ const DOM = ({ problemData }: ProblemProps) => {
     return () => clearInterval(timer);
   }, [minutesLeft]);
 
-  const displayTimeLeft = () => {
-    if (minutesLeft >= 2) {
-      return `${minutesLeft} minutes`;
-    } else if (minutesLeft === 1) {
-      return `1 minute... Hurry!`;
-    } else {
-      return "Times up!";
-    }
-  };
-
+  // handles monaco custom theme creation: create theme -> apply the theme
   useEffect(() => {
+    // ensures monaco instance has been created before updating the theme
     if (!monaco) {
       return;
     }
@@ -99,6 +92,7 @@ const DOM = ({ problemData }: ProblemProps) => {
       purple = "#AAA0FA"
     }
 
+    // 1. create custom theme
     monaco.editor.defineTheme("code-clash", {
       base: "vs-dark",
       inherit: true,
@@ -137,9 +131,21 @@ const DOM = ({ problemData }: ProblemProps) => {
       }
     });
 
+    // 2. set the Monaco instance to the custom theme
     monaco.editor.setTheme("code-clash");
   }, [monaco]);
 
+  const displayTimeLeft = () => {
+    if (minutesLeft >= 2) {
+      return `${minutesLeft} minutes`;
+    } else if (minutesLeft === 1) {
+      return `1 minute... Hurry!`;
+    } else {
+      return "Times up!";
+    }
+  };
+
+  // store the user's input into the current state
   const handleEditorChange = value => {
     setCode(value);
   };
