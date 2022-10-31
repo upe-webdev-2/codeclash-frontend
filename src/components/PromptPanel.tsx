@@ -9,24 +9,39 @@ type PrompPanelProps = {
 };
 
 function promptPanel(props: PrompPanelProps) {
+  const getDifficultyColor = (): string => {
+    switch (props.difficulty) {
+      case "Easy":
+        return "text-green-600";
+      case "Medium":
+        return "text-yellow-600";
+      case "Hard":
+        return "text-red-600";
+      default:
+        return "text-grey-600";
+    }
+  };
+
   return (
     <div className="w-full px-6 py-12 md:w-1/3">
-      <h2 className="text-2xl font-bold">
+      <h2 className="text-xl font-bold">
         {props.id}. {props.title}{" "}
-        <span className="text-green-600">({props.difficulty})</span>
       </h2>
+      <h4 className={`mt-1 text-lg font-bold ${getDifficultyColor()}`}>
+        ({props.difficulty})
+      </h4>
 
       <br />
       <h4 className="font-bold">Objective:</h4>
-      {props.objectives.map((objective) => (
-        <>
+      {props.objectives.map((objective, index) => (
+        <div key={index}>
           <div className="text-sm">{objective}</div>
           <br />
-        </>
+        </div>
       ))}
 
       {props.examples.map((example, index) => (
-        <>
+        <div key={index}>
           <h4 className="font-bold">Example {index + 1}</h4>
           <p className="text-sm">
             <strong>Input: </strong>
@@ -45,7 +60,7 @@ function promptPanel(props: PrompPanelProps) {
             </p>
           )}
           <br />
-        </>
+        </div>
       ))}
     </div>
   );

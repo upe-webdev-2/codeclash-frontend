@@ -2,30 +2,37 @@
 
 ## How to use
 
-This demo relies on two things:
+This demo relies on 3 things:
 
-1. JSON Server to fetch data
-2. Development server
+1. Installing packages using `yarn`
+2. Running a local JSON server to fetch data (mock REST API)
+3. Run the development server
 
-### 1. Start the JSON Server (port 8000)
+### 1. Install all the dependendicies
+
+```bash
+yarn
+```
+
+### 2. Start the JSON Server (port 8000)
 
 > Temporary JSON server. Fetches data from db.json
 
 ```bash
-npx json-server --watch db.json --port 8000
+yarn mock-backend
 ```
 
-> Open JSON server: http://localhost:8000/
+> Open JSON server: <http://localhost:8000/>
 
 #### Possible Routes
 
 - /problems
 - /problems/1
 
-### 2. Run Development Server
+### 3. Run Development Server
 
 ```bash
-npm run dev
+yarn dev
 ```
 
 <!-- # r3f-next-starter

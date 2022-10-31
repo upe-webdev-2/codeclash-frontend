@@ -1,9 +1,10 @@
 import useStore from "@/helpers/store";
 import dynamic from "next/dynamic";
 import { useRouter } from "next/router";
-import PromptPanel from "../components/PromptPanel";
+import PromptPanel from "../../components/PromptPanel";
 import { useState, useEffect } from "react";
 import Editor, { useMonaco } from "@monaco-editor/react";
+import Link from "next/link";
 // import Shader from '@/components/canvas/ShaderExample/ShaderExample'
 
 // Prefer dynamic import for production builds
@@ -16,7 +17,6 @@ const Shader = dynamic(
     ssr: false
   }
 );
-
 const URL = "http://localhost:8000";
 
 const editorConfig = {
@@ -34,7 +34,7 @@ const editorConfig = {
   }
 };
 
-type PlaygroundProps = {
+type ProblemProps = {
   problemData: {
     id: number;
     title: string;
@@ -53,15 +53,29 @@ type PlaygroundProps = {
 };
 
 // DOM elements here
-const DOM = ({ problemData }: PlaygroundProps) => {
+const DOM = ({ problemData }: ProblemProps) => {
   const monaco = useMonaco();
-
   const [language, setLanguage] = useState("python");
 
   const [minutesLeft, setMinutesLeft] = useState(problemData.timeLimit); // minutes
   const [code, setCode] = useState(problemData.starterCode);
 
+  // updates the countdown timer
   useEffect(() => {
+    let timer = null;
+
+    if (minutesLeft > 0) {
+      timer = setInterval(() => {
+        setMinutesLeft(prevMinutesLeft => prevMinutesLeft - 1);
+      }, 60000); // 60000ms / 1 min
+    }
+
+    return () => clearInterval(timer);
+  }, [minutesLeft]);
+
+  // handles monaco custom theme creation: create theme -> apply the theme
+  useEffect(() => {
+    // ensures monaco instance has been created before updating the theme
     if (!monaco) {
       return;
     }
@@ -78,6 +92,7 @@ const DOM = ({ problemData }: PlaygroundProps) => {
       purple = "#AAA0FA"
     }
 
+    // 1. create custom theme
     monaco.editor.defineTheme("code-clash", {
       base: "vs-dark",
       inherit: true,
@@ -116,20 +131,9 @@ const DOM = ({ problemData }: PlaygroundProps) => {
       }
     });
 
+    // 2. set the Monaco instance to the custom theme
     monaco.editor.setTheme("code-clash");
   }, [monaco]);
-
-  useEffect(() => {
-    let timer = null;
-
-    if (minutesLeft > 0) {
-      timer = setInterval(() => {
-        setMinutesLeft(prevMinutesLeft => prevMinutesLeft - 1);
-      }, 60000); // 60000ms / 1 min
-    }
-
-    return () => clearInterval(timer);
-  }, [minutesLeft]);
 
   const displayTimeLeft = () => {
     if (minutesLeft >= 2) {
@@ -141,6 +145,7 @@ const DOM = ({ problemData }: PlaygroundProps) => {
     }
   };
 
+  // store the user's input into the current state
   const handleEditorChange = value => {
     setCode(value);
   };
@@ -171,7 +176,7 @@ const DOM = ({ problemData }: PlaygroundProps) => {
         <div className="w-full md:w-2/3 hidden md:block">
           <div className="w-full">
             <h2 className="text-2xl font-bold text-center pt-10">
-              <span>Sebastian</span> vs. <span>Emily</span>
+              <span>Player 1</span> vs. <span>Player 2</span>
             </h2>
             <p className="text-center">{displayTimeLeft()}</p>
           </div>
@@ -206,7 +211,7 @@ const R3F = () => {
   return <></>;
 };
 
-export default function playground(props) {
+export default function problem(props) {
   return (
     <>
       <DOM {...props} />
@@ -215,15 +220,46 @@ export default function playground(props) {
   );
 }
 
-export async function getStaticProps() {
-  const res = await fetch(`${URL}/problems/1`);
-  const data = await res.json();
-  console.log(data);
+// export const getServerSideProps = async ({ params }) => {
+//   const res = await fetch(`${URL}/problems/${params.problemId}`);
+//   const problemData = await res.json();
+
+//   if (!problemData) {
+//     return {
+//       redirect: {
+//         destination: "/problems",
+//         permanent: false
+//       }
+//     };
+//   }
+
+//   return {
+//     props: {
+//       title: `Problem ${params.problemId}`,
+//       problemData
+//     }
+//   };
+// };
+
+export const getStaticProps = async ({ params }) => {
+  const res = await fetch(`${URL}/problems/${params.problemId}`);
+  const problemData = await res.json();
 
   return {
     props: {
-      title: "Playground",
-      problemData: data
+      title: `Problem ${params.problemId}`,
+      problemData
     }
   };
-}
+};
+
+export const getStaticPaths = async () => {
+  const res = await fetch(`${URL}/problems`);
+  const problems = await res.json();
+
+  const paths = problems.map(problem => ({
+    params: { problemId: "" + problem.id }
+  }));
+
+  return { paths, fallback: false };
+};
