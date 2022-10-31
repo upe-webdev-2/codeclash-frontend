@@ -3,6 +3,7 @@ import dynamic from "next/dynamic";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import SimpleCard from "../components/SimpleCard";
+
 // import Shader from '@/components/canvas/ShaderExample/ShaderExample'
 
 // Prefer dynamic import for production builds
