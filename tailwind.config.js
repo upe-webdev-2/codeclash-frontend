@@ -11,10 +11,14 @@ module.exports = {
         // insert colors for regular mode
         dark: {
           // insert colors for dark mode
-        },
+        }
         // if we have more themes then we can have more colors
-      },
+      }
     },
+    fontFamily: {
+      gilroy: ["sans-serif"], // TODO: get gilroy font
+      jetBrains: ["JetBrains Mono", "sans-serif"]
+    }
   },
-  plugins: [],
+  plugins: []
 };
