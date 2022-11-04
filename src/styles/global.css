@@ -2,7 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
-html {
-  scroll-behavior: smooth;
-  font-family: "JetBrains Mono", sans-serif;
+@layer base {
+  html {
+    @apply scroll-smooth font-jetBrains;
+  }
+  body {
+    @apply bg-[#0F1031] text-white;
+  }
+  p {
+    @apply text-xl font-light font-gilroy;
+  }
 }
