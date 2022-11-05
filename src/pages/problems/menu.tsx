@@ -1,9 +1,9 @@
 import Image from "next/image";
 import { useState } from "react";
 
-type MenuProps = (props: {}) => JSX.Element;
+type MenuProps = {};
 
-const Menu: MenuProps = () => {
+const Menu = (props: MenuProps) => {
   const [difficultyCards] = useState([
     {
       difficulty: "Easy",
@@ -32,6 +32,10 @@ const Menu: MenuProps = () => {
     }
   ]);
 
+  const handlePlayButton = (difficulty: string) => {
+    console.log(`You clicked on ${difficulty}`);
+  };
+
   return (
     <>
       <div>
@@ -55,21 +59,21 @@ const Menu: MenuProps = () => {
           {difficultyCards.map((card, index) => (
             <div
               key={index}
-              className={`${card.background} shadow-[2px_11px_2px_-2px_rgba(34,_73,_214,_0.3)] flex flex-col justify-center items-center w-96 rounded-2xl px-4 pb-20`}
+              className={`${card.background} shadow-[2px_11px_2px_-2px_rgba(34,_73,_214,_0.3)] flex flex-col justify-center items-center w-72 xl:w-96 rounded-2xl px-4 pb-10 xl:pb-20`}
             >
               <Image src={card.image} alt="" width={252} height={189} />
 
-              <h1 className="pb-10 text-4xl font-extrabold capitalize font-gilroy">
+              <h1 className="text-2xl font-extrabold capitalize mb-7 xl:text-4xl xl:mb-10 font-gilroy">
                 {card.difficulty}
               </h1>
-              <p className="pb-16 text-center">{card.description}</p>
+              <p className="mb-10 text-base font-light text-center xl:text-xl xl:mb-16">
+                {card.description}
+              </p>
 
-              <div className="bg-[linear-gradient(97.13deg,_#7335DA_17.89%,_#6CFFED_100.73%)] rounded-3xl px-9 py-6 ">
+              <div className="bg-[linear-gradient(97.13deg,_#7335DA_17.89%,_#6CFFED_100.73%)] rounded-xl xl:rounded-3xl py-3 px-6 xl:px-9 xl:py-6 ">
                 <button
-                  className="text-xl font-extrabold font-gilroy"
-                  onClick={() =>
-                    console.log(`You've selected ${card.difficulty}`)
-                  }
+                  className="text-base font-extrabold xl:text-xl font-gilroy"
+                  onClick={() => handlePlayButton(card.difficulty)}
                 >
                   Play Now
                 </button>
