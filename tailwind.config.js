@@ -8,13 +8,22 @@ module.exports = {
   theme: {
     extend: {
       colors: {
+        primary: "#0F1021",
+        secondary: "#6cffed",
+        tertiary: "#6b44d9",
         // insert colors for regular mode
         dark: {
           // insert colors for dark mode
-        },
+        }
         // if we have more themes then we can have more colors
-      },
+      }
     },
+    fontFamily: {
+      poppins: ["Poppins", "sans-serif"],
+      gilroy: ["sans-serif"], // TODO: get gilroy font
+      jetBrains: ["JetBrains Mono", "sans-serif"]
+
+    }
   },
-  plugins: [],
+  plugins: []
 };
