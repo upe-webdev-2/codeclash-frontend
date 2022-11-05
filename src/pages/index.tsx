@@ -27,7 +27,7 @@ const DOM = () => {
       <Navbar />
       <div className="flex flex-col items-center justify-center flex-1 w-full h-full pb-[200vh] px-20 text-center">
         <h1 className="mb-5 text-6xl font-bold ">
-          Welcome to{" "} frefejroifenrfeo veo eoeoreerioerer
+          Welcome to{" "}
           <Link href="/">
             <span className="text-pink-500 cursor-pointer">CodeClash!</span>
           </Link>
