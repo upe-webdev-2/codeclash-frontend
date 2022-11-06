@@ -3,6 +3,7 @@ import dynamic from "next/dynamic";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import { signIn, signOut, useSession } from "next-auth/react";
+import { Model } from '../components/laptop'
 // import Shader from '@/components/canvas/ShaderExample/ShaderExample'
 
 // Prefer dynamic import for production builds
@@ -47,14 +48,16 @@ const DOM = () => {
 
 // Canvas/R3F components here
 const R3F = () => {
-  return <></>;
+  return <>
+    <Model />
+  </>;
 };
 
 export default function landingPage() {
   return (
     <>
       <DOM />
-      {/* <R3F /> */}
+      <R3F />
     </>
   );
 }
