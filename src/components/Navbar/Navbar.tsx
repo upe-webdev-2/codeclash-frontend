@@ -2,12 +2,19 @@ import React from "react";
 import Image from "next/image";
 import NavElements from "./NavElements";
 import ProfileComponents from "./ProfileComponents";
+import { useRouter } from "next/router";
 
 const Navbar = () => {
+  const router = useRouter();
   let isLoggedIn = true;
   return (
-    <div className="flex justify-between w-full pt-1 px-28 text-lg">
-      <div className="flex flex-col">
+    <div className="flex justify-between w-full pt-1 text-lg px-28">
+      <div
+        className="flex flex-col cursor-pointer"
+        onClick={() => {
+          router.push("/");
+        }}
+      >
         <Image
           src={"/static/logo.svg"}
           alt="Image of Code Clash Logo"
