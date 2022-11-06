@@ -1,39 +1,16 @@
-import { useState } from "react";
 import Image from "next/image";
 
 type DifficultySelector = {
-  startPlaying: (difficulty: string) => void;
+  cards: {
+    difficulty: string;
+    image: string;
+    description: string;
+    background: string;
+  }[];
+  searchForGame: (difficulty: string) => void;
 };
 
-const DifficultySelector = ({ startPlaying }: DifficultySelector) => {
-  const [difficultyCards] = useState([
-    {
-      difficulty: "Easy",
-      image: "/static/problems-menu/easy.png",
-      description:
-        "Based on your selected difficulty level, we will select an appropriate problem for you to solve.",
-      link: "#",
-      background: "bg-[linear-gradient(180deg,_#565AAC_0%,_#2D2F61_63.38%)]"
-    },
-    {
-      difficulty: "Medium",
-      image: "/static/problems-menu/medium.png",
-      description:
-        "Based on your selected difficulty level, we will select an appropriate problem for you to solve.",
-      link: "#",
-      background:
-        "bg-[linear-gradient(179.62deg,_#6b44d9db_29.69%,_#2D2F61_63.01%)]"
-    },
-    {
-      difficulty: "Hard",
-      image: "/static/problems-menu/medium.png",
-      description:
-        "Based on your selected difficulty level, we will select an appropriate problem for you to solve.",
-      link: "#",
-      background: "bg-[linear-gradient(180deg,_#6CFFED_-13.2%,_#2D2F61_61%)]"
-    }
-  ]);
-
+const DifficultySelector = ({ cards, searchForGame }: DifficultySelector) => {
   return (
     <>
       <div className="flex flex-col items-center w-full mb-20">
@@ -53,24 +30,24 @@ const DifficultySelector = ({ startPlaying }: DifficultySelector) => {
       </div>
 
       <div className="flex items-center justify-center gap-16">
-        {difficultyCards.map((card, index) => (
+        {cards?.map(({ difficulty, image, description, background }, index) => (
           <div
             key={index}
-            className={`${card.background} shadow-[2px_11px_2px_-2px_rgba(34,_73,_214,_0.3)] flex flex-col justify-center items-center w-72 xl:w-96 rounded-2xl px-4 pb-10 xl:pb-20`}
+            className={`${background} shadow-[2px_11px_2px_-2px_rgba(34,_73,_214,_0.3)] flex flex-col justify-center items-center w-72 xl:w-96 rounded-2xl px-4 pb-10 xl:pb-20`}
           >
-            <Image src={card.image} alt="" width={252} height={189} />
+            <Image src={image} alt="" width={252} height={189} />
 
             <h1 className="text-2xl font-extrabold capitalize mb-7 xl:text-4xl xl:mb-10 font-gilroy">
-              {card.difficulty}
+              {difficulty}
             </h1>
             <p className="mb-10 text-base font-light text-center xl:text-xl xl:mb-16">
-              {card.description}
+              {description}
             </p>
 
             <div className="bg-[linear-gradient(97.13deg,_#7335DA_17.89%,_#6CFFED_100.73%)] rounded-xl xl:rounded-3xl py-3 px-6 xl:px-9 xl:py-6 ">
               <button
                 className="text-base font-extrabold xl:text-xl font-gilroy"
-                onClick={() => startPlaying(card.difficulty)}
+                onClick={() => searchForGame(difficulty)}
               >
                 Play Now
               </button>
