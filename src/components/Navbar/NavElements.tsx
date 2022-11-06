@@ -3,7 +3,11 @@ import Link from "next/link";
 import Button from "../Button";
 import { useRouter } from "next/router";
 
-const NavElements = () => {
+const NavElements = ({
+  setIsLoggedIn
+}: {
+  setIsLoggedIn: React.Dispatch<React.SetStateAction<boolean>>;
+}) => {
   const router = useRouter();
 
   return (
@@ -13,7 +17,16 @@ const NavElements = () => {
         onclick={() => router.push("/signin")}
         type="none"
       />
-      <Button name={"Join"} onclick={() => router.push("/join")} type="fill" />
+      <Button
+        name={"Join"}
+        onclick={() => {
+          setIsLoggedIn(true);
+          console.warn('Redirect user to "/join"');
+
+          // router.push("/join")
+        }}
+        type="fill"
+      />
     </div>
   );
 };

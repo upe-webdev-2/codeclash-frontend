@@ -14,6 +14,7 @@ module.exports = {
         primary: "#0F1021",
         secondary: "#6cffed",
         tertiary: "#6b44d9",
+        quaternary: "#1D1E3F",
         // insert colors for regular mode
         dark: {
           // insert colors for dark mode

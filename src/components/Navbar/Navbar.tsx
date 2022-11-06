@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Image from "next/image";
 import NavElements from "./NavElements";
 import ProfileComponents from "./ProfileComponents";
@@ -6,7 +6,7 @@ import { useRouter } from "next/router";
 
 const Navbar = () => {
   const router = useRouter();
-  let isLoggedIn = true;
+  let [isLoggedIn, setIsLoggedIn] = useState<boolean>(true);
   return (
     <div className="flex justify-between w-full pt-1 text-lg px-28">
       <div
@@ -25,7 +25,11 @@ const Navbar = () => {
           Code<span className="font-bold">Clash</span>
         </p>
       </div>
-      {isLoggedIn ? <ProfileComponents /> : <NavElements />}
+      {isLoggedIn ? (
+        <ProfileComponents setIsLoggedIn={setIsLoggedIn} />
+      ) : (
+        <NavElements setIsLoggedIn={setIsLoggedIn} />
+      )}
     </div>
   );
 };
