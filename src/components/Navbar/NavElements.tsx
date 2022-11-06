@@ -25,7 +25,7 @@ const NavElements = ({
           console.warn('Redirect user to "/join"');
           // router.push("/join")
         }}
-        type="fill"
+        type="outline"
         movingGradient={true}
       />
     </div>
