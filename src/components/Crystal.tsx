@@ -9,12 +9,11 @@ type Crystal = {
 };
 
 const Crystal = ({ alt, className, width, height }: Crystal) => {
-  console.log(width);
-  //TODO error with passing width
-  //. sometimes tailwind will ignore the width prop sometimes it won't ignore
-  //. lots of headache has been caused because of that
+  //! error with passing width
+  //! sometimes tailwind will ignore the width prop, causing the Crystal to not appear
+  //! lots of headache has been caused because of that
   return (
-    <div className={`h-[${height}] w-[3rem] relative `}>
+    <div className={`h-[${height}] w-[${width}] relative `}>
       <Image
         className={`${className} object-contain`}
         alt={`${alt || "image of xp"}`}
