@@ -25,7 +25,7 @@ const ProfileOptions = ({
         </li>
         <li
           className="hover:text-secondary cursor-pointer"
-          onClick={() => console.warn("Set up settings page")}
+          onClick={() => router.push("/settings")}
         >
           Settings
         </li>
@@ -57,9 +57,7 @@ const ProfileBox = ({ setIsLoggedIn, isHovering }: Profile) => {
         <Image
           src={"/static/triangle.svg"}
           alt="user profile image"
-          // width="13"
           layout="fill"
-          // height="13"
         />
       </span>
     </div>
@@ -94,7 +92,7 @@ const ProfileComponents = ({
         onMouseOut={handleMouseOut}
       >
         <Image
-          className="cursor-pointer z-[1]"
+          className="cursor-pointer z-[1] rounded-full"
           onClick={() => router.push("/profile")}
           src={"/static/profile_placeholder.png"}
           alt="user profile image"
