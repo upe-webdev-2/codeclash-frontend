@@ -7,9 +7,6 @@ module.exports = {
   darkMode: "class",
   theme: {
     extend: {
-      backgroundImage: {
-        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))'
-      },
       colors: {
         primary: "#0F1021",
         secondary: "#6cffed",
@@ -20,13 +17,23 @@ module.exports = {
           // insert colors for dark mode
         }
         // if we have more themes then we can have more colors
+      },
+
+      backgroundPosition: {
+        "pos-0": "0% 0%",
+        "pos-100": "100% 100%"
+      },
+      backgroundImage: {
+        "gradient-radial": "radial-gradient(var(--tw-gradient-stops))"
+      },
+      backgroundSize: {
+        "size-200": "200% 200%"
       }
     },
     fontFamily: {
       poppins: ["Poppins", "sans-serif"],
       gilroy: ["sans-serif"], // TODO: get gilroy font
       jetBrains: ["JetBrains Mono", "sans-serif"]
-
     }
   },
   plugins: []

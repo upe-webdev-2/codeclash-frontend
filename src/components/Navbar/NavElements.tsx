@@ -16,16 +16,17 @@ const NavElements = ({
         name={"Sign in"}
         onclick={() => router.push("/signin")}
         type="none"
+        movingGradient={false}
       />
       <Button
         name={"Join"}
         onclick={() => {
           setIsLoggedIn(true);
           console.warn('Redirect user to "/join"');
-
           // router.push("/join")
         }}
-        type="fill"
+        type="outline"
+        movingGradient={true}
       />
     </div>
   );
