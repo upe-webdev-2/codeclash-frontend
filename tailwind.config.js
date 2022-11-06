@@ -8,11 +8,8 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        // insert colors for regular mode
-        dark: {
-          // insert colors for dark mode
-        }
-        // if we have more themes then we can have more colors
+        primary: "#0F1031",
+        secondary: "#1D1E3F"
       }
     },
     fontFamily: {
