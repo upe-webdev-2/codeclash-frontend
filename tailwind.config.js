@@ -11,14 +11,8 @@ module.exports = {
         primary: "#0F1021",
         secondary: "#6cffed",
         tertiary: "#6b44d9",
-        quaternary: "#1D1E3F",
-        // insert colors for regular mode
-        dark: {
-          // insert colors for dark mode
-        }
-        // if we have more themes then we can have more colors
+        quaternary: "#1D1E3F"
       },
-
       backgroundPosition: {
         "pos-0": "0% 0%",
         "pos-100": "100% 100%"
