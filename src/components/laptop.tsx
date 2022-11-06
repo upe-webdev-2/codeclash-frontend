@@ -28,9 +28,12 @@ type GLTFResult = GLTF & {
 };
 
 export function Model(props: JSX.IntrinsicElements["group"]) {
+
+  const group = useRef<THREE.Group>();
+  
   const { nodes, materials } = useGLTF("/mac-draco.glb") as GLTFResult;
   return (
-    <group {...props} dispose={null}>
+    <group ref={group} {...props} dispose={null}>
       <group position={[0, -0.04, 0.41]} rotation={[0.01, 0, 0]}>
         <group position={[0, 2.96, -0.13]} rotation={[Math.PI / 2, 0, 0]}>
           <mesh
