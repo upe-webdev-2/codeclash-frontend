@@ -32,7 +32,7 @@ const DisplayPlayer = (params: DisplayUser) => {
       <h1 className="mb-10 text-3xl">{achievements}</h1>
 
       <div
-        className={`bg-gradient-to-b from-[#6B44D9] to-[#6CFFED] px-12 py-9 rounded-lg`}
+        className={`bg-gradient-to-b from-tertiary to-secondary px-12 py-9 rounded-lg`}
       >
         <h3 className="text-2xl font-extrabold font-gilroy">{type}</h3>
       </div>
@@ -57,8 +57,8 @@ const LoadingScreen = () => {
 
   return (
     <div className="flex items-center justify-center min-h-screen">
-      <div className="bg-gradient-to-br from-[#6B44D9] to-[#6CFFED] p-1 rounded-2xl">
-        <div className="flex items-center justify-center w-full h-full gap-10 py-16 px-28 bg-secondary rounded-2xl">
+      <div className="p-1 bg-gradient-to-br from-tertiary to-secondary rounded-2xl">
+        <div className="flex items-center justify-center w-full h-full gap-10 py-16 px-28 bg-quaternary rounded-2xl">
           <DisplayPlayer {...opponent} type="Random" />
           <div className="text-3xl font-black text-[#FC9D44]">
             <h1>VS</h1>
