@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Button from "../Button";
 
 type DifficultySelector = {
   cards: {
@@ -44,14 +45,12 @@ const DifficultySelector = ({ cards, searchForGame }: DifficultySelector) => {
               {description}
             </p>
 
-            <div className="bg-[linear-gradient(97.13deg,_#7335DA_17.89%,_#6CFFED_100.73%)] rounded-xl xl:rounded-3xl py-3 px-6 xl:px-9 xl:py-6 ">
-              <button
-                className="text-base font-extrabold xl:text-xl font-gilroy"
-                onClick={() => searchForGame(difficulty)}
-              >
-                Play Now
-              </button>
-            </div>
+            <Button
+              name="Play Now"
+              onclick={() => searchForGame(difficulty)}
+              type="fill"
+              movingGradient={false}
+            />
           </div>
         ))}
       </div>
