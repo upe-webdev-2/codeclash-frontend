@@ -8,14 +8,14 @@ type Crystal = {
   height: string;
 };
 
-const Crystal = ({ alt, className, width, height }: Crystal) => {
-  //! error with passing width
-  //! sometimes tailwind will ignore the width prop, causing the Crystal to not appear
-  //! lots of headache has been caused because of that
+const Crystal = ({ alt, className, width = "3rem", height }: Crystal) => {
+  // error with passing width
+  // sometimes tailwind will ignore the width prop, causing the Crystal to not appear
+  // lots of headache has been caused because of that
   return (
-    <div className={`h-[${height}] w-${width?`[${width}]`:"12"} relative `}>
+    <div className={`h-[${height}] w-[${width}] relative`}>
       <Image
-        className={`${className} object-contain`}
+        className={`${className} object-contain `}
         alt={`${alt || "image of xp"}`}
         src="/static/xp.svg"
         layout="fill"
