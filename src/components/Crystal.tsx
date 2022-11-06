@@ -13,7 +13,7 @@ const Crystal = ({ alt, className, width, height }: Crystal) => {
   //! sometimes tailwind will ignore the width prop, causing the Crystal to not appear
   //! lots of headache has been caused because of that
   return (
-    <div className={`h-[${height}] w-[${width}] relative `}>
+    <div className={`h-[${height}] w-${width?`[${width}]`:"12"} relative `}>
       <Image
         className={`${className} object-contain`}
         alt={`${alt || "image of xp"}`}
