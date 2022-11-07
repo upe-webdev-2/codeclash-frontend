@@ -1,8 +1,6 @@
 import useStore from "@/helpers/store";
 import dynamic from "next/dynamic";
-import { useRouter } from "next/router";
 import Link from "next/link";
-import SimpleCard from "../components/SimpleCard";
 import Navbar from "@/components/Navbar/Navbar";
 import { signIn, signOut, useSession } from "next-auth/react";
 // import Shader from '@/components/canvas/ShaderExample/ShaderExample'
