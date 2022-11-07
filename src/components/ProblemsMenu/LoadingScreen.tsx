@@ -15,13 +15,13 @@ type DisplayUser = Player & {
 
 const DisplayPlayer = (params: DisplayUser) => {
   return (
-    <div className="flex flex-col items-center justify-center">
+    <div className="flex flex-col items-center justify-center gap-5">
       <h1 className="text-2xl capitalize font-gilroy-bold">
         {params.username}
       </h1>
-      <div className="pt-3 pb-5">
+      <div className="">
         <Image
-          className="rounded-full"
+          className="object-cover rounded-full"
           loader={() => params.profilePic}
           src={params.profilePic}
           alt="Opponent Profile Image"
@@ -30,17 +30,13 @@ const DisplayPlayer = (params: DisplayUser) => {
         />
       </div>
 
-      <div>
-        <h1 className="mb-10 text-3xl">{params.achievements}</h1>
-        <div className="flex items-center justify-center gap-2">
-          <Crystal width={"3rem"} height={"49px"} />
-          {params.extraCrystal && <Crystal width={"3rem"} height={"49px"} />}
-        </div>
+      <div className="flex items-center justify-center gap-2">
+        <h1 className="text-3xl">{params.achievements}</h1>
+        <Crystal />
+        {params.extraCrystal && <Crystal />}
       </div>
 
-      <div
-        className={`bg-gradient-to-b from-tertiary to-secondary px-12 py-9 rounded-lg`}
-      >
+      <div className="flex justify-center items-center bg-gradient-to-b from-tertiary to-secondary px-12 py-9 rounded-lg w-[10rem]">
         <h3 className="text-2xl font-gilroy-bold">{params.type}</h3>
       </div>
     </div>
@@ -54,12 +50,12 @@ const LoadingScreen = () => {
   const [user] = useState<Player>({
     username: "SEBAS0228",
     achievements: 12,
-    profilePic: "https://source.unsplash.com/random/161×161"
+    profilePic: "/static/placeholder.jpeg"
   });
   const [opponent] = useState<Player>({
     username: "......",
     achievements: 0,
-    profilePic: "https://source.unsplash.com/random/162×162"
+    profilePic: "/static/placeholder.jpeg"
   });
 
   useEffect(() => {
@@ -78,7 +74,7 @@ const LoadingScreen = () => {
           extraCrystal={opponent.achievements > user.achievements}
         />
 
-        <div className="text-3xl font-black text-[#FC9D44]">
+        <div className="text-3xl font-gilroy-bold text-[#FC9D44] pb-28">
           <h1>VS</h1>
         </div>
 
