@@ -17,7 +17,7 @@
     @apply scroll-smooth font-jetBrains;
   }
   body {
-    @apply bg-[#0F1031] text-white;
+    @apply bg-primary text-white;
   }
   p {
     @apply text-xl font-light font-gilroy;
