@@ -85,7 +85,7 @@ const ProfileComponents = ({
   return (
     <div className="flex gap-4 my-auto">
       <span className="my-auto font-bold text-center">{XP}</span>
-      <Crystal width={"3rem"} height={"49px"} />
+      <Crystal width={"3rem"} />
       <div
         className="relative h-[49px] w-[49px] "
         onMouseOver={handleMouseOver}
