@@ -11,6 +11,7 @@ import { a as three } from "@react-spring/three";
 import { a as web } from "@react-spring/web";
 import { ContactShadows, Environment } from "@react-three/drei";
 import { extend } from "@react-three/fiber";
+import { PerspectiveCamera } from "@react-three/drei";
 
 // import Shader from '@/components/canvas/ShaderExample/ShaderExample'
 
@@ -86,7 +87,13 @@ const R3F = () => {
           rotation={[0, Math.PI, 0]}
           onClick={e => (e.stopPropagation(), setOpen(!open))}
         >
-          <Model open={open} hinge={props.open.to([0, 1], [1.575, -0.425])} />
+          <PerspectiveCamera
+            // dpr={[1, 2]}
+            position={[0, 0, 4]}
+            fov={35}
+          >
+            <Model open={open} hinge={props.open.to([0, 1], [1.575, -0.425])}/>
+          </PerspectiveCamera>
         </group>
         <Environment preset="city" />
       </Suspense>

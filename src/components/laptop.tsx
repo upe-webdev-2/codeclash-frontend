@@ -38,6 +38,7 @@ export function Model({ open, hinge, ...props }) {
     () => void (document.body.style.cursor = hovered ? "pointer" : "auto"),
     [hovered]
   );
+
   // Make it float in the air when it's opened
   useFrame(state => {
     const t = state.clock.getElapsedTime();
@@ -74,8 +75,8 @@ export function Model({ open, hinge, ...props }) {
     >
       <three.group
         rotateX={hinge}
-        position={[0, -0.04, 0.41]}
-        rotation={[0.01, 0, 0]}
+        position={[0, 0, 0.41]}
+        rotation={[0.01, Math.PI, 0]}
       >
         <group position={[0, 2.96, -0.13]} rotation={[Math.PI / 2, 0, 0]}>
           <mesh
@@ -98,34 +99,36 @@ export function Model({ open, hinge, ...props }) {
           />
         </group>
       </three.group>
-      <mesh
-        castShadow
-        receiveShadow
-        geometry={nodes.touchbar.geometry}
-        material={materials.touchbar}
-        position={[0, -0.03, 1.2]}
-      />
-      <group position={[0, -0.1, 3.39]}>
+      <three.group rotation={[0, Math.PI, 0]} position={[0, 0, 0.9]}>
         <mesh
           castShadow
           receiveShadow
-          geometry={nodes.Cube002.geometry}
-          material={materials.aluminium}
+          geometry={nodes.touchbar.geometry}
+          material={materials.touchbar}
+          position={[0, -0.03, 1.2]}
         />
+        <group position={[0, -0.1, 3.39]}>
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.Cube002.geometry}
+            material={materials.aluminium}
+          />
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.Cube002_1.geometry}
+            material={materials.trackpad}
+          />
+        </group>
         <mesh
           castShadow
           receiveShadow
-          geometry={nodes.Cube002_1.geometry}
-          material={materials.trackpad}
+          geometry={nodes.keyboard.geometry}
+          material={materials.keys}
+          position={[1.79, 0, 3.45]}
         />
-      </group>
-      <mesh
-        castShadow
-        receiveShadow
-        geometry={nodes.keyboard.geometry}
-        material={materials.keys}
-        position={[1.79, 0, 3.45]}
-      />
+      </three.group>
     </group>
   );
 }
