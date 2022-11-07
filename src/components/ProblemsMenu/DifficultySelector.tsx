@@ -34,21 +34,28 @@ const DifficultySelector = ({ cards, searchForGame }: DifficultySelector) => {
         {cards?.map(({ difficulty, image, description, background }, index) => (
           <div
             key={index}
-            className={`${background} shadow-[2px_11px_2px_-2px_rgba(34,_73,_214,_0.3)] flex flex-col justify-center items-center w-72 xl:w-96 rounded-2xl px-4 pb-10 xl:pb-20`}
+            className={`${background} shadow-[2px_11px_2px_-2px_rgba(34,_73,_214,_0.3)] flex flex-col justify-between items-center w-72 xl:w-96 rounded-2xl px-4 py-10 gap-10`}
           >
-            <Image src={image} alt="" width={252} height={189} />
+            <div className="relative w-32 h-32">
+              <Image
+                src={image}
+                alt=""
+                className="object-contain"
+                layout="fill"
+              />
+            </div>
 
-            <h1 className="text-2xl font-extrabold capitalize mb-7 xl:text-4xl xl:mb-10 font-gilroy">
+            <h1 className="text-2xl font-extrabold capitalize xl:text-4xl font-gilroy">
               {difficulty}
             </h1>
-            <p className="mb-10 text-base font-light text-center xl:text-xl xl:mb-16">
+            <p className="text-base font-light text-center xl:text-xl">
               {description}
             </p>
 
             <Button
               name="Play Now"
               onclick={() => searchForGame(difficulty)}
-              type="fill"
+              type="outline"
               movingGradient={false}
             />
           </div>
