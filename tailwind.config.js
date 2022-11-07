@@ -22,13 +22,13 @@ module.exports = {
       },
       backgroundSize: {
         "size-200": "200% 200%"
-      },
-      fontFamily: {
-        poppins: ["Poppins", "sans-serif"],
-        gilroy: ["GILROY", "sans-serif"],
-        "gilroy-bold": ["GILROY_BOLD", "sans-serif"],
-        jetBrains: ["JetBrains Mono", "sans-serif"]
       }
+    },
+    fontFamily: {
+      poppins: ["Poppins", "sans-serif"],
+      gilroy: ["GILROY", "sans-serif"],
+      "gilroy-bold": ["GILROY_BOLD", "sans-serif"],
+      jetBrains: ["JetBrains Mono", "sans-serif"]
     }
   },
   plugins: []

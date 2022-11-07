@@ -16,21 +16,21 @@ const ProfileOptions = ({
   const router = useRouter();
   return (
     <nav className="my-2">
-      <ul className="text-white text-center text-sm">
+      <ul className="text-sm text-center text-white">
         <li
-          className="hover:text-secondary cursor-pointer"
+          className="cursor-pointer hover:text-secondary"
           onClick={() => router.push("/profile")}
         >
           Profile
         </li>
         <li
-          className="hover:text-secondary cursor-pointer"
+          className="cursor-pointer hover:text-secondary"
           onClick={() => router.push("/settings")}
         >
           Settings
         </li>
         <li
-          className="hover:text-secondary cursor-pointer"
+          className="cursor-pointer hover:text-secondary"
           onClick={() => {
             setIsLoggedIn(false);
             router.push("/");
@@ -83,9 +83,9 @@ const ProfileComponents = ({
   const router = useRouter();
 
   return (
-    <div className="flex gap-4 my-auto">
+    <>
       <span className="my-auto font-bold text-center">{XP}</span>
-      <Crystal width={"3rem"} height={"49px"} />
+      <Crystal width={"3rem"} />
       <div
         className="relative h-[49px] w-[49px] "
         onMouseOver={handleMouseOver}
@@ -103,7 +103,7 @@ const ProfileComponents = ({
         <div className="absolute block -mt-3 bg-transparent w-[90px] h-6 -left-2/4 z-0" />
         <ProfileBox setIsLoggedIn={setIsLoggedIn} isHovering={isHovering} />
       </div>
-    </div>
+    </>
   );
 };
 

@@ -11,15 +11,15 @@ const NavElements = ({
   const router = useRouter();
 
   return (
-    <div className="flex my-auto gap-10">
+    <>
       <Button
-        name={"Sign in"}
         onclick={() => router.push("/signin")}
         type="none"
         movingGradient={false}
-      />
+      >
+        Sign In
+      </Button>
       <Button
-        name={"Join"}
         onclick={() => {
           setIsLoggedIn(true);
           console.warn('Redirect user to "/join"');
@@ -27,8 +27,10 @@ const NavElements = ({
         }}
         type="outline"
         movingGradient={true}
-      />
-    </div>
+      >
+        Log in
+      </Button>
+    </>
   );
 };
 
