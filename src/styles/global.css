@@ -2,14 +2,17 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer base {
-  html {
-    @apply scroll-smooth font-jetBrains;
-  }
-  body {
-    @apply bg-[#0F1031] text-white;
-  }
-  p {
-    @apply text-xl font-light font-gilroy;
-  }
+@font-face {
+  font-family: "GILROY";
+  src: url("/fonts/gilroy/Gilroy-UltraLight.ttf");
+}
+
+@font-face {
+  font-family: "GILROY_BOLD";
+  src: url("/fonts/gilroy/Gilroy-ExtraBold.ttf");
+}
+
+html {
+  scroll-behavior: smooth;
+  font-family: "JetBrains Mono", sans-serif;
 }
