@@ -7,6 +7,10 @@ import Header from "@/components/dom/Header";
 import Dom from "@/components/layout/dom";
 import dynamic from "next/dynamic";
 import "../styles/global.css";
+import type { AppType } from "next/dist/shared/lib/utils";
+import { SessionProvider } from "next-auth/react";
+
+
 
 const Canvas = dynamic(() => import("@/components/layout/canvas"), {
   ssr: false
@@ -22,7 +26,7 @@ const AppLayout = ({ children }) => {
   return newChildren;
 };
 
-function App({ Component, pageProps = { title: "CodeClash" } }: AppProps) {
+function App({ Component, pageProps: { session, ...pageProps } }) {
   const router = useRouter();
   const { setRouter } = useStore();
 
@@ -31,13 +35,15 @@ function App({ Component, pageProps = { title: "CodeClash" } }: AppProps) {
   }, [setRouter, router]);
 
   // Get the children from each page so we can split them
-  //@ts-ignore
+  // @ts-ignore/
   const children = Component(pageProps).props.children;
 
   return (
     <>
       <Header title={pageProps.title} />
-      <AppLayout>{children}</AppLayout>
+      <SessionProvider session={session}>
+        <AppLayout>{children}</AppLayout>
+      </SessionProvider>
     </>
   );
 }
