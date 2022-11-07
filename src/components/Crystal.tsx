@@ -1,15 +1,18 @@
-import React from "react";
+import React, { CSSProperties } from "react";
 import Image from "next/image";
 
 type Crystal = {
   alt?: string;
   type?: string;
-  styles?: {};
+  styles?: CSSProperties;
   width?: string;
 };
 
 const Crystal = ({ alt, styles = {}, width = "3rem" }: Crystal) => (
-  <div className={`relative`} style={{ width: width, ...styles }}>
+  <div
+    className={`relative`}
+    style={{ width: width, height: width, ...styles }}
+  >
     <Image
       className={`object-contain `}
       alt={`${alt || "image of xp"}`}
