@@ -1,3 +1,4 @@
+import Navbar from "@/components/Navbar/Navbar";
 import DifficultySelector from "@/components/ProblemsMenu/DifficultySelector";
 import LoadingScreen from "@/components/ProblemsMenu/LoadingScreen";
 import Router from "next/router";
@@ -28,37 +29,44 @@ const Dom = () => {
     Router.push("/problems/1");
   };
 
-  return isLoading ? (
-    <LoadingScreen />
-  ) : (
-    <DifficultySelector
-      cards={[
-        {
-          difficulty: "Easy",
-          image: "/static/problems-menu/easy.png",
-          description:
-            "Based on your selected difficulty level, we will select an appropriate problem for you to solve.",
-          background: "bg-[linear-gradient(180deg,_#565AAC_0%,_#2D2F61_63.38%)]"
-        },
-        {
-          difficulty: "Medium",
-          image: "/static/problems-menu/medium.png",
-          description:
-            "Based on your selected difficulty level, we will select an appropriate problem for you to solve.",
-          background:
-            "bg-[linear-gradient(179.62deg,_#6b44d9db_29.69%,_#2D2F61_63.01%)]"
-        },
-        {
-          difficulty: "Hard",
-          image: "/static/problems-menu/medium.png",
-          description:
-            "Based on your selected difficulty level, we will select an appropriate problem for you to solve.",
-          background:
-            "bg-[linear-gradient(180deg,_#6CFFED_-13.2%,_#2D2F61_61%)]"
-        }
-      ]}
-      searchForGame={searchForGame}
-    />
+  return (
+    <>
+      <Navbar />
+
+      {isLoading ? (
+        <LoadingScreen />
+      ) : (
+        <DifficultySelector
+          cards={[
+            {
+              difficulty: "Easy",
+              image: "/static/problems-menu/easy.png",
+              description:
+                "Based on your selected difficulty level, we will select an appropriate problem for you to solve.",
+              background:
+                "bg-[linear-gradient(180deg,_#565AAC_0%,_#2D2F61_63.38%)]"
+            },
+            {
+              difficulty: "Medium",
+              image: "/static/problems-menu/medium.png",
+              description:
+                "Based on your selected difficulty level, we will select an appropriate problem for you to solve.",
+              background:
+                "bg-[linear-gradient(179.62deg,_#6b44d9db_29.69%,_#2D2F61_63.01%)]"
+            },
+            {
+              difficulty: "Hard",
+              image: "/static/problems-menu/medium.png",
+              description:
+                "Based on your selected difficulty level, we will select an appropriate problem for you to solve.",
+              background:
+                "bg-[linear-gradient(180deg,_#6CFFED_-13.2%,_#2D2F61_61%)]"
+            }
+          ]}
+          searchForGame={searchForGame}
+        />
+      )}
+    </>
   );
 };
 
