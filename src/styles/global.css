@@ -12,7 +12,29 @@
   src: url("/fonts/gilroy/Gilroy-ExtraBold.ttf");
 }
 
-html {
-  scroll-behavior: smooth;
-  font-family: "JetBrains Mono", sans-serif;
+@layer base {
+  html {
+    @apply scroll-smooth font-jetBrains;
+  }
+  body {
+    @apply bg-[#0F1021] text-white;
+  }
+  p {
+    @apply text-xl font-light font-gilroy;
+  }
+}
+
+/* ! Do NOT add @layer these three button classes /*
+/* https://tailwindcss.com/docs/adding-custom-styles#removing-unused-custom-css  */
+/* https://v2.tailwindcss.com/docs/just-in-time-mode#arbitrary-value-support */
+.button-gradient {
+  @apply bg-gradient-to-r p-[3px] from-tertiary to-secondary;
+}
+
+.button-gradient.button-moving-gradient {
+  @apply bg-size-200 bg-pos-0 hover:bg-pos-100;
+}
+
+.button-outline {
+  @apply bg-primary;
 }
