@@ -40,7 +40,7 @@ const Dom = () => {
           cards={[
             {
               difficulty: "Easy",
-              image: "/static/problems-menu/easy.png",
+              image: "/static/problems-menu/easy.svg",
               description:
                 "Based on your selected difficulty level, we will select an appropriate problem for you to solve.",
               background:
@@ -48,7 +48,7 @@ const Dom = () => {
             },
             {
               difficulty: "Medium",
-              image: "/static/problems-menu/medium.png",
+              image: "/static/problems-menu/medium.svg",
               description:
                 "Based on your selected difficulty level, we will select an appropriate problem for you to solve.",
               background:
@@ -56,7 +56,7 @@ const Dom = () => {
             },
             {
               difficulty: "Hard",
-              image: "/static/problems-menu/medium.png",
+              image: "/static/problems-menu/hard.svg",
               description:
                 "Based on your selected difficulty level, we will select an appropriate problem for you to solve.",
               background:
