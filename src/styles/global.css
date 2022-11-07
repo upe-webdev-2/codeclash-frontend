@@ -2,6 +2,16 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+  font-family: "GILROY";
+  src: url("/fonts/gilroy/Gilroy-UltraLight.ttf");
+}
+
+@font-face {
+  font-family: "GILROY_BOLD";
+  src: url("/fonts/gilroy/Gilroy-ExtraBold.ttf");
+}
+
 @layer base {
   html {
     @apply scroll-smooth font-jetBrains;

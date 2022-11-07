@@ -15,7 +15,7 @@ module.exports = {
         // insert colors for regular mode
         dark: {
           // insert colors for dark mode
-        },
+        }
         // if we have more themes then we can have more colors
       },
       backgroundPosition: {
@@ -31,9 +31,10 @@ module.exports = {
     },
     fontFamily: {
       poppins: ["Poppins", "sans-serif"],
-      gilroy: ["sans-serif"], // TODO: get gilroy font
+      gilroy: ["GILROY", "sans-serif"],
+      "gilroy-bold": ["GILROY_BOLD", "sans-serif"],
       jetBrains: ["JetBrains Mono", "sans-serif"]
     }
   },
-  plugins: [],
+  plugins: []
 };
