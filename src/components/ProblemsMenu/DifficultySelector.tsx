@@ -15,7 +15,7 @@ const DifficultySelector = ({ cards, searchForGame }: DifficultySelector) => {
   return (
     <>
       <div className="flex flex-col items-center w-full mb-20">
-        <h1 className="font-extrabold font-gilroy text-[40px] leading-10 mb-9 w-fit">
+        <h1 className="font-gilroy-bold text-[40px] leading-10 mb-9 w-fit">
           Choose your level
         </h1>
 
@@ -45,17 +45,17 @@ const DifficultySelector = ({ cards, searchForGame }: DifficultySelector) => {
               />
             </div>
 
-            <h1 className="text-2xl font-extrabold capitalize xl:text-4xl font-gilroy">
+            <h1 className="text-2xl capitalize xl:text-4xl font-gilroy-bold">
               {difficulty}
             </h1>
-            <p className="text-base font-light text-center xl:text-xl">
+            <p className="text-base text-center font-gilroy xl:text-xl">
               {description}
             </p>
 
             <Button
               name="Play Now"
               onclick={() => searchForGame(difficulty)}
-              type="outline"
+              type="fill"
               movingGradient={false}
             />
           </div>

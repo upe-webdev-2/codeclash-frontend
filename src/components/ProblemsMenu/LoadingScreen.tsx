@@ -16,7 +16,7 @@ type DisplayUser = Player & {
 const DisplayPlayer = (params: DisplayUser) => {
   return (
     <div className="flex flex-col items-center justify-center">
-      <h1 className="text-2xl font-extrabold capitalize font-gilroy">
+      <h1 className="text-2xl capitalize font-gilroy-bold">
         {params.username}
       </h1>
       <div className="pt-3 pb-5">
@@ -41,7 +41,7 @@ const DisplayPlayer = (params: DisplayUser) => {
       <div
         className={`bg-gradient-to-b from-tertiary to-secondary px-12 py-9 rounded-lg`}
       >
-        <h3 className="text-2xl font-extrabold font-gilroy">{params.type}</h3>
+        <h3 className="text-2xl font-gilroy-bold">{params.type}</h3>
       </div>
     </div>
   );
