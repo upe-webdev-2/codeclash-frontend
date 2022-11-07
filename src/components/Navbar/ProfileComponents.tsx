@@ -83,7 +83,7 @@ const ProfileComponents = ({
   const router = useRouter();
 
   return (
-    <div className="flex gap-4 my-auto">
+    <>
       <span className="my-auto font-bold text-center">{XP}</span>
       <Crystal width={"3rem"} />
       <div
@@ -103,7 +103,7 @@ const ProfileComponents = ({
         <div className="absolute block -mt-3 bg-transparent w-[90px] h-6 -left-2/4 z-0" />
         <ProfileBox setIsLoggedIn={setIsLoggedIn} isHovering={isHovering} />
       </div>
-    </div>
+    </>
   );
 };
 
