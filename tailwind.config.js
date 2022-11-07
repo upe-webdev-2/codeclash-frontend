@@ -15,10 +15,9 @@ module.exports = {
         // insert colors for regular mode
         dark: {
           // insert colors for dark mode
-        }
+        },
         // if we have more themes then we can have more colors
       },
-
       backgroundPosition: {
         "pos-0": "0% 0%",
         "pos-100": "100% 100%"
@@ -36,5 +35,5 @@ module.exports = {
       jetBrains: ["JetBrains Mono", "sans-serif"]
     }
   },
-  plugins: []
+  plugins: [],
 };

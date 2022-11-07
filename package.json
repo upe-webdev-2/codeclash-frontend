@@ -14,7 +14,7 @@
     "lint": "yarn prettier && yarn eslint",
     "eslint": "next lint --fix --dir src",
     "prettier": "prettier -l \"./src/**/*.{js,jsx,ts,tsx,md}\" --write",
-    "dev": "next dev -p 8000",
+    "dev": "PORT=8000 next dev",
     "build": "next build",
     "export": "EXPORT=true next build && EXPORT=true next export",
     "analyze": "ANALYZE=true next build",
