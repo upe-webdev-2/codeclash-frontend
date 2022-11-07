@@ -87,13 +87,12 @@ const R3F = () => {
           rotation={[0, Math.PI, 0]}
           onClick={e => (e.stopPropagation(), setOpen(!open))}
         >
-          <PerspectiveCamera
-            // dpr={[1, 2]}
-            position={[0, 0, 4]}
+          {/* <PerspectiveCamera
+            position={[0, 0, 9]}
             fov={35}
-          >
+          > */}
             <Model open={open} hinge={props.open.to([0, 1], [1.575, -0.425])}/>
-          </PerspectiveCamera>
+          {/* </PerspectiveCamera> */}
         </group>
         <Environment preset="city" />
       </Suspense>
