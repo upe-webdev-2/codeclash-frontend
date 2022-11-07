@@ -51,13 +51,14 @@ const DifficultySelector = ({ cards, searchForGame }: DifficultySelector) => {
             <p className="text-base text-center font-gilroy xl:text-xl">
               {description}
             </p>
-
             <Button
-              name="Play Now"
               onclick={() => searchForGame(difficulty)}
-              type="fill"
-              movingGradient={false}
-            />
+              type={"fill"}
+              bold
+              movingGradient
+            >
+              Play Now
+            </Button>
           </div>
         ))}
       </div>
