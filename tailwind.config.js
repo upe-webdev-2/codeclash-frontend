@@ -8,13 +8,33 @@ module.exports = {
   theme: {
     extend: {
       colors: {
+        primary: "#0F1021",
+        secondary: "#6cffed",
+        tertiary: "#6b44d9",
+        quaternary: "#1D1E3F",
         // insert colors for regular mode
         dark: {
           // insert colors for dark mode
-        },
+        }
         // if we have more themes then we can have more colors
       },
+      backgroundPosition: {
+        "pos-0": "0% 0%",
+        "pos-100": "100% 100%"
+      },
+      backgroundImage: {
+        "gradient-radial": "radial-gradient(var(--tw-gradient-stops))"
+      },
+      backgroundSize: {
+        "size-200": "200% 200%"
+      }
     },
+    fontFamily: {
+      poppins: ["Poppins", "sans-serif"],
+      gilroy: ["GILROY", "sans-serif"],
+      "gilroy-bold": ["GILROY_BOLD", "sans-serif"],
+      jetBrains: ["JetBrains Mono", "sans-serif"]
+    }
   },
-  plugins: [],
+  plugins: []
 };

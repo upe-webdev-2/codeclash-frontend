@@ -1,7 +1,7 @@
 import useStore from "@/helpers/store";
 import dynamic from "next/dynamic";
-import { useRouter } from "next/router";
 import Link from "next/link";
+import Navbar from "@/components/Navbar/Navbar";
 import { signIn, signOut, useSession } from "next-auth/react";
 import { Model } from '../components/laptop'
 import { useSpring } from "react-spring";
@@ -33,6 +33,7 @@ const DOM = () => {
 
   return (
     <>
+      <Navbar />
       <h1 className="text-6xl font-bold mb-5 pt-10 px-6">Landing Page :/</h1>
       <p className="text-xl text-pink-600">Working on it...</p>
       <Link href="/menu">
