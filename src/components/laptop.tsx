@@ -44,16 +44,47 @@ export function Model({ open, ...props }) {
     [hovered]
   );
   
-  useFrame(({gl, scene, camera}) => {
-    gl.render(scene, camera);
+  useFrame((state) => {
+    // gl.render(scene, camera);
 
-    group.current.position.y = THREE.MathUtils.lerp(
-      group.current.position.y,
-      open ? -4 : -4.3,
+    // group.current.position.y = THREE.MathUtils.lerp(
+    //   group.current.position.y,
+    //   open ? -4 : -1.3,
+    //   0.1
+    // );
+    const t = state.clock.getElapsedTime();
+
+    group.current.position.x = THREE.MathUtils.lerp(
+      group.current.position.x,
+      open ? Math.cos(t / 10) / 10 + -15.15 : -15,
       0.1
     );
+    
+    group.current.rotation.x = THREE.MathUtils.lerp(
+      group.current.rotation.x,
+      open ? Math.cos(t / 10) / 10 + 0.25 : 0,
+      0.075
+    );
+    group.current.rotation.y = THREE.MathUtils.lerp(
+      group.current.rotation.y,
+      open ? Math.sin(t / 10) / 2 : 0.5,
+            0.075
 
-  }, 1);
+    );
+    group.current.rotation.z = THREE.MathUtils.lerp(
+      group.current.rotation.z,
+      open ? Math.sin(t / 10) / 10 : 0,
+            0.075
+
+    );
+    group.current.position.y = THREE.MathUtils.lerp(
+      group.current.position.y,
+      open ? (-5 + Math.sin(t)) / 3 : -3.3,
+            0.075
+
+    );
+
+  });
 
   useFrame(({ gl, scene, camera }) => {
     gl.render(scene, camera);
@@ -61,10 +92,20 @@ export function Model({ open, ...props }) {
         hinge.current.rotation.x = THREE.MathUtils.lerp(
           hinge.current.rotation.x,
           open ? 0 : 0,
-          0.025
+          0.02
         );
       // }, 1000)
   }, 2);
+
+  // useEffect(() => {
+  //   setTimeout(() => {
+  //     hinge.current.rotation.x = THREE.MathUtils.lerp(
+  //       hinge.current.rotation.x,
+  //       open ? 0 : 0,
+  //       0.025
+  //     );
+  //   }, 1000)
+  // }, [])
 
   const { nodes, materials } = useGLTF("/mac-draco.glb") as GLTFResult;
   return (

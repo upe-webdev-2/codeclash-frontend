@@ -12,7 +12,6 @@ import { a as web } from "@react-spring/web";
 import { ContactShadows, Environment } from "@react-three/drei";
 import { extend } from "@react-three/fiber";
 import { PerspectiveCamera } from "@react-three/drei";
-
 // import Shader from '@/components/canvas/ShaderExample/ShaderExample'
 
 // Prefer dynamic import for production builds
@@ -74,7 +73,9 @@ const R3F = () => {
           rotation={[0, Math.PI, 0]}
           onClick={e => (e.stopPropagation(), setOpen(!open))}
         >
-          <Model open={open} />
+          <Model open={open} 
+          position={[0, -3.3, 0]}
+          />
         </group>
         <Environment preset="city" />
       </Suspense>
