@@ -75,7 +75,6 @@ const R3F = () => {
           onClick={e => (e.stopPropagation(), setOpen(!open))}
         >
           <Model open={open} />
-          {/* hinge={props.open.to([0, 1], [1.575, -0.425])} */}
         </group>
         <Environment preset="city" />
       </Suspense>

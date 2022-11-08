@@ -44,7 +44,6 @@ export function Model({ open, ...props }) {
     [hovered]
   );
   
-  // Make it float in the air when it's opened
   useFrame(({gl, scene, camera}) => {
     gl.render(scene, camera);
 
@@ -70,7 +69,6 @@ export function Model({ open, ...props }) {
   const { nodes, materials } = useGLTF("/mac-draco.glb") as GLTFResult;
   return (
     <three.group
-      position={[0, 0, 8]}
       ref={group}
       {...props}
       dispose={null}
