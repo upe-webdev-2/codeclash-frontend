@@ -16,7 +16,7 @@ const CanvasWrapper = ({ children }) => {
         mode="concurrent"
         style={{
           position: "absolute",
-          top: 0
+          top: 0,
         }}
       >
         <Stats />

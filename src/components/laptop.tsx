@@ -6,7 +6,8 @@ import * as THREE from "three";
 import React, { useEffect, useRef, useState } from "react";
 import { useGLTF } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
-import { a as three } from "@react-spring/three";
+import { useRouter } from "next/router";
+import { a as three, useSpring } from "@react-spring/three";
 import { GLTF } from "three-stdlib";
 
 type GLTFResult = GLTF & {
@@ -29,8 +30,12 @@ type GLTFResult = GLTF & {
   };
 };
 
-export function Model({ open, hinge, ...props }) {
+export function Model({ open, ...props }) {
   const group = useRef<THREE.Group>();
+  
+  const router = useRouter();
+
+  const hinge = useRef<THREE.Group>();
 
   const [hovered, setHovered] = useState<boolean>(false);
 
@@ -38,35 +43,34 @@ export function Model({ open, hinge, ...props }) {
     () => void (document.body.style.cursor = hovered ? "pointer" : "auto"),
     [hovered]
   );
-
+  
   // Make it float in the air when it's opened
-  useFrame(state => {
-    const t = state.clock.getElapsedTime();
-    group.current.rotation.x = THREE.MathUtils.lerp(
-      group.current.rotation.x,
-      open ? Math.cos(t / 10) / 10 + 0.25 : 0,
-      0.1
-    );
-    group.current.rotation.y = THREE.MathUtils.lerp(
-      group.current.rotation.y,
-      open ? Math.sin(t / 10) / 4 : 0,
-      0.1
-    );
-    group.current.rotation.z = THREE.MathUtils.lerp(
-      group.current.rotation.z,
-      open ? Math.sin(t / 10) / 10 : 0,
-      0.1
-    );
+  useFrame(({gl, scene, camera}) => {
+    gl.render(scene, camera);
+
     group.current.position.y = THREE.MathUtils.lerp(
       group.current.position.y,
-      open ? (-2 + Math.sin(t)) / 3 : -4.3,
+      open ? -4 : -4.3,
       0.1
     );
-  });
+
+  }, 1);
+
+  useFrame(({ gl, scene, camera }) => {
+    gl.render(scene, camera);
+        // setTimeout(() => {
+        hinge.current.rotation.x = THREE.MathUtils.lerp(
+          hinge.current.rotation.x,
+          open ? 0 : 0,
+          0.025
+        );
+      // }, 1000)
+  }, 2);
 
   const { nodes, materials } = useGLTF("/mac-draco.glb") as GLTFResult;
   return (
-    <group
+    <three.group
+      position={[0, 0, 8]}
       ref={group}
       {...props}
       dispose={null}
@@ -74,9 +78,9 @@ export function Model({ open, hinge, ...props }) {
       onPointerOut={e => setHovered(false)}
     >
       <three.group
-        rotateX={hinge}
+        ref={hinge}
         position={[0, 0, 0.41]}
-        rotation={[0.01, Math.PI, 0]}
+        rotation={[-1.58, Math.PI, 0]}
       >
         <group position={[0, 2.96, -0.13]} rotation={[Math.PI / 2, 0, 0]}>
           <mesh
@@ -129,7 +133,7 @@ export function Model({ open, hinge, ...props }) {
           position={[1.79, 0, 3.45]}
         />
       </three.group>
-    </group>
+    </three.group>
   );
 }
 
