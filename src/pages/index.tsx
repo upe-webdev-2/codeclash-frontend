@@ -24,10 +24,10 @@ const DOM = () => {
   return (
     <>
       <Navbar />
-      <h1 className="text-6xl font-bold mb-5 pt-10 px-6">Landing Page :/</h1>
+      <h1 className="px-6 pt-10 mb-5 text-6xl font-bold">Landing Page :/</h1>
       <p className="text-xl text-pink-600">Working on it...</p>
       <Link href="/menu">
-        <span className="text-pink-500 cursor-pointer text-5xl">
+        <span className="text-5xl text-pink-500 cursor-pointer">
           Go to CodeClash Menu!
         </span>
       </Link>

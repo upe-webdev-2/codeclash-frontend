@@ -12,11 +12,14 @@ module.exports = {
         secondary: "#6cffed",
         tertiary: "#6b44d9",
         quaternary: "#1D1E3F",
-        // insert colors for regular mode
-        dark: {
-          // insert colors for dark mode
+        cardGradient: {
+          primary: "#24264E",
+          secondary: "#0F1021"
+        },
+        borderGradient: {
+          primary: "#454992",
+          secondary: "#262850"
         }
-        // if we have more themes then we can have more colors
       },
       backgroundPosition: {
         "pos-0": "0% 0%",
