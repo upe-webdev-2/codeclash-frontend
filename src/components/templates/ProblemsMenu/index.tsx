@@ -15,7 +15,6 @@ const ProblemsMenu = ({ searchForGame }: ProblemsMenu) => {
         link: "/static/problems-menu/easy.svg",
         size: 120
       },
-      background: "bg-[linear-gradient(180deg,_#565AAC_0%,_#2D2F61_63.38%)]",
       clickHandler: searchForGame
     },
     {
@@ -26,8 +25,6 @@ const ProblemsMenu = ({ searchForGame }: ProblemsMenu) => {
         link: "/static/problems-menu/medium.svg",
         size: 110
       },
-      background:
-        "bg-[linear-gradient(179.62deg,_#6b44d9db_29.69%,_#2D2F61_63.01%)]",
       clickHandler: searchForGame
     },
     {
@@ -38,7 +35,6 @@ const ProblemsMenu = ({ searchForGame }: ProblemsMenu) => {
         link: "/static/problems-menu/hard.svg",
         size: 150
       },
-      background: "bg-[linear-gradient(180deg,_#6CFFED_-13.2%,_#2D2F61_61%)]",
       clickHandler: searchForGame
     }
   ]);
