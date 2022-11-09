@@ -6,10 +6,19 @@ type Crystal = {
   type?: string;
   styles?: {};
   width?: string;
+  height?: string;
 };
 
-const Crystal = ({ alt, styles = {}, width = "3rem" }: Crystal) => (
-  <div className={`relative`} style={{ width: width, ...styles }}>
+const Crystal = ({
+  alt,
+  styles = {},
+  width = "3rem",
+  height = "3rem"
+}: Crystal) => (
+  <div
+    className={`relative`}
+    style={{ width: width, height: height, ...styles }}
+  >
     <Image
       className={`object-contain `}
       alt={`${alt || "image of xp"}`}
