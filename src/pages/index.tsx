@@ -3,7 +3,6 @@ import dynamic from "next/dynamic";
 import Link from "next/link";
 import Navbar from "@/components/Navbar/Navbar";
 import { signIn, signOut, useSession } from "next-auth/react";
-import ProblemsMenu from "@/components/templates/ProblemsMenu";
 // import Shader from '@/components/canvas/ShaderExample/ShaderExample'
 
 // Prefer dynamic import for production builds
