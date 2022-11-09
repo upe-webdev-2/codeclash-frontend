@@ -29,7 +29,7 @@ const Dom = ({ page }: Auth) => {
 
   return (
     <div className="w-screen">
-      <Navbar showLogo />
+      <Navbar hideElements />
 
       <div className="flex flex-col items-center justify-center ">
         <div>
