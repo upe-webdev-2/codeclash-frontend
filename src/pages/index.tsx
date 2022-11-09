@@ -3,6 +3,15 @@ import dynamic from "next/dynamic";
 import Link from "next/link";
 import Navbar from "@/components/Navbar/Navbar";
 import { signIn, signOut, useSession } from "next-auth/react";
+import { Model } from '../components/laptop'
+import { useSpring } from "react-spring";
+import { Suspense, useState } from "react";
+import { Canvas } from "@react-three/fiber";
+import { a as three } from "@react-spring/three";
+import { a as web } from "@react-spring/web";
+import { ContactShadows, Environment } from "@react-three/drei";
+import { extend } from "@react-three/fiber";
+import { PerspectiveCamera } from "@react-three/drei";
 // import Shader from '@/components/canvas/ShaderExample/ShaderExample'
 
 // Prefer dynamic import for production builds
@@ -48,14 +57,44 @@ const DOM = () => {
 
 // Canvas/R3F components here
 const R3F = () => {
-  return <></>;
+  // This flag controls open state, alternates between true & false
+  const [open, setOpen] = useState(false);
+  // We turn this into a spring animation that interpolates between 0 and 1
+  const props = useSpring({ open: Number(open) });
+  return (
+    <>
+      <three.pointLight
+        position={[10, 10, 10]}
+        intensity={1.5}
+        // color={props.open.to([0, 1], ["#f0f0f0", "#d25578"])}
+      />
+      <Suspense fallback={null}>
+        <group
+          rotation={[0, Math.PI, 0]}
+          onClick={e => (e.stopPropagation(), setOpen(!open))}
+        >
+          <Model open={open} 
+          position={[0, -3.3, 0]}
+          />
+        </group>
+        <Environment preset="city" />
+      </Suspense>
+      <ContactShadows
+        position={[0, -4.5, 0]}
+        opacity={0.4}
+        scale={20}
+        blur={1.75}
+        far={4.5}
+      />
+    </>
+  );
 };
 
 export default function landingPage() {
   return (
     <>
       <DOM />
-      {/* <R3F /> */}
+      <R3F />
     </>
   );
 }
