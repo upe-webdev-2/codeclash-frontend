@@ -3,7 +3,7 @@ import Loading from "@/templates/Loading";
 import ProblemsMenu from "@/templates/ProblemsMenu";
 import { useState } from "react";
 
-const Menu = () => {
+const Dom = () => {
   const [isLoading, setLoading] = useState(false);
 
   const searchForGame = (difficulty: string) => {
@@ -36,4 +36,10 @@ const Menu = () => {
   );
 };
 
-export default Menu;
+export default function Menu() {
+  return (
+    <>
+      <Dom />
+    </>
+  );
+}
