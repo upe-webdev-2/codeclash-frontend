@@ -1,23 +1,18 @@
 import React from "react";
 import Image from "next/image";
+import CSS from "csstype";
 
 type Crystal = {
   alt?: string;
   type?: string;
-  styles?: {};
+  styles?: CSS.Properties;
   width?: string;
-  height?: string;
 };
 
-const Crystal = ({
-  alt,
-  styles = {},
-  width = "3rem",
-  height = "3rem"
-}: Crystal) => (
+const Crystal = ({ alt, styles = {}, width = "3rem" }: Crystal) => (
   <div
     className={`relative`}
-    style={{ width: width, height: height, ...styles }}
+    style={{ width: width, height: width, ...styles }}
   >
     <Image
       className={`object-contain `}
