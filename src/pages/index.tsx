@@ -19,13 +19,6 @@ const Shader = dynamic(
 
 // DOM elements here
 const DOM = () => {
-  return (
-    <>
-      <div>
-        <ProblemsMenu searchForGame={() => {}} />
-      </div>
-    </>
-  );
   const { router } = useStore();
   const { data } = useSession();
 
