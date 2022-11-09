@@ -45,11 +45,12 @@ const Dom = ({ page }: Auth) => {
 
         <div className="flex flex-col items-center justify-center gap-3 mt-10">
           {loginMethods.map(({ name, icon, action }, index) => (
-            <Container key={index}>
+            <Container key={index} onHover>
               <button
                 className="flex items-center justify-center h-16 cursor-pointer w-[768px]"
                 onClick={action}
               >
+                
                 <Image src={icon} alt={name} width={30} height={30} />
               </button>
             </Container>
