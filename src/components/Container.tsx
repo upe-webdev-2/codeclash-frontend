@@ -2,14 +2,19 @@ import { ReactNode } from "react";
 
 type Container = {
   children: ReactNode;
-  extraTailwindStyles?: string;
+  backgroundStyles?: string;
+  borderStyles?: string;
 };
 
-const Container = ({ children, extraTailwindStyles = "" }: Container) => {
+const Container = (props: Container) => {
+  const { children, backgroundStyles = "", borderStyles = "" } = props;
+
   return (
-    <div className="bg-gradient-radial from-borderGradient-primary to-borderGradient-secondary p-[1px] rounded-2xl">
+    <div
+      className={`${borderStyles} bg-gradient-radial from-borderGradient-primary to-borderGradient-secondary p-[1px] rounded-2xl`}
+    >
       <div
-        className={`${extraTailwindStyles} rounded-2xl w-fit bg-gradient-radial from-cardGradient-primary to-cardGradient-secondary`}
+        className={`${backgroundStyles} rounded-2xl bg-gradient-radial from-cardGradient-primary to-cardGradient-secondary`}
       >
         {children}
       </div>
