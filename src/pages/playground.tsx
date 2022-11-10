@@ -1,6 +1,7 @@
 import Tabs from "@/components/Tabs";
 import CustomEditor from "@/templates/Playground/CustomEditor";
 import Instruction from "@/templates/Playground/Instructions";
+import GameInfo from "@/templates/Playground/GameInfo";
 import { GetServerSideProps } from "next";
 import { useRef } from "react";
 
@@ -41,7 +42,23 @@ const Dom = ({ problem }: Playground) => {
       </div>
 
       <div className="pr-10 w-[67vw]">
-        <div className="h-28">PlayerStats</div>
+        <div className="h-32">
+          {/**
+           * TODO: Get Opponent from backend
+           */}
+          <GameInfo
+            opponent={{
+              username: "ROXXY345",
+              profilePicture: "/static/placeholder.jpeg",
+              achievements: 12
+            }}
+            testCases={{
+              total: 10,
+              opponentCompletion: 8,
+              userCompletion: 6
+            }}
+          />
+        </div>
 
         <div className="h-[65vh]">
           <CustomEditor
@@ -52,6 +69,8 @@ const Dom = ({ problem }: Playground) => {
             editorRef={editorRef}
           />
         </div>
+
+        <div>Controls</div>
       </div>
     </div>
   );
