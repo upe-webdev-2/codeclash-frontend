@@ -39,9 +39,8 @@ model User {
   accounts      Account[]
   sessions      Session[]
 
-  // problemsHistory Problems?
-  // problems        Problems? @relation(fields: [problemsHistory], references: [id], onDelete: Cascade)
-  Problems Problems[]
+  problems       Problems? @relation(fields: [problemHistory], references: [id])
+  problemHistory String?
 }
 
 model Problems {
@@ -54,10 +53,7 @@ model Problems {
   testCases    String[]
   functionName String
 
-  userId String @unique
-  user   User   @relation(fields: [userId], references: [id])
-
-  // user   User   @relation(fields: [userId], references: [id])
+  User         User[]
 }
 
 model Session {
