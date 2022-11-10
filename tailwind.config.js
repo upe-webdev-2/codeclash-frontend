@@ -14,7 +14,8 @@ module.exports = {
         quaternary: "#1D1E3F",
         cardGradient: {
           primary: "#24264E",
-          secondary: "#0F1021"
+          secondary: "#0F1021",
+          tertiary: "#070810"
         },
         borderGradient: {
           primary: "#454992",

@@ -4,17 +4,20 @@ import NavElements from "./NavElements";
 import ProfileComponents from "./ProfileComponents";
 import { useRouter } from "next/router";
 
-const Navbar = () => {
+type Navbar = {
+  hideLogo?: true;
+  hideElements?: true;
+};
+
+const Navbar = ({ hideLogo, hideElements }: Navbar) => {
   const router = useRouter();
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
-  const [hiddenRight, setHiddenRight] = useState<boolean>(false);
-  const [hiddenLeft, setHiddenLeft] = useState<boolean>(false);
 
   return (
     <div className="flex justify-between w-full pt-1 text-lg px-28">
       <div
         className="flex flex-col cursor-pointer"
-        style={{ visibility: hiddenRight ? "hidden" : "visible" }}
+        style={{ visibility: hideLogo ? "hidden" : "visible" }}
         onClick={() => {
           router.push("/");
         }}
@@ -32,7 +35,7 @@ const Navbar = () => {
 
       <div
         style={{
-          visibility: hiddenLeft ? "hidden" : "visible",
+          visibility: hideElements ? "hidden" : "visible",
           gap: isLoggedIn ? "1rem" : "2.5rem"
         }}
         className="flex my-auto"
