@@ -1,6 +1,8 @@
 import Tabs from "@/components/Tabs";
+import CustomEditor from "@/templates/Playground/CustomEditor";
 import Instruction from "@/templates/Playground/Instructions";
 import { GetServerSideProps } from "next";
+import { useRef } from "react";
 
 type Playground = {
   problem: {
@@ -19,6 +21,8 @@ type Playground = {
 };
 
 const Dom = ({ problem }: Playground) => {
+  const editorRef = useRef(null);
+
   return (
     <div className="flex">
       <div className="w-[33vw]">
@@ -35,7 +39,20 @@ const Dom = ({ problem }: Playground) => {
           ]}
         />
       </div>
-      <div className="w-[67vw]"></div>
+
+      <div className="pr-10 w-[67vw]">
+        <div className="h-28">PlayerStats</div>
+
+        <div className="h-[65vh]">
+          <CustomEditor
+            editorConfig={{
+              defaultValue: problem.starterCode,
+              language: "python"
+            }}
+            editorRef={editorRef}
+          />
+        </div>
+      </div>
     </div>
   );
 };
