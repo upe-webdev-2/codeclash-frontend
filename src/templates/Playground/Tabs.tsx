@@ -1,4 +1,4 @@
-import { ReactNode, useState } from "react";
+import { ReactNode, useEffect, useState } from "react";
 import Container from "@/components/Container";
 
 type Tabs = {
@@ -6,11 +6,11 @@ type Tabs = {
     name: string;
     element: ReactNode;
   }[];
+  activeTab?: number;
+  switchTab: (tab: number) => void;
 };
 
-const Tabs = ({ tabs }: Tabs) => {
-  const [activeTab, setActiveTab] = useState(0);
-
+const Tabs = ({ tabs, switchTab, activeTab = 0 }: Tabs) => {
   return (
     <div className="p-10">
       <Container
@@ -21,7 +21,7 @@ const Tabs = ({ tabs }: Tabs) => {
           {tabs.map(({ name }, index) => (
             <h1
               key={index}
-              onClick={() => setActiveTab(index)}
+              onClick={() => switchTab(index)}
               className={`${
                 activeTab === index ? "border-b-2" : "active:translate-y-1"
               } px-6 py-3 capitalize cursor-pointer font-gilroy-bold rounded-t-2xl hover:bg-primary`}
