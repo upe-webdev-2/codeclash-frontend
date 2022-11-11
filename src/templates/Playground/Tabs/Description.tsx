@@ -10,7 +10,7 @@ type Problem = {
   }[];
 };
 
-const Instruction = (problem: Problem) => {
+const Description = (problem: Problem) => {
   const difficultyColors = {
     Easy: "text-green-600",
     Medium: "text-yellow-600",
@@ -53,4 +53,4 @@ const Instruction = (problem: Problem) => {
   );
 };
 
-export default Instruction;
+export default Description;

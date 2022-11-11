@@ -17,17 +17,17 @@ const Tabs = ({ tabs, switchTab, activeTab = 0 }: Tabs) => {
         borderStyles="mb-3 rounded-b-none"
         backgroundStyles="rounded-b-none"
       >
-        <div className="flex rounded-t-xl">
+        <div className="flex overflow-x-scroll rounded-t-xl">
           {tabs.map(({ name }, index) => (
-            <h1
+            <div
               key={index}
               onClick={() => switchTab(index)}
               className={`${
-                activeTab === index ? "border-b-2" : "active:translate-y-1"
-              } px-6 py-3 capitalize cursor-pointer font-gilroy-bold rounded-t-2xl hover:bg-primary`}
+                activeTab === index && "border-b-2"
+              } px-6 py-3 capitalize cursor-pointer font-gilroy-bold rounded-t-2xl hover:bg-primary active:[&>*]:translate-y-1`}
             >
-              {name}
-            </h1>
+              <h1>{name}</h1>
+            </div>
           ))}
         </div>
       </Container>
