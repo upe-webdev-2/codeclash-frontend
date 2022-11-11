@@ -24,6 +24,24 @@
   }
 }
 
+/*
+@layer components {
+  .polymorphism: {
+    background-color: theme("colors.white");
+  }
+}
+*/
+
+@layer components {
+  .polymorphism {
+    box-shadow: 0px 4px 4px #0f1021, inset 0px 1px 2px #ffffff,
+      inset 0px 20px 80px #0f1021, inset 0px -4px 4px #ffffff,
+      inset 0px -40px 40px rgba(15, 16, 33, 0.2), inset 0px 4px 12px #ffffff;
+    backdrop-filter: blur(20px);
+  }
+  /* ... */
+}
+
 /* ! Do NOT add @layer these three button classes /*
 /* https://tailwindcss.com/docs/adding-custom-styles#removing-unused-custom-css  */
 /* https://v2.tailwindcss.com/docs/just-in-time-mode#arbitrary-value-support */

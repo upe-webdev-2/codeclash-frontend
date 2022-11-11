@@ -3,7 +3,7 @@ import CustomEditor from "@/templates/Playground/CustomEditor";
 import Instruction from "@/templates/Playground/Instructions";
 import GameInfo from "@/templates/Playground/GameInfo";
 import { GetServerSideProps } from "next";
-import { useEffect, useRef } from "react";
+import { useRef, useState } from "react";
 
 type Playground = {
   problem: {
@@ -23,6 +23,22 @@ type Playground = {
 
 const Dom = ({ problem }: Playground) => {
   const editorRef = useRef(null);
+  const [promptPanelTab, setPromptPanelTab] = useState(0);
+
+  const handleSubmit = () => {
+    /**
+     * TODO: send code to sockets for validation
+     */
+    alert("Submit: \n\n\n" + editorRef.current.getValue());
+  };
+
+  const handleTest = () => {
+    /**
+     * TODO: Send code to sockets for test cases
+     */
+    setPromptPanelTab(1);
+    alert("Testing: \n\n\n" + editorRef.current.getValue());
+  };
 
   return (
     <div className="flex">
@@ -38,6 +54,8 @@ const Dom = ({ problem }: Playground) => {
               element: <h1>This will one day be the output tab</h1>
             }
           ]}
+          activeTab={promptPanelTab}
+          switchTab={tab => setPromptPanelTab(tab)}
         />
       </div>
 
@@ -67,7 +85,20 @@ const Dom = ({ problem }: Playground) => {
           />
         </div>
 
-        <div>Controls</div>
+        <div className="flex flex-col items-center justify-center gap-2 mt-2 [&>*]:p-2 [&>*]:rounded-lg font-gilroy-bold">
+          <button
+            className="w-full transition duration-1000 polymorphism active:translate-y-1 hover:bg-tertiary"
+            onClick={handleTest}
+          >
+            Test
+          </button>
+          <button
+            onClick={handleSubmit}
+            className="w-full transition-all duration-1000 active:translate-y-1 bg-gradient-to-r from-tertiary via-secondary to-tertiary bg-size-200 bg-pos-0 hover:bg-pos-100"
+          >
+            Submit
+          </button>
+        </div>
       </div>
     </div>
   );
