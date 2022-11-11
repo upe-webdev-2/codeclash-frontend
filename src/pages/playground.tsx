@@ -1,9 +1,9 @@
-import Tabs from "@/components/Tabs";
+import Tabs from "@/templates/Playground/Tabs";
 import CustomEditor from "@/templates/Playground/CustomEditor";
 import Instruction from "@/templates/Playground/Instructions";
 import GameInfo from "@/templates/Playground/GameInfo";
 import { GetServerSideProps } from "next";
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 
 type Playground = {
   problem: {
@@ -43,9 +43,6 @@ const Dom = ({ problem }: Playground) => {
 
       <div className="pr-10 w-[67vw]">
         <div className="h-32">
-          {/**
-           * TODO: Get Opponent from backend
-           */}
           <GameInfo
             opponent={{
               username: "ROXXY345",
