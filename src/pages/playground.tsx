@@ -1,9 +1,10 @@
 import Tabs from "@/templates/Playground/Tabs";
 import CustomEditor from "@/templates/Playground/CustomEditor";
-import Instruction from "@/templates/Playground/Instructions";
+import Description from "@/templates/Playground/Tabs/Description";
 import GameInfo from "@/templates/Playground/GameInfo";
 import { GetServerSideProps } from "next";
 import { useEffect, useRef, useState } from "react";
+import Result from "@/templates/Playground/Tabs/Result";
 
 type Playground = {
   problem: {
@@ -43,6 +44,9 @@ const Dom = ({ problem }: Playground) => {
     }
   }, [timer]);
 
+  const [testCases, setTestCases] = useState(null);
+  const [completedAllTestCases, setCompletedAllTestCases] = useState(false); // from the sockets if the user was able to do all the test cases
+
   const handleSubmit = () => {
     /**
      * TODO: send code to sockets for validation
@@ -53,9 +57,34 @@ const Dom = ({ problem }: Playground) => {
   const handleTest = () => {
     /**
      * TODO: Send code to sockets for test cases
+     * * editorRef.current.getValue()
      */
-    setPromptTabManager(1);
-    alert("Testing: \n\n\n" + editorRef.current.getValue());
+    setPromptTabManager(1); // show the results tab
+    setTestCases([
+      {
+        input: "nums = [2,7,11,15], target = 9",
+        output: "[0]",
+        expected: "[0,1]",
+        Stdout: "{}"
+      },
+      {
+        input: "nums = [2,7,11,15], target = 9",
+        output: "[]",
+        expected: "[0,1]"
+      },
+      {
+        input: "nums = [2,7,11,15], target = 9",
+        output: "[0,1]",
+        expected: "[0,1]"
+      },
+      {
+        input: "nums = [2,7,11,15], target = 9",
+        output: "[0,1]",
+        expected: "[0,1]",
+        Stdout: "[2,7,11,15]"
+      }
+    ]);
+    setCompletedAllTestCases(false);
   };
 
   return (
@@ -64,12 +93,14 @@ const Dom = ({ problem }: Playground) => {
         <Tabs
           tabs={[
             {
-              name: "instruction",
-              element: <Instruction {...problem} />
+              name: "Description",
+              element: <Description {...problem} />
             },
             {
-              name: "output",
-              element: <h1>This will one day be the output tab</h1>
+              name: "Result",
+              element: (
+                <Result testCases={testCases} passed={completedAllTestCases} />
+              )
             }
           ]}
           activeTab={promptTabManager}
@@ -137,12 +168,15 @@ export default function Playground(props: Playground) {
 export const getServerSideProps: GetServerSideProps = async ({ query }) => {
   const { problem } = query;
 
-  const response = await fetch(`${process.env.ENDPOINT}/problems/${problem}`, {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json"
+  const response = await fetch(
+    `${process.env.API_ENDPOINT}/problems/${problem}`,
+    {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json"
+      }
     }
-  });
+  );
 
   const data = await response.json();
 
