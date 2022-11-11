@@ -24,7 +24,13 @@ const CustomEditor = ({ editorConfig, editorRef }: CustomEditor) => {
     monaco.editor.defineTheme("code-clash", {
       base: "vs-dark",
       inherit: true,
-      rules: [{}],
+      rules: [
+        {
+          token: "",
+          foreground: "#ffffff",
+          background: tailwindVariables.colors["primary"]
+        }
+      ],
       colors: {
         "editor.foreground": "#ffffff",
         "editor.background": tailwindVariables.colors["primary"],
