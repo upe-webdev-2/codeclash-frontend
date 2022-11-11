@@ -27,34 +27,38 @@ const PlayerStats = (params: PlayerStats) => {
           inverted && "justify-end flex-row-reverse"
         } flex justify-center gap-5 relative`}
       >
-        <div className="flex items-center justify-center p-2 rounded-full bg-gradient-radial from-borderGradient-primary to-cardGradient-secondary">
+        {/* profile picture */}
+        <div className="z-10 flex items-center justify-center p-2 bg-black rounded-full bg-gradient-radial from-cardGradient-primary via-cardGradient-primary to-cardGradient-secondary">
           <Image
             src={profilePicture}
             alt="Profile Picture"
             width={70}
             height={70}
-            className="z-10 object-cover rounded-full"
+            className="object-cover rounded-full"
           />
         </div>
 
+        {/* number of test completed out of total test cases */}
         <h1 className="mt-3 text-lg font-gilroy-bold">
           {completedTestCases}/{totalTestCases}
         </h1>
 
+        {/* Test cases progress bar */}
         <div
           className={`${
             inverted ? "-left-6 justify-end" : "-right-6"
-          } absolute w-28 h-3 bottom-3 rounded-full flex`}
+          } absolute w-28 h-3 bottom-3 rounded-full flex bg-quaternary`}
         >
           <div
             className={`${
               inverted ? "bg-gradient-to-l" : "bg-gradient-to-r"
-            } from-secondary to-tertiary h-full rounded-full`}
+            } from-secondary to-tertiary h-full rounded-full bg-opacity-100`}
             style={{ width: `${(completedTestCases / totalTestCases) * 100}%` }}
           />
         </div>
       </div>
 
+      {/* user name and total cystals */}
       <div className="flex items-center justify-center gap-3 font-gilroy-bold">
         <h1 className="font-gilroy-bold">{username}</h1>
         <span className="flex items-center justify-center">
