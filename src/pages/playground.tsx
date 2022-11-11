@@ -3,7 +3,7 @@ import CustomEditor from "@/templates/Playground/CustomEditor";
 import Instruction from "@/templates/Playground/Instructions";
 import GameInfo from "@/templates/Playground/GameInfo";
 import { GetServerSideProps } from "next";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 type Playground = {
   problem: {
@@ -23,7 +23,25 @@ type Playground = {
 
 const Dom = ({ problem }: Playground) => {
   const editorRef = useRef(null);
-  const [promptPanelTab, setPromptPanelTab] = useState(0);
+  const [promptTabManager, setPromptTabManager] = useState(0); // instructions - results - (past submissions)?
+
+  /**
+   * to start the countdown, set timer to problems.timeLimit
+   * To stop the countdown, set timer to null or 0,
+   */
+  const [timer, setTimer] = useState<number>(problem.timeLimit);
+
+  useEffect(() => {
+    if (timer > 0) {
+      setTimeout(() => setTimer(timer - 1), 1000);
+    } else if (timer === 0) {
+      setTimer(null);
+    }
+
+    if (timer === null) {
+      alert("Time limit exceeded!");
+    }
+  }, [timer]);
 
   const handleSubmit = () => {
     /**
@@ -36,7 +54,7 @@ const Dom = ({ problem }: Playground) => {
     /**
      * TODO: Send code to sockets for test cases
      */
-    setPromptPanelTab(1);
+    setPromptTabManager(1);
     alert("Testing: \n\n\n" + editorRef.current.getValue());
   };
 
@@ -54,8 +72,8 @@ const Dom = ({ problem }: Playground) => {
               element: <h1>This will one day be the output tab</h1>
             }
           ]}
-          activeTab={promptPanelTab}
-          switchTab={tab => setPromptPanelTab(tab)}
+          activeTab={promptTabManager}
+          switchTab={tab => setPromptTabManager(tab)}
         />
       </div>
 
@@ -71,6 +89,10 @@ const Dom = ({ problem }: Playground) => {
               total: 10,
               opponentCompletion: 8,
               userCompletion: 6
+            }}
+            timer={{
+              timeRemaining: timer || problem.timeLimit,
+              timeLimit: problem.timeLimit
             }}
           />
         </div>

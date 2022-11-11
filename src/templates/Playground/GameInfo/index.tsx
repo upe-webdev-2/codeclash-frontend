@@ -15,9 +15,13 @@ type GameInfo = {
     userCompletion: number;
     opponentCompletion: number;
   };
+  timer: {
+    timeLimit: number;
+    timeRemaining: number;
+  };
 };
 
-const GameInfo = ({ opponent, testCases }: GameInfo) => {
+const GameInfo = ({ opponent, testCases, timer }: GameInfo) => {
   /**
    * TODO: Get user from next/auth
    */
@@ -34,7 +38,7 @@ const GameInfo = ({ opponent, testCases }: GameInfo) => {
         totalTestCases={testCases.total}
         completedTestCases={testCases.userCompletion}
       />
-      <Timer timeRemaining={90} timeLimit={120} />
+      <Timer {...timer} />
       <PlayerStats
         {...opponent}
         totalTestCases={testCases.total}
