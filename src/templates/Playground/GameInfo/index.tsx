@@ -1,5 +1,6 @@
-import { useState } from "react";
+import { ElementRef, useRef, useState } from "react";
 import PlayerStats from "./PlayerStats";
+import Timer from "./Timer";
 
 type Player = {
   username: string;
@@ -33,7 +34,7 @@ const GameInfo = ({ opponent, testCases }: GameInfo) => {
         totalTestCases={testCases.total}
         completedTestCases={testCases.userCompletion}
       />
-      <h1>timer</h1>
+      <Timer timeRemaining={90} timeLimit={120} />
       <PlayerStats
         {...opponent}
         totalTestCases={testCases.total}
