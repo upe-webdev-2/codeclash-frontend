@@ -23,8 +23,8 @@ type Playground = {
 };
 
 const Dom = ({ problem }: Playground) => {
-  const editorRef = useRef(null);
-  const [promptTabManager, setPromptTabManager] = useState(0); // instructions - results - (past submissions)?
+  const editorRef = useRef(null); // monaco editor
+  const [tabManager, setTabManager] = useState(0); // instructions - results - (past submissions)?
 
   /**
    * to start the countdown, set timer to problems.timeLimit
@@ -59,7 +59,7 @@ const Dom = ({ problem }: Playground) => {
      * TODO: Send code to sockets for test cases
      * * editorRef.current.getValue()
      */
-    setPromptTabManager(1); // show the results tab
+    setTabManager(1); // show the results tab
     setTestCases([
       {
         input: "nums = [2,7,11,15], target = 9",
@@ -103,8 +103,8 @@ const Dom = ({ problem }: Playground) => {
               )
             }
           ]}
-          activeTab={promptTabManager}
-          switchTab={tab => setPromptTabManager(tab)}
+          activeTab={tabManager}
+          switchTab={tab => setTabManager(tab)}
         />
       </div>
 
