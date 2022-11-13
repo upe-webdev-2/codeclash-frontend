@@ -17,7 +17,7 @@ const Tabs = ({ tabs, switchTab, activeTab = 0 }: Tabs) => {
         borderStyles="mb-3 rounded-b-none"
         backgroundStyles="rounded-b-none"
       >
-        <div className="flex overflow-x-scroll rounded-t-xl">
+        <div className="flex overflow-x-auto rounded-t-xl">
           {tabs.map(({ name }, index) => (
             <div
               key={index}
