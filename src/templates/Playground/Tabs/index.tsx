@@ -33,7 +33,7 @@ const Tabs = ({ tabs, switchTab, activeTab = 0 }: Tabs) => {
       </Container>
 
       <Container
-        backgroundStyles="w-full h-[80vh] overflow-y-scroll p-5 rounded-t-none "
+        backgroundStyles="w-full h-[80vh] overflow-y-scroll p-5 rounded-t-none hide-scroll-bar"
         borderStyles="rounded-t-none"
       >
         {tabs[activeTab].element}
