@@ -40,7 +40,7 @@ const ProblemsMenu = ({ searchForGame }: ProblemsMenu) => {
   ]);
 
   return (
-    <div className="flex flex-col items-center justify-center w-full h-screen gap-20">
+    <div className="flex flex-col items-center justify-center w-full gap-20">
       <div className="text-center">
         <h1 className="mb-10 text-4xl font-gilroy-bold">Choose your level</h1>
 
