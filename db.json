@@ -25,7 +25,7 @@
         }
       ],
       "starterCode": "def solve(nums: list, target: int) -> list:\n\t# Code here...",
-      "timeLimit": 5
+      "timeLimit": 60
     },
     {
       "id": 3,
@@ -52,7 +52,7 @@
         }
       ],
       "starterCode": "def solve(s: str) -> int:\n\t# Code here...",
-      "timeLimit": 15
+      "timeLimit": 900
     },
     {
       "id": 4,
@@ -75,7 +75,7 @@
         }
       ],
       "starterCode": "def solve(nums1: list, nums2: list) -> float:\n\t# Code here...",
-      "timeLimit": 30
+      "timeLimit": 1800
     }
   ]
 }
