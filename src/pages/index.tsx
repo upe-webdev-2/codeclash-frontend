@@ -38,7 +38,7 @@ const DOM = () => {
         </>
       ) : (
         <>
-          <button onClick={() => signIn("google")}>Sign In</button>
+          <button onClick={() => signIn()}>Sign In</button>
           <h3>not signed in</h3>
         </>
       )}
