@@ -11,6 +11,12 @@ datasource db {
   //   shadowDatabaseUrl = env("SHADOW_DATABASE_URL") // Only needed when using a cloud provider that doesn't support the creation of new databases, like Heroku. Learn more: https://pris.ly/migrate-shadow
 }
 
+enum ProblemDifficulty {
+  EASY
+  MEDIUM
+  HARD
+}
+
 model Account {
   id                String  @id @default(cuid())
   userId            String
@@ -31,29 +37,55 @@ model Account {
 }
 
 model User {
-  id            String    @id @default(cuid())
+  id            String         @id @default(cuid())
   name          String?
-  email         String?   @unique
+  email         String         @unique
   emailVerified DateTime?
+  xp            Int            @default(0)
   image         String?
   accounts      Account[]
   sessions      Session[]
+  Player1       MatchHistory[] @relation("Player1Id")
+  Player2       MatchHistory[] @relation("Player2Id")
 
-  problems       Problems? @relation(fields: [problemHistory], references: [id])
-  problemHistory String?
+  // @@index([xp(sort: Desc)])
+  @@index([email])
 }
 
-model Problems {
-  id           String   @id @default(cuid())
-  title        String
-  difficulty   String
-  objectives   String[]
-  examples     String[]
-  starterCode  String
-  testCases    String[]
-  functionName String
+model MatchHistory {
+  id        String   @id @default(cuid())
+  player1Id String
+  player2Id String
+  problemId String
+  timestamp DateTime @default(now())
+  status    String
 
-  User         User[]
+  winningcode String
+  losingcode  String
+
+  Player1 User    @relation(fields: [player1Id], references: [id], name: "Player1Id")
+  Player2 User    @relation(fields: [player2Id], references: [id], name: "Player2Id")
+  problem Problem @relation(fields: [problemId], references: [id])
+
+  // @@index([userId, problemId])
+}
+
+model Problem {
+  id            String            @id @default(cuid())
+  problemNumber Int               @unique @default(autoincrement())
+  title         String
+  difficulty    ProblemDifficulty
+  objectives    String[]
+  examples      String[]
+  starterCode   String
+  testCases     String[]
+  functionName  String
+
+  MatchHistory MatchHistory[]
+  // @@index([difficulty, problemNumber(sort: Desc)], map: "by_difficulty_decending") //this can stay but it needs to be commented out, I think the only difficulty will be easy
+  // @@index([difficulty, problemNumber(sort: Asc)], map: "by_difficulty_ascending") //this can stay but it needs to be commented out, I think the only difficulty will be easy
+
+  @@index([problemNumber(sort: Desc)])
 }
 
 model Session {
