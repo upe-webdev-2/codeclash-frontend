@@ -1,4 +1,7 @@
 -- CreateEnum
+CREATE TYPE "Winner" AS ENUM ('Player1', 'Player2', 'Tie');
+
+-- CreateEnum
 CREATE TYPE "ProblemDifficulty" AS ENUM ('EASY', 'MEDIUM', 'HARD');
 
 -- CreateTable
@@ -38,7 +41,7 @@ CREATE TABLE "MatchHistory" (
     "player2Id" TEXT NOT NULL,
     "problemId" TEXT NOT NULL,
     "timestamp" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "status" TEXT NOT NULL,
+    "winner" "Winner" NOT NULL,
     "winningcode" TEXT NOT NULL,
     "losingcode" TEXT NOT NULL,
 
