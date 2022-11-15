@@ -27,6 +27,7 @@ const AppLayout = ({ children }) => {
 };
 
 function App({ Component, pageProps: { session, ...pageProps } }) {
+
   const router = useRouter();
   const { setRouter } = useStore();
 
@@ -42,7 +43,7 @@ function App({ Component, pageProps: { session, ...pageProps } }) {
     <>
       <Header title={pageProps.title} />
       <SessionProvider session={session}>
-        <AppLayout>{children}</AppLayout>
+        <AppLayout {...pageProps}>{children}</AppLayout>
       </SessionProvider>
     </>
   );
