@@ -25,6 +25,7 @@
     "@next-auth/prisma-adapter": "^1.0.5",
     "@prisma/client": "^4.6.0",
     "@react-spring/three": "^9.4.5",
+    "@react-spring/web": "^9.5.5",
     "@react-three/a11y": "^3.0.0",
     "@react-three/drei": "^9.11.3",
     "@react-three/fiber": "^8.0.22",
@@ -37,7 +38,7 @@
     "react-dom": "^18.1.0",
     "react-is": "^18.1.0",
     "react-spring": "^9.5.5",
-    "three": "^0.141.0",
+    "three": "^0.146.0",
     "three-stdlib": "^2.10.2",
     "zustand": "^4.0.0-rc.1"
   },

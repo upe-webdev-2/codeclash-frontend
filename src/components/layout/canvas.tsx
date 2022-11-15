@@ -11,16 +11,17 @@ const CanvasWrapper = ({ children }) => {
   return (
     <>
       <Canvas
+      camera={{ position: [35, -3, 20], fov: 35 }}
         // Is this deprecated or typed wrong? Ignoring for now.
         // @ts-ignore
-        mode="concurrent"
+        // mode="concurrent"
         style={{
           position: "absolute",
           top: 0
         }}
       >
         <Stats />
-        <Controls />
+        {/* <Controls /> */}
         <Preload all />
         {children}
       </Canvas>

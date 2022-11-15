@@ -1566,7 +1566,7 @@
     "@react-spring/shared" "~9.5.5"
     "@react-spring/types" "~9.5.5"
 
-"@react-spring/core@~9.5.5":
+"@react-spring/core@^9.5.5", "@react-spring/core@~9.5.5":
   "integrity" "sha512-shaJYb3iX18Au6gkk8ahaF0qx0LpS0Yd+ajb4asBaAQf6WPGuEdJsbsNSgei1/O13JyEATsJl20lkjeslJPMYA=="
   "resolved" "https://registry.npmjs.org/@react-spring/core/-/core-9.5.5.tgz"
   "version" "9.5.5"
@@ -1624,7 +1624,7 @@
   "resolved" "https://registry.npmjs.org/@react-spring/types/-/types-9.5.5.tgz"
   "version" "9.5.5"
 
-"@react-spring/web@~9.5.5":
+"@react-spring/web@^9.5.5", "@react-spring/web@~9.5.5":
   "integrity" "sha512-+moT8aDX/ho/XAhU+HRY9m0LVV9y9CK6NjSRaI+30Re150pB3iEip6QfnF4qnhSCQ5drpMF0XRXHgOTY/xbtFw=="
   "resolved" "https://registry.npmjs.org/@react-spring/web/-/web-9.5.5.tgz"
   "version" "9.5.5"
@@ -8611,10 +8611,10 @@
     "potpack" "^1.0.1"
     "zstddec" "^0.0.2"
 
-"three@^0.141.0", "three@>= 0.123.0", "three@>=0.103.0", "three@>=0.122.0", "three@>=0.126", "three@>=0.133", "three@>=0.133.0", "three@>=0.137":
-  "integrity" "sha512-JaSDAPWuk4RTzG5BYRQm8YZbERUxTfTDVouWgHMisS2to4E5fotMS9F2zPFNOIJyEFTTQDDKPpsgZVThKU3pXA=="
-  "resolved" "https://registry.npmjs.org/three/-/three-0.141.0.tgz"
-  "version" "0.141.0"
+"three@^0.146.0", "three@>= 0.123.0", "three@>=0.103.0", "three@>=0.122.0", "three@>=0.126", "three@>=0.133", "three@>=0.133.0", "three@>=0.137":
+  "integrity" "sha512-1lvNfLezN6OJ9NaFAhfX4sm5e9YCzHtaRgZ1+B4C+Hv6TibRMsuBAM5/wVKzxjpYIlMymvgsHEFrrigEfXnb2A=="
+  "resolved" "https://registry.npmjs.org/three/-/three-0.146.0.tgz"
+  "version" "0.146.0"
 
 "throat@^5.0.0":
   "integrity" "sha512-fcwX4mndzpLQKBS1DVYhGAcYaYt7vsHNIvQV+WXMvnow5cgjPphq5CaayLaGsjRdSCKZFNGt7/GYAuXaNOiYCA=="

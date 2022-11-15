@@ -1,9 +1,12 @@
-import useStore from "@/helpers/store";
-import { useEffect, useRef } from "react";
-
 const Dom = ({ children }) => {
   return (
-    <div>
+    <div style={{
+        position: "absolute",
+        top: 0,
+        left: 0,
+        zIndex: 10,
+        overflow: "hidden"
+      }}>
       <main className="flex min-h-screen flex-col items-center justify-top">
         {children}
       </main>

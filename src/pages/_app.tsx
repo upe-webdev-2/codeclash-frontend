@@ -36,7 +36,7 @@ function App({ Component, pageProps: { session, ...pageProps } }) {
   }, [setRouter, router]);
 
   // Get the children from each page so we can split them
-  // @ts-ignore/
+  // @ts-ignore
   const children = Component(pageProps).props.children;
 
   return (
