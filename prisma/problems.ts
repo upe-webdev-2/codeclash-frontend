@@ -1,15 +1,12 @@
-// Use jsonb data type faster output slower input
-//json data type is faster input slower output
-
 type Example = {
-  input: any;
-  output: any;
+  input: String;
+  output: String;
   explanation?: string;
 };
 
 type TestCase = {
-  inputs: any;
-  output: any;
+  inputs: String;
+  output: String;
 };
 
 type Problem = {
@@ -51,8 +48,8 @@ const problems: Problem[] = [
     starterCode:
       "def twoSum(nums: List[int], target: int) -> List[int]:\n\t# Code here...\n\tpass",
     testCases: [
-      { inputs: [[2, 7, 11, 15], 9], output: [0, 1] },
-      { inputs: [[1, 1, 2, 3, 4, 6, 7], 8], output: [2, 5] }
+      { inputs: "[[2, 7, 11, 15], 9]", output: "[0, 1]" },
+      { inputs: "[[1, 1, 2, 3, 4, 6, 7], 8]", output: "[2, 5]" }
     ],
     functionName: "twoSum"
   },
@@ -84,9 +81,9 @@ const problems: Problem[] = [
     ],
     starterCode: "def isValid(self, s): \n\t# Code here...\n\t",
     testCases: [
-      { inputs: ["()"], output: true },
-      { inputs: ["(]"], output: false },
-      { inputs: ["()[]{}"], output: true }
+      { inputs: `["()"]`, output: `true` },
+      { inputs: `["(]"]`, output: `false` },
+      { inputs: `["()[]{}"]`, output: `true` }
     ],
     functionName: "validParentheses"
   },
@@ -133,9 +130,9 @@ const problems: Problem[] = [
     ],
     starterCode: "def romanToInt(self, s: str) -> int:\n\t# Code here...\n\t",
     testCases: [
-      { inputs: ["III"], output: 3 },
-      { inputs: ["LVIII"], output: 58 },
-      { inputs: ["MCMXCIV"], output: 1994 }
+      { inputs: `["III"]`, output: `3` },
+      { inputs: `["LVIII"]`, output: `58` },
+      { inputs: `["MCMXCIV"]`, output: `1994` }
     ],
     functionName: "romanToInteger"
   }
