@@ -11,12 +11,6 @@ datasource db {
   //   shadowDatabaseUrl = env("SHADOW_DATABASE_URL") // Only needed when using a cloud provider that doesn't support the creation of new databases, like Heroku. Learn more: https://pris.ly/migrate-shadow
 }
 
-enum ProblemDifficulty {
-  EASY
-  MEDIUM
-  HARD
-}
-
 model Account {
   id                String  @id @default(cuid())
   userId            String
@@ -52,13 +46,19 @@ model User {
   @@index([email])
 }
 
+enum Winner {
+  Player1
+  Player2
+  Tie
+}
+
 model MatchHistory {
   id        String   @id @default(cuid())
   player1Id String
   player2Id String
   problemId String
   timestamp DateTime @default(now())
-  status    String
+  winner    Winner //player1 player2 tie
 
   winningcode String
   losingcode  String
@@ -68,6 +68,12 @@ model MatchHistory {
   problem Problem @relation(fields: [problemId], references: [id])
 
   // @@index([userId, problemId])
+}
+
+enum ProblemDifficulty {
+  EASY
+  MEDIUM
+  HARD
 }
 
 model Problem {
