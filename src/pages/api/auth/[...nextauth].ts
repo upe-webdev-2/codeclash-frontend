@@ -1,7 +1,6 @@
 import NextAuth, { type NextAuthOptions } from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
 
-
 export const authOptions: any = {
   // unknown type that works with JWT. Last known type: NextAuthOptions
   // Include user.id on session
@@ -21,7 +20,9 @@ export const authOptions: any = {
       clientSecret: process.env.GOOGLE_CLIENT_SECRET
     })
   ],
-
+  pages: {
+    signIn: "/auth"
+  },
   jwt: {
     signingKey: process.env.JWT_SIGNING_PRIVATE_KEY
   }
