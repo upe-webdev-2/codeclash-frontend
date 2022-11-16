@@ -4,6 +4,7 @@ import Description from "@/templates/Playground/Tabs/Description";
 import GameInfo from "@/templates/Playground/GameInfo";
 import { GetServerSideProps } from "next";
 import { useEffect, useRef, useState } from "react";
+import { getSession } from "next-auth/react";
 import Result from "@/templates/Playground/Tabs/Result";
 
 type Playground = {
@@ -165,11 +166,20 @@ export default function Playground(props: Playground) {
   );
 }
 
-export const getServerSideProps: GetServerSideProps = async ({ query }) => {
-  const { problem } = query;
+export const getServerSideProps: GetServerSideProps = async context => {
+  const session = await getSession(context);
+
+  if (!session) {
+    return {
+      redirect: {
+        destination: "/auth",
+        permanent: false
+      }
+    };
+  }
 
   const response = await fetch(
-    `${process.env.API_ENDPOINT}/problems/${problem}`,
+    `${process.env.API_ENDPOINT}/problems/${context.query.problem}`,
     {
       method: "GET",
       headers: {
