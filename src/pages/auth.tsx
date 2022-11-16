@@ -1,29 +1,26 @@
 import Container from "@/components/Container";
 import Navbar from "@/components/Navbar/Navbar";
-import { GetStaticPaths, GetStaticProps } from "next";
+import { GetServerSideProps } from "next";
+import { signIn } from "next-auth/react";
 import Image from "next/image";
 import { useState } from "react";
 
-type Auth = {
-  page: "login" | "join";
-};
-
-const Dom = ({ page }: Auth) => {
+const Dom = ({}) => {
   const [loginMethods] = useState([
     {
       name: "Google",
       icon: "/static/auth/google.svg",
-      action: () => alert("You want to login with Google")
+      providerId: "google"
     },
     {
-      name: "Facebook",
+      name: "Linkedin",
       icon: "/static/auth/facebook.svg",
-      action: () => alert("You want to login with Facebook")
+      providerId: "linkedin"
     },
     {
-      name: "Github",
+      name: "GitHub",
       icon: "/static/auth/github.svg",
-      action: () => alert("You want to login with Github")
+      providerId: "github"
     }
   ]);
 
@@ -41,16 +38,17 @@ const Dom = ({ page }: Auth) => {
           />
         </div>
 
-        <h1 className="mt-6 text-5xl capitalize font-gilroy-bold">{page}</h1>
+        <h1 className="mt-6 text-5xl capitalize font-gilroy-bold">
+          Login | Register
+        </h1>
 
         <div className="flex flex-col items-center justify-center gap-3 mt-10">
-          {loginMethods.map(({ name, icon, action }, index) => (
+          {loginMethods.map(({ name, icon, providerId }, index) => (
             <Container key={index} onHover>
               <button
                 className="flex items-center justify-center h-16 cursor-pointer w-[768px]"
-                onClick={action}
+                onClick={() => signIn(providerId, { callbackUrl: "/menu" })}
               >
-                
                 <Image src={icon} alt={name} width={30} height={30} />
               </button>
             </Container>
@@ -61,7 +59,7 @@ const Dom = ({ page }: Auth) => {
   );
 };
 
-export default function Auth(props: Auth) {
+export default function Auth(props) {
   return (
     <>
       <Dom {...props} />
@@ -69,25 +67,10 @@ export default function Auth(props: Auth) {
   );
 }
 
-export const getStaticPaths: GetStaticPaths = async () => {
-  return {
-    paths: [
-      {
-        params: { page: "login" }
-      },
-      {
-        params: { page: "join" }
-      }
-    ],
-    fallback: false
-  };
-};
-
-export const getStaticProps: GetStaticProps = async ({ params }) => {
+export const getServerSideProps: GetServerSideProps = async ({ query }) => {
   return {
     props: {
-      ...params,
-      title: params.page
+      title: "Login - Register"
     }
   };
 };

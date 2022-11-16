@@ -51,7 +51,7 @@ const ProblemsMenu = ({ searchForGame }: ProblemsMenu) => {
         <p>The next step involves selecting your preferred coding languages.</p>
       </div>
 
-      <div className="flex items-center justify-center gap-10">
+      <div className="flex flex-wrap items-center justify-center w-full gap-10">
         {difficultyCards.map((card, index) => (
           <DifficultyCard key={index} {...card} />
         ))}
