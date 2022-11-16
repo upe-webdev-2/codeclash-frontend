@@ -30,17 +30,16 @@ model Account {
 }
 
 model User {
-  id            String    @id @default(cuid())
+  id            String         @id @default(cuid())
   name          String?
-  email         String    @unique
+  email         String         @unique
   emailVerified DateTime?
-  xp            Int       @default(0)
+  xp            Int            @default(0)
   image         String?
   accounts      Account[]
   sessions      Session[]
-
-  Player1 MatchHistory[] @relation("Player1Id")
-  Player2 MatchHistory[] @relation("Player2Id")
+  player1       MatchHistory[] @relation("Player1Id")
+  player2       MatchHistory[] @relation("Player2Id")
 
   // @@index([xp(sort: Desc)])
   @@index([email])
@@ -53,7 +52,7 @@ enum Winner {
   Ongoing
 }
 
-
+model MatchHistory {
   id                  String   @id @default(cuid())
   roomId              String?
   player1Id           String
@@ -61,11 +60,11 @@ enum Winner {
   problemId           String
   matchStartTimestamp DateTime @default(now())
   matchEndTimestamp   DateTime
-  winner              Winner   @default(Ongoing) //Player1 Player2 Tie
+  winner              Winner   @default(Ongoing) //Player1 Player2 Draw Ongoing
   player1Code         String
   player2Code         String
-  Player1             User     @relation(fields: [player1Id], references: [id], name: "Player1Id")
-  Player2             User     @relation(fields: [player2Id], references: [id], name: "Player2Id")
+  player1             User     @relation(fields: [player1Id], references: [id], name: "Player1Id")
+  player2             User     @relation(fields: [player2Id], references: [id], name: "Player2Id")
   problem             Problem  @relation(fields: [problemId], references: [id])
   // @@index([userId, problemId])
   // maybe use an @@index somewhere
@@ -87,8 +86,7 @@ model Problem {
   starterCode   String
   testCases     String[]
   functionName  String
-
-  MatchHistory MatchHistory[]
+  MatchHistory  MatchHistory[]
   // @@index([difficulty, problemNumber(sort: Desc)], map: "by_difficulty_decending") //this can stay but it needs to be commented out, I think the only difficulty will be easy
   // @@index([difficulty, problemNumber(sort: Asc)], map: "by_difficulty_ascending") //this can stay but it needs to be commented out, I think the only difficulty will be easy
 
