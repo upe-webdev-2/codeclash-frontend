@@ -2,16 +2,11 @@ import dynamic from "next/dynamic";
 import Navbar from "@/components/Navbar/Navbar";
 import { Model } from "../components/laptop";
 import { useSpring } from "react-spring";
-import { Suspense, useContext, useState } from "react";
+import { Suspense, useState } from "react";
 import { a as three } from "@react-spring/three";
 import { ContactShadows, Environment, Html } from "@react-three/drei";
-import Router from "next/router";
-import {
-  getSession,
-  SessionContext,
-  SessionProvider,
-  useSession
-} from "next-auth/react";
+
+import { getSession, SessionProvider } from "next-auth/react";
 import { GetServerSideProps } from "next";
 // import Shader from '@/components/canvas/ShaderExample/ShaderExample'
 
