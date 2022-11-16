@@ -5,6 +5,7 @@ import GameInfo from "@/templates/Playground/GameInfo";
 import { GetServerSideProps } from "next";
 import { useEffect, useRef, useState } from "react";
 import Result from "@/templates/Playground/Tabs/Result";
+import io from "socket.io-client";
 
 type Playground = {
   problem: {
@@ -20,26 +21,33 @@ type Playground = {
     starterCode: string;
     timeLimit: number;
   };
+  jwt: string;
 };
 
-const Dom = ({ problem }: Playground) => {
+const socket = io(`http://localhost:3001`);
+
+const Dom = ({ problem, jwt }: Playground) => {
   const editorRef = useRef(null); // monaco editor
   const [tabManager, setTabManager] = useState(0); // instructions - results - (past submissions)?
 
+  console.log(jwt);
+  // localStorage.setItem(jwt, jwt)
+
   /**
    * to start the countdown, set timer to problems.timeLimit
-   * To stop the countdown, set timer to null or 0,
+   * To stop the countdown, set timer to null
    */
-  const [timer, setTimer] = useState<number>(problem.timeLimit);
+  // const [timer, setTimer] = useState<number>(problem.timeLimit);
+
+  // console.log(socket);
+
+  const [timer, setTimer] = useState<number>(null);
 
   useEffect(() => {
     if (timer > 0) {
       setTimeout(() => setTimer(timer - 1), 1000);
-    } else if (timer === 0) {
-      setTimer(null);
     }
-
-    if (timer === null) {
+    if (timer === 0) {
       alert("Time limit exceeded!");
     }
   }, [timer]);
@@ -51,7 +59,14 @@ const Dom = ({ problem }: Playground) => {
     /**
      * TODO: send code to sockets for validation
      */
-    alert("Submit: \n\n\n" + editorRef.current.getValue());
+
+    socket.emit("submit", {
+      id: socket.id,
+      jwt: jwt,
+      code: editorRef.current.getValue()
+    });
+
+    // alert("Submit: \n\n\n" + editorRef.current.getValue());
   };
 
   const handleTest = () => {
@@ -59,6 +74,13 @@ const Dom = ({ problem }: Playground) => {
      * TODO: Send code to sockets for test cases
      * * editorRef.current.getValue()
      */
+
+    socket.emit("test", {
+      id: socket.id,
+      jwt: jwt,
+      code: editorRef.current.getValue()
+    });
+
     setTabManager(1); // show the results tab
     setTestCases([
       {
@@ -165,8 +187,30 @@ export default function Playground(props: Playground) {
   );
 }
 
-export const getServerSideProps: GetServerSideProps = async ({ query }) => {
+export const getServerSideProps: GetServerSideProps = async ({
+  req,
+  query
+}) => {
   const { problem } = query;
+  console.log(req.cookies["next-auth.session-token"]);
+
+  const jwtRes = await fetch("http://localhost:3001/auth/me", {
+    method: "POST",
+    body: req.cookies["next-auth.session-token"]
+  });
+
+  const jwt = await jwtRes.json();
+
+  /**
+   * get a jwt from auth/me (with a time limit set to the match length)
+   * store jwt in cookie
+   * every socket.io transaction will have the jwt, so we know who the user is even if they refresh the page
+   *
+   */
+
+  /**
+   * code could be saved every time the user clicks test and submit
+   */
 
   const response = await fetch(
     `${process.env.API_ENDPOINT}/problems/${problem}`,
@@ -188,7 +232,8 @@ export const getServerSideProps: GetServerSideProps = async ({ query }) => {
 
   return {
     props: {
-      problem: data
+      problem: data,
+      jwt: jwt
     }
   };
 };
