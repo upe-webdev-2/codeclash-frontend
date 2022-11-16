@@ -1,40 +1,34 @@
 import Image from "next/image";
 import { useRouter } from "next/router";
+import { signOut, useSession } from "next-auth/react";
 import React, { useState } from "react";
 import Crystal from "../Crystal";
 
 type Profile = {
-  setIsLoggedIn: React.Dispatch<React.SetStateAction<boolean>>;
   isHovering: boolean;
 };
 
-const ProfileOptions = ({
-  setIsLoggedIn
-}: {
-  setIsLoggedIn: React.Dispatch<React.SetStateAction<boolean>>;
-}) => {
+const ProfileOptions = () => {
   const router = useRouter();
   return (
     <nav className="my-2">
-      <ul className="text-white text-center text-sm">
+      <ul className="text-sm text-center text-white">
         <li
-          className="hover:text-secondary cursor-pointer"
+          className="cursor-pointer hover:text-secondary"
           onClick={() => router.push("/profile")}
         >
           Profile
         </li>
         <li
-          className="hover:text-secondary cursor-pointer"
+          className="cursor-pointer hover:text-secondary"
           onClick={() => router.push("/settings")}
         >
           Settings
         </li>
         <li
-          className="hover:text-secondary cursor-pointer"
+          className="cursor-pointer hover:text-secondary"
           onClick={() => {
-            setIsLoggedIn(false);
-            router.push("/");
-            console.warn("Log user out");
+            signOut({ callbackUrl: "/" });
           }}
         >
           Log out
@@ -44,14 +38,14 @@ const ProfileOptions = ({
   );
 };
 
-const ProfileBox = ({ setIsLoggedIn, isHovering }: Profile) => {
+const ProfileBox = ({ isHovering }: Profile) => {
   return (
     <div
       className={`${
         isHovering || "hidden"
       }  mt-2 absolute block bg-quaternary w-[90px] -translate-x-1/4 font-gilroy rounded-[5px]`}
     >
-      <ProfileOptions setIsLoggedIn={setIsLoggedIn} />
+      <ProfileOptions />
 
       <span className="absolute top-[-13%] -translate-x-2/4	 left-2/4 w-[13px] h-[13px]">
         <Image
@@ -64,11 +58,8 @@ const ProfileBox = ({ setIsLoggedIn, isHovering }: Profile) => {
   );
 };
 
-const ProfileComponents = ({
-  setIsLoggedIn
-}: {
-  setIsLoggedIn: React.Dispatch<React.SetStateAction<boolean>>;
-}) => {
+const ProfileComponents = () => {
+  const { data } = useSession();
   const [XP, setXP] = useState(12);
 
   const [isHovering, setIsHovering] = useState(false);
@@ -94,14 +85,14 @@ const ProfileComponents = ({
         <Image
           className="cursor-pointer z-[1] rounded-full"
           onClick={() => router.push("/profile")}
-          src={"/static/profile_placeholder.png"}
-          alt="user profile image"
+          src={data.user.image}
+          alt=""
           width="49"
           height="49"
         />
         {/* Invisible box so the function handleMouseOut doesn't trigger */}
         <div className="absolute block -mt-3 bg-transparent w-[90px] h-6 -left-2/4 z-0" />
-        <ProfileBox setIsLoggedIn={setIsLoggedIn} isHovering={isHovering} />
+        <ProfileBox isHovering={isHovering} />
       </div>
     </>
   );

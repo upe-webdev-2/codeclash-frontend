@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 import Image from "next/image";
 import NavElements from "./NavElements";
 import ProfileComponents from "./ProfileComponents";
-import { useRouter } from "next/router";
+import Router from "next/router";
+import { useSession } from "next-auth/react";
 
 type Navbar = {
   hideLogo?: true;
@@ -10,8 +11,10 @@ type Navbar = {
 };
 
 const Navbar = ({ hideLogo, hideElements }: Navbar) => {
-  const router = useRouter();
-  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
+  /**
+   * TODO: Get login state from next/auth
+   */
+  const { status } = useSession();
 
   return (
     <div className="flex justify-between w-full pt-1 text-lg px-28">
@@ -19,7 +22,9 @@ const Navbar = ({ hideLogo, hideElements }: Navbar) => {
         className="flex flex-col cursor-pointer"
         style={{ visibility: hideLogo ? "hidden" : "visible" }}
         onClick={() => {
-          router.push("/");
+          if (!(typeof Router.query === "string" && Router.query === "/")) {
+            Router.push("/");
+          }
         }}
       >
         <Image
@@ -36,15 +41,11 @@ const Navbar = ({ hideLogo, hideElements }: Navbar) => {
       <div
         style={{
           visibility: hideElements ? "hidden" : "visible",
-          gap: isLoggedIn ? "1rem" : "2.5rem"
+          gap: status === "authenticated" ? "1rem" : "2.5rem"
         }}
         className="flex my-auto"
       >
-        {isLoggedIn ? (
-          <ProfileComponents setIsLoggedIn={setIsLoggedIn} />
-        ) : (
-          <NavElements setIsLoggedIn={setIsLoggedIn} />
-        )}
+        {status === "authenticated" ? <ProfileComponents /> : <NavElements />}
       </div>
     </div>
   );
