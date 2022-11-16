@@ -1,9 +1,18 @@
 import Navbar from "@/components/Navbar/Navbar";
 import Loading from "@/templates/Loading";
 import ProblemsMenu from "@/templates/ProblemsMenu";
+import { GetServerSideProps } from "next";
+import { getSession, useSession } from "next-auth/react";
+import Router from "next/router";
 import { useState } from "react";
 
 const Dom = () => {
+  const { status } = useSession();
+
+  if (status === "unauthenticated") {
+    Router.push("/auth");
+  }
+
   const [isLoading, setLoading] = useState(false);
 
   const searchForGame = (difficulty: string) => {

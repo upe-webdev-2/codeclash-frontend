@@ -1,11 +1,18 @@
 import Container from "@/components/Container";
 import Navbar from "@/components/Navbar/Navbar";
 import { GetServerSideProps } from "next";
-import { signIn } from "next-auth/react";
+import { getSession, signIn, useSession } from "next-auth/react";
 import Image from "next/image";
-import { useState } from "react";
+import Router from "next/router";
+import { useEffect, useState } from "react";
 
 const Dom = ({}) => {
+  const { status } = useSession();
+
+  if (status === "authenticated") {
+    Router.push("/menu");
+  }
+
   const [loginMethods] = useState([
     {
       name: "Google",
@@ -67,7 +74,7 @@ export default function Auth(props) {
   );
 }
 
-export const getServerSideProps: GetServerSideProps = async ({ query }) => {
+export const getServerSideProps: GetServerSideProps = async context => {
   return {
     props: {
       title: "Login - Register"
