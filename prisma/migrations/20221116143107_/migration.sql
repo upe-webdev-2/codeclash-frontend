@@ -42,10 +42,10 @@ CREATE TABLE "MatchHistory" (
     "player2Id" TEXT NOT NULL,
     "problemId" TEXT NOT NULL,
     "matchStartTimestamp" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "matchEndTimestamp" TIMESTAMP(3) NOT NULL,
+    "matchEndTimestamp" TIMESTAMP(3),
     "winner" "Winner" NOT NULL DEFAULT 'Ongoing',
-    "player1Code" TEXT NOT NULL,
-    "player2Code" TEXT NOT NULL,
+    "player1Code" TEXT,
+    "player2Code" TEXT,
 
     CONSTRAINT "MatchHistory_pkey" PRIMARY KEY ("id")
 );

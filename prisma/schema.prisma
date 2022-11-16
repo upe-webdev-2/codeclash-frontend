@@ -59,10 +59,10 @@ model MatchHistory {
   player2Id           String
   problemId           String
   matchStartTimestamp DateTime @default(now())
-  matchEndTimestamp   DateTime
+  matchEndTimestamp   DateTime?
   winner              Winner   @default(Ongoing) //Player1 Player2 Draw Ongoing
-  player1Code         String
-  player2Code         String
+  player1Code         String?
+  player2Code         String?
   player1             User     @relation(fields: [player1Id], references: [id], name: "Player1Id")
   player2             User     @relation(fields: [player2Id], references: [id], name: "Player2Id")
   problem             Problem  @relation(fields: [problemId], references: [id])
