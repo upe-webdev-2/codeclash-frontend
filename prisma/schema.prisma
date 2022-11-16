@@ -49,25 +49,27 @@ model User {
 enum Winner {
   Player1
   Player2
-  Tie
+  Draw
+  Ongoing
 }
 
 model MatchHistory {
-  id        String   @id @default(cuid())
-  player1Id String?
-  player2Id String?
-  problemId String
-  timestamp DateTime @default(now())
-  winner    Winner //player1 player2 tie
-
-  winningcode String
-  losingcode  String
-
-  Player1 User?    @relation(fields: [player1Id], references: [id], name: "Player1Id")
-  Player2 User?    @relation(fields: [player2Id], references: [id], name: "Player2Id")
-  problem Problem @relation(fields: [problemId], references: [id])
+  id                  String   @id @default(cuid())
+  roomId              String?
+  player1Id           String
+  player2Id           String
+  problemId           String
+  matchStartTimestamp DateTime @default(now())
+  matchEndTimestamp   DateTime
+  winner              Winner   @default(Ongoing) //Player1 Player2 Tie
+  winningcode         String?
+  losingcode          String?
+  Player1             User     @relation(fields: [player1Id], references: [id], name: "Player1Id")
+  Player2             User     @relation(fields: [player2Id], references: [id], name: "Player2Id")
+  problem             Problem  @relation(fields: [problemId], references: [id])
 
   // @@index([userId, problemId])
+  // maybe use an @@index somewhere
 }
 
 enum ProblemDifficulty {
