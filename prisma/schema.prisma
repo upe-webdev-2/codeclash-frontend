@@ -60,8 +60,8 @@ model MatchHistory {
   timestamp DateTime @default(now())
   winner    Winner //player1 player2 tie
 
-  winningcode String
-  losingcode  String
+  player1Code String
+  player2Code String
 
   Player1 User?    @relation(fields: [player1Id], references: [id], name: "Player1Id")
   Player2 User?    @relation(fields: [player2Id], references: [id], name: "Player2Id")
