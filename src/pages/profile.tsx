@@ -1,6 +1,9 @@
 import useStore from "@/helpers/store";
 import dynamic from "next/dynamic";
+import { signIn, signOut, useSession } from "next-auth/react";
 import { useRouter } from "next/router";
+import Navbar from "@/components/Navbar/Navbar";
+import LeaderboardList from "@/components/profile/leaderboard/leaderboard-list";
 // import Shader from '@/components/canvas/ShaderExample/ShaderExample'
 
 // Prefer dynamic import for production builds
@@ -16,10 +19,14 @@ const Shader = dynamic(
 
 // DOM elements here
 const DOM = () => {
+  const { router } = useStore();
+  const { data } = useSession();
   return (
     <>
-      <h1 className="text-6xl font-bold mb-5 pt-10 px-6">Profile Page :/</h1>
+      <Navbar />
+      <h1 className="text-6xl font-bold mb-5 pt-10 px-6">Profile Page</h1>
       <p className="text-xl text-pink-600">Working on it...</p>
+      <LeaderboardList />
     </>
   );
 };
