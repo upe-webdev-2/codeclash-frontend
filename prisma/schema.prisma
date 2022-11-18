@@ -53,19 +53,19 @@ enum Winner {
 }
 
 model MatchHistory {
-  id                  String   @id @default(cuid())
+  id                  String    @id @default(cuid())
   roomId              String?
   player1Id           String
   player2Id           String
   problemId           String
-  matchStartTimestamp DateTime @default(now())
+  matchStartTimestamp DateTime  @default(now())
   matchEndTimestamp   DateTime?
-  winner              Winner   @default(Ongoing) //Player1 Player2 Draw Ongoing
+  winner              Winner    @default(Ongoing) //Player1 Player2 Draw Ongoing
   player1Code         String?
   player2Code         String?
-  player1             User     @relation(fields: [player1Id], references: [id], name: "Player1Id")
-  player2             User     @relation(fields: [player2Id], references: [id], name: "Player2Id")
-  problem             Problem  @relation(fields: [problemId], references: [id])
+  player1             User      @relation(fields: [player1Id], references: [id], name: "Player1Id")
+  player2             User      @relation(fields: [player2Id], references: [id], name: "Player2Id")
+  problem             Problem   @relation(fields: [problemId], references: [id])
   // @@index([userId, problemId])
   // maybe use an @@index somewhere
 }
@@ -83,6 +83,7 @@ model Problem {
   difficulty    ProblemDifficulty
   objectives    String[]
   examples      String[]
+  timeLimit     Int
   starterCode   String
   testCases     String[]
   functionName  String

@@ -58,6 +58,7 @@ CREATE TABLE "Problem" (
     "difficulty" "ProblemDifficulty" NOT NULL,
     "objectives" TEXT[],
     "examples" TEXT[],
+    "timeLimit" INTEGER NOT NULL,
     "starterCode" TEXT NOT NULL,
     "testCases" TEXT[],
     "functionName" TEXT NOT NULL,
