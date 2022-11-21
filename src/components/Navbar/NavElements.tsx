@@ -12,7 +12,7 @@ const NavElements = () => {
         type="outline"
         movingGradient={true}
       >
-        Login | Register
+        Join
       </Button>
     </div>
   );

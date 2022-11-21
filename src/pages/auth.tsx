@@ -49,7 +49,7 @@ const Dom = ({}) => {
         </div>
 
         <h1 className="mt-6 text-5xl capitalize font-gilroy-bold">
-          Login | Register
+          Sign in
         </h1>
 
         <div className="flex flex-col items-center justify-center gap-3 mt-10">
