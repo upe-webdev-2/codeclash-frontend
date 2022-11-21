@@ -30,10 +30,10 @@ const Navbar = ({ hideLogo, hideElements }: Navbar) => {
         <Image
           src={"/static/logo.svg"}
           alt="Image of Code Clash Logo"
-          width={"101.94px"}
-          height={"101.88px"}
+          width={"51.22px"}
+          height={"49.22px"}
         />
-        <p className="pt-2 text-center w-100 font-poppins">
+        <p className="pt-2 text-center w-100 font-poppins text-lg">
           Code<span className="font-bold">Clash</span>
         </p>
       </div>
