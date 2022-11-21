@@ -1,17 +1,19 @@
 const Dom = ({ children }) => {
   return (
-    <div style={{
+    <div
+      style={{
         position: "absolute",
         top: 0,
         left: 0,
         zIndex: 10,
         overflow: "hidden"
-      }}>
-      <main className="flex min-h-screen flex-col items-center justify-top">
+      }}
+    >
+      <main className="flex flex-col items-center min-h-screen justify-top">
         {children}
       </main>
 
-      <footer className="flex h-20 w-full items-center mt-14 justify-center border-t-2">
+      <footer className="flex items-center justify-center w-screen h-20 border-t-2 mt-14">
         <a
           className="flex items-center justify-center gap-2 cursor-pointer"
           href="https://upe.cs.fiu.edu/sparkdev/"
