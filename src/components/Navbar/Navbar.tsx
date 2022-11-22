@@ -10,6 +10,19 @@ type Navbar = {
   hideElements?: true;
 };
 
+const NavbarRight = ({
+  status
+}: {
+  status: "authenticated" | "loading" | "unauthenticated";
+}) => {
+  return (
+    <>
+      {status === "authenticated" && <ProfileComponents />}
+      {status === "unauthenticated" && <NavElements />}
+    </>
+  );
+};
+
 const Navbar = ({ hideLogo, hideElements }: Navbar) => {
   const { status } = useSession();
 
@@ -42,8 +55,7 @@ const Navbar = ({ hideLogo, hideElements }: Navbar) => {
         }}
         className="flex my-auto"
       >
-        {status === "authenticated" && <ProfileComponents />}
-        {status === "unauthenticated" && <NavElements />}
+        <NavbarRight status={status} />
       </div>
     </div>
   );
