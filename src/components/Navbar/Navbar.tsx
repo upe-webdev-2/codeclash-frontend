@@ -11,9 +11,6 @@ type Navbar = {
 };
 
 const Navbar = ({ hideLogo, hideElements }: Navbar) => {
-  /**
-   * TODO: Get login state from next/auth
-   */
   const { status } = useSession();
 
   return (
@@ -45,7 +42,8 @@ const Navbar = ({ hideLogo, hideElements }: Navbar) => {
         }}
         className="flex my-auto"
       >
-        {status === "authenticated" ? <ProfileComponents /> : <NavElements />}
+        {status === "authenticated" && <ProfileComponents />}
+        {status === "unauthenticated" && <NavElements />}
       </div>
     </div>
   );
