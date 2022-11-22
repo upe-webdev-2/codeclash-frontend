@@ -19,7 +19,7 @@ const Navbar = ({ hideLogo, hideElements }: Navbar) => {
   return (
     <div className="flex justify-between w-full pt-1 text-lg px-28">
       <div
-        className="flex flex-col cursor-pointer"
+        className="flex flex-col cursor-pointer m-3"
         style={{ visibility: hideLogo ? "hidden" : "visible" }}
         onClick={() => {
           if (!(typeof Router.query === "string" && Router.query === "/")) {
@@ -33,7 +33,7 @@ const Navbar = ({ hideLogo, hideElements }: Navbar) => {
           width={"51.22px"}
           height={"49.22px"}
         />
-        <p className="pt-2 text-center w-100 font-poppins text-lg">
+        <p className="text-center w-100 font-poppins text-base">
           Code<span className="font-bold">Clash</span>
         </p>
       </div>
