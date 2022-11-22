@@ -58,7 +58,20 @@ const ProfileBox = ({ isHovering }: Profile) => {
   );
 };
 
-const ProfileComponents = () => {
+const ProfileComponents = ({
+  user
+}: {
+  user?: {
+    name?: string;
+    email?: string;
+    image?: string;
+  };
+}) => {
+  /**
+   * user is being passed down to take care of a bug in the landing page
+   * landing page is unable to get the information from useSession properly, navbar thinks the user is not logged in, until the user clicks unfocuses on the webpage.
+   */
+   
   const { data } = useSession();
   const [XP, setXP] = useState(12);
 
@@ -85,7 +98,7 @@ const ProfileComponents = () => {
         <Image
           className="cursor-pointer z-[1] rounded-full"
           onClick={() => router.push("/profile")}
-          src={data.user.image}
+          src={user?user.image:data?.user?.image}
           alt=""
           width="49"
           height="49"
