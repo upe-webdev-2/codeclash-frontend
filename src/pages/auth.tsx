@@ -11,7 +11,7 @@ import {
   AiFillGithub
 } from "react-icons/ai";
 
-const Dom = ({}) => {
+const Dom = () => {
   const router = useRouter();
   const { error } = router.query;
   
@@ -49,7 +49,7 @@ const Dom = ({}) => {
         </div>
 
         <h1 className="my-6 text-5xl capitalize font-gilroy-bold">Sign in</h1>
-        <p className="text-[#F60C04]">
+        <p className="text-[#F60C04] capitalize">
           {error === "OAuthAccountNotLinked" &&
             "Please sign in with the account you originally registered with"}
         </p>
@@ -72,7 +72,7 @@ const Dom = ({}) => {
   );
 };
 
-export default function Auth(props) {
+export default function Auth(props) {  
   return (
     <>
       <Dom {...props} />
