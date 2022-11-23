@@ -30,6 +30,7 @@ export const authOptions = {
     signingKey: process.env.JWT_SIGNING_PRIVATE_KEY,
     secret: process.env.SECRET
   },
+  debug: process.env.NODE_ENV !== "production",
   database: process.env.DATABASE_URL,
   adapter: PrismaAdapter(prisma)
 };
