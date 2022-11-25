@@ -32,8 +32,6 @@ const DOM = () => {
       <div className="absolute top-0 w-full">
         <Navbar />
       </div>
-      <h1 className="mb-5 text-6xl font-bold">Landing Page :/</h1>
-      <h3 className="text-xl text-pink-600">Working on it...</h3>
     </div>
   );
 };
@@ -56,7 +54,7 @@ const R3F = () => {
       <three.pointLight
         position={[10, 10, 10]}
         intensity={1.5}
-        // color={props.open.to([0, 1], ["#f0f0f0", "#d25578"])}
+        color={props.open.to([0, 1], ["#f0f0f0", "#0F1021"])}
       />
       <Suspense fallback={null}>
         <group
@@ -65,7 +63,7 @@ const R3F = () => {
         >
           <Model open={open} position={[0, -3.3, 0]} />
         </group>
-        <Environment preset="city" />
+        <Environment preset="warehouse" />
       </Suspense>
       <ContactShadows
         position={[0, -4.5, 0]}
