@@ -1,11 +1,11 @@
 import Container from "@/components/Container";
 import Navbar from "@/components/Navbar/Navbar";
 import { GetServerSideProps } from "next";
-import { getSession, signIn, useSession } from "next-auth/react";
+import { signIn, useSession } from "next-auth/react";
 import Image from "next/image";
 import Router from "next/router";
-import { useEffect, useState } from "react";
-import { AiFillLinkedin, AiFillGoogleCircle, AiFillGithub, AiOutlineGithub } from "react-icons/ai";
+import { useState } from "react";
+import { AiFillLinkedin, AiFillGoogleCircle, AiFillGithub } from "react-icons/ai";
 
 const Dom = ({}) => {
   const { status } = useSession();

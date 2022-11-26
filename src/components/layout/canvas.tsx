@@ -1,12 +1,7 @@
-import { useRef } from "react";
 import { Canvas } from "@react-three/fiber";
 import { A11yAnnouncer } from "@react-three/a11y";
-import { OrbitControls, Preload, Stats } from "@react-three/drei";
+import { Preload } from "@react-three/drei";
 
-const Controls = () => {
-  const control = useRef(null);
-  return <OrbitControls ref={control} />;
-};
 const CanvasWrapper = ({ children }) => {
   return (
     <>
@@ -20,8 +15,6 @@ const CanvasWrapper = ({ children }) => {
           top: 0
         }}
       >
-        <Stats />
-        {/* <Controls /> */}
         <Preload all />
         {children}
       </Canvas>
