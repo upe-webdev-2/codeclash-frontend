@@ -28,13 +28,13 @@ const Description = (problem: Problem) => {
       </h1>
 
       <div className="flex flex-col gap-4 mb-5 font-gilroy">
-        {problem.objectives.map((obj, index) => (
+        {problem.objectives?.map((obj, index) => (
           <h3 key={index}>{obj}</h3>
         ))}
       </div>
 
       <div className="flex flex-col gap-4">
-        {problem.examples.map((example, index) => (
+        {problem.examples?.map((example, index) => (
           <div key={index}>
             <h1 className="font-gilroy-bold">Example {index + 1}</h1>
 

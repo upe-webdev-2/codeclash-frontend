@@ -21,9 +21,12 @@ type Playground = {
     starterCode: string;
     timeLimit: number;
   };
+  onSubmitCode: (code: string) => void;
+  onTestCode: (code: string) => void;
+  testCases?: {};
 };
 
-const Dom = ({ problem }: Playground) => {
+const Dom = ({ problem, onSubmitCode, onTestCode }: Playground) => {
   const editorRef = useRef(null); // monaco editor
   const [tabManager, setTabManager] = useState(0); // instructions - results - (past submissions)?
 
@@ -31,6 +34,7 @@ const Dom = ({ problem }: Playground) => {
    * to start the countdown, set timer to problems.timeLimit
    * To stop the countdown, set timer to null or 0,
    */
+
   const [timer, setTimer] = useState<number>(problem.timeLimit);
 
   useEffect(() => {
@@ -47,46 +51,6 @@ const Dom = ({ problem }: Playground) => {
 
   const [testCases, setTestCases] = useState(null);
   const [completedAllTestCases, setCompletedAllTestCases] = useState(false); // from the sockets if the user was able to do all the test cases
-
-  const handleSubmit = () => {
-    /**
-     * TODO: send code to sockets for validation
-     */
-    alert("Submit: \n\n\n" + editorRef.current.getValue());
-  };
-
-  const handleTest = () => {
-    /**
-     * TODO: Send code to sockets for test cases
-     * * editorRef.current.getValue()
-     */
-    setTabManager(1); // show the results tab
-    setTestCases([
-      {
-        input: "nums = [2,7,11,15], target = 9",
-        output: "[0]",
-        expected: "[0,1]",
-        Stdout: "{}"
-      },
-      {
-        input: "nums = [2,7,11,15], target = 9",
-        output: "[]",
-        expected: "[0,1]"
-      },
-      {
-        input: "nums = [2,7,11,15], target = 9",
-        output: "[0,1]",
-        expected: "[0,1]"
-      },
-      {
-        input: "nums = [2,7,11,15], target = 9",
-        output: "[0,1]",
-        expected: "[0,1]",
-        Stdout: "[2,7,11,15]"
-      }
-    ]);
-    setCompletedAllTestCases(false);
-  };
 
   return (
     <div className="flex">
@@ -142,12 +106,12 @@ const Dom = ({ problem }: Playground) => {
         <div className="flex flex-col items-center justify-center gap-2 mt-2 [&>*]:p-2 [&>*]:rounded-lg font-gilroy-bold">
           <button
             className="w-full transition duration-1000 polymorphism active:translate-y-1 hover:bg-tertiary"
-            onClick={handleTest}
+            onClick={() => onTestCode(editorRef.current?.getValue())}
           >
             Test
           </button>
           <button
-            onClick={handleSubmit}
+            onClick={() => onSubmitCode(editorRef.current?.getValue())}
             className="w-full transition-all duration-1000 active:translate-y-1 bg-gradient-to-r from-tertiary via-secondary to-tertiary bg-size-200 bg-pos-0 hover:bg-pos-100"
           >
             Submit
