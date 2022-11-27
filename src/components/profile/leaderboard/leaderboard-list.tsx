@@ -33,13 +33,13 @@ const LeaderboardList = () => {
     "bg-gradient-radial from-cardGradient-primary to-cardGradient-secondary";
 
   return (
-    <div className={`flex-nowrap space-y-4 w-[90%] `}>
-      <div className={`flex flex-nowrap rounded w-full `}>
-        <div className={`w-[20%] px-5 text-left`}>Leaderboard</div>
-        <div className={`w-[20%] px-5 text-left`}>Rank</div>
-        <div className={`w-[20%] px-5 text-left`}>Badges</div>
-        <div className={`w-[20%] px-5 text-left`}>Hours</div>
-        <div className={`w-[20%] px-5 text-left`}>Score</div>
+    <div className={`space-y-4 w-[95%] `}>
+      <div className={`flex flex-row content-center items-center`}>
+        <div className={`w-[20%] text-left`}>Leaderboard</div>
+        <div className={`w-[10%] text-left`}>Rank</div>
+        <div className={`w-[40%] text-left`}>Badges</div>
+        <div className={`w-[20%] text-left`}>Hours</div>
+        <div className={`w-[10%] text-left`}>Score</div>
       </div>
 
       {leaderboardMockData.map(

@@ -25,7 +25,6 @@ const DOM = () => {
     <>
       <Navbar />
       <h1 className="text-6xl font-bold mb-5 pt-10 px-6">Profile Page</h1>
-      <p className="text-xl text-pink-600">Working on it...</p>
       <LeaderboardList />
     </>
   );
