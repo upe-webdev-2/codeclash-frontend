@@ -1,6 +1,8 @@
+import ConclusionModal from "@/components/ConclusionModal";
 import Navbar from "@/components/Navbar/Navbar";
 import Loading from "@/templates/Loading";
 import ProblemsMenu from "@/templates/ProblemsMenu";
+import { useSession } from "next-auth/react";
 import { useState } from "react";
 
 const Dom = () => {
@@ -20,12 +22,13 @@ const Dom = () => {
      */
     console.log("Cancel search for game");
     setLoading(false);
-  };
-
+  };  
   return (
     <>
       <div className="w-screen">
         <Navbar />
+        <ConclusionModal displayModal={true} name={"Daniel"} profileImage={useSession()?.data?.user?.image || "https://avatars.githubusercontent.com/u/83048344?v=4"} didIWin={true} />
+
         {isLoading ? (
           <Loading onCancel={cancelSearchForGame} />
         ) : (
