@@ -1,5 +1,6 @@
 import useStore from "@/helpers/store";
 import dynamic from "next/dynamic";
+import { signIn, signOut, useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import Image from "next/image";
 import Navbar from "@/components/Navbar/Navbar";
