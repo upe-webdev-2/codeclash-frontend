@@ -6,8 +6,7 @@ import Header from "@/components/dom/Header";
 import { SessionProvider } from "next-auth/react";
 import "../styles/global.css";
 import Dom from "@/components/layout/dom";
-
-
+import dynamic from "next/dynamic";
 
 const Canvas = dynamic(() => import("@/components/layout/canvas"), {
   ssr: false
@@ -24,7 +23,6 @@ const AppLayout = ({ children }) => {
 };
 
 function App({ Component, pageProps: { session, ...pageProps } }) {
-
   const router = useRouter();
   const { setRouter } = useStore();
 
@@ -36,7 +34,7 @@ function App({ Component, pageProps: { session, ...pageProps } }) {
   const children = Component(pageProps).props.children;
 
   return (
-    <SessionProvider session={pageProps.session}>
+    <>
       <Header title={pageProps.title} />
       <SessionProvider session={session}>
         <AppLayout {...pageProps}>{children}</AppLayout>
