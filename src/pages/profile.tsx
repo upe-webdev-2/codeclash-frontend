@@ -4,6 +4,7 @@ import { signIn, signOut, useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import Image from "next/image";
 import Navbar from "@/components/Navbar/Navbar";
+import LeaderboardList from "@/components/profile/leaderboard/leaderboard-list";
 
 // DOM elements here
 const DOM = () => {
@@ -21,7 +22,7 @@ const DOM = () => {
     <>
       <Navbar />
 
-      <div className="grid grid-cols-2 gap-4 font-gilroy mx-28 mt-8">
+      <div className="grid grid-cols-2 gap-4 font-gilroy mx-28 my-8">
         {/* Welcome! */}
         <div
           className={`flex flex-col gap-4 ${gradientBackground} h-[157px] w-[625px] rounded-2xl`}
@@ -120,6 +121,8 @@ const DOM = () => {
           </div>
         </div>
       </div>
+
+      <LeaderboardList />
     </>
   );
 };
