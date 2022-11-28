@@ -1,7 +1,7 @@
 import Container from "@/components/Container";
 import Navbar from "@/components/Navbar/Navbar";
 import { GetServerSideProps } from "next";
-import { signIn } from "next-auth/react";
+import { getSession, signIn } from "next-auth/react";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import { useState } from "react";
