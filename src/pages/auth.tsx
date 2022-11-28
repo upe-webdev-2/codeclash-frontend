@@ -1,35 +1,35 @@
 import Container from "@/components/Container";
 import Navbar from "@/components/Navbar/Navbar";
 import { GetServerSideProps } from "next";
-import { signIn, useSession } from "next-auth/react";
+import { signIn } from "next-auth/react";
 import Image from "next/image";
-import Router from "next/router";
+import { useRouter } from "next/router";
 import { useState } from "react";
-import { AiFillLinkedin, AiFillGoogleCircle, AiFillGithub } from "react-icons/ai";
+import {
+  AiFillLinkedin,
+  AiFillGoogleCircle,
+  AiFillGithub
+} from "react-icons/ai";
 
-const Dom = ({}) => {
-  const { status } = useSession();
+const Dom = () => {
+  const router = useRouter();
+  const { error } = router.query;
 
-  if (status === "authenticated") {
-    Router.push("/menu");
-  }
-
-  const size = 35;
-
+  const iconSize = 35;
   const [loginMethods] = useState([
     {
       name: "Google",
-      icon: <AiFillGoogleCircle size={size}/>,
+      icon: <AiFillGoogleCircle size={iconSize} />,
       providerId: "google"
     },
     {
       name: "Linkedin",
-      icon: <AiFillLinkedin size={size}/>,
+      icon: <AiFillLinkedin size={iconSize} />,
       providerId: "linkedin"
     },
     {
       name: "GitHub",
-      icon: <AiFillGithub size={size} />,
+      icon: <AiFillGithub size={iconSize} />,
       providerId: "github"
     }
   ]);
@@ -48,9 +48,11 @@ const Dom = ({}) => {
           />
         </div>
 
-        <h1 className="mt-6 text-5xl capitalize font-gilroy-bold">
-          Sign in
-        </h1>
+        <h1 className="my-6 text-5xl capitalize font-gilroy-bold">Sign in</h1>
+        <p className="text-[#F60C04] capitalize">
+          {error === "OAuthAccountNotLinked" &&
+            "Please sign in with the account you originally registered with"}
+        </p>
 
         <div className="flex flex-col items-center justify-center gap-3 mt-10">
           {loginMethods.map(({ name, icon, providerId }, index) => (
@@ -79,6 +81,15 @@ export default function Auth(props) {
 }
 
 export const getServerSideProps: GetServerSideProps = async context => {
+  const session = await getSession(context);
+  if (session) {
+    return {
+      redirect: {
+        destination: "/menu",
+        permanent: false
+      }
+    };
+  }
   return {
     props: {
       title: "Login - Register"

@@ -5,7 +5,8 @@ import { useSpring } from "react-spring";
 import { Suspense, useState } from "react";
 import { a as three } from "@react-spring/three";
 import { ContactShadows, Environment, Html } from "@react-three/drei";
-import { getSession, SessionProvider } from "next-auth/react";
+
+import { getSession, SessionProvider, signOut } from "next-auth/react";
 import { GetServerSideProps } from "next";
 
 const Canvas = dynamic(() => import("@/components/layout/canvas"), {
@@ -13,18 +14,34 @@ const Canvas = dynamic(() => import("@/components/layout/canvas"), {
 });
 
 // DOM elements here
-const DOM = () => {
+const DOM = ({
+  user
+}: {
+  user: {
+    name?: string;
+    email?: string;
+    image?: string;
+  };
+}) => {
   return (
     <div className="relative top-0 left-0 flex flex-col items-center justify-center w-full h-screen">
       <div className="absolute top-0 w-full">
-        <Navbar />
+        <Navbar user={user} />
       </div>
     </div>
   );
 };
 
 // Canvas/R3F components here
-const R3F = () => {
+const R3F = ({
+  user
+}: {
+  user: {
+    name?: string;
+    email?: string;
+    image?: string;
+  };
+}) => {
   // This flag controls open state, alternates between true & false
   const [open, setOpen] = useState(false);
   // We turn this into a spring animation that interpolates between 0 and 1
@@ -34,7 +51,7 @@ const R3F = () => {
     <>
       <Html fullscreen>
         <SessionProvider>
-          <DOM />
+          <DOM user={user} />
         </SessionProvider>
       </Html>
 
@@ -63,11 +80,19 @@ const R3F = () => {
   );
 };
 
-export default function LandingPage() {
+export default function LandingPage({
+  user
+}: {
+  user: {
+    name?: string;
+    email?: string;
+    image?: string;
+  };
+}) {
   return (
     <>
       <Canvas>
-        <R3F />
+        <R3F user={user} />
       </Canvas>
     </>
   );
@@ -75,19 +100,10 @@ export default function LandingPage() {
 
 export const getServerSideProps: GetServerSideProps = async context => {
   const session = await getSession(context);
-
-  if (session) {
-    return {
-      redirect: {
-        destination: "/menu",
-        permanent: false
-      }
-    };
-  }
-
   return {
     props: {
-      title: "Landing Page"
+      title: "Landing Page",
+      user: session?.user ? session?.user : null
     }
   };
 };
