@@ -29,11 +29,12 @@ const nextConfig = {
   },
   // so the the profile images could work
   images: {
-    domains: ["lh3.googleusercontent.com"]
-  	images: {
-		domains: ["avatars.githubusercontent.com", "lh3.googleusercontent.com", "media-exp1.licdn.com"]
-	}
-}
+    domains: [
+      "avatars.githubusercontent.com",
+      "lh3.googleusercontent.com",
+      "media-exp1.licdn.com"
+    ]
+  }
 };
 
 module.exports = plugins(
