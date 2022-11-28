@@ -106,6 +106,11 @@ const Dom = () => {
       problem={problem}
       onSubmitCode={handleSubmitCode}
       onTestCode={handleTestCode}
+      // FIXME: unsure where/at what point we get the correct jwt info to pass down
+      jwt={{
+        jwt: "",
+        room: ""
+      }}
     />
   );
 };
