@@ -5,6 +5,7 @@ import GameInfo from "@/templates/Playground/GameInfo";
 import { GetServerSideProps } from "next";
 import { useEffect, useRef, useState } from "react";
 import Result from "@/templates/Playground/Tabs/Result";
+import io, { Socket } from "socket.io-client";
 
 type Playground = {
   problem: {
@@ -20,29 +21,84 @@ type Playground = {
     starterCode: string;
     timeLimit: number;
   };
+  jwt: { jwt: string; room: string };
 };
 
-const Dom = ({ problem }: Playground) => {
+const Dom = ({ problem, jwt }: Playground) => {
+  const [socket, setSocket] = useState<Socket>(null);
   const editorRef = useRef(null); // monaco editor
   const [tabManager, setTabManager] = useState(0); // instructions - results - (past submissions)?
 
+  //! RAS syndrome everywhere
+
+  // loading page should be the same url as the playground... and actually act like a loading page
+
+  // JWT needs to have the problem id, the enemy's id, the users email (or user's id if you want consistency) and the room id
+  // jwt token should have an expiration date of the currentTime + problemTime + bufferTime(5 minutes?)
+
+  /**
+   * Loading page: socket.io connects and waits until an emit happens with the jwt token and enemy id, jwt token will be store in local storage
+   * Loading page: query api with enemy id to receive their image and name
+   * Loading page: three seconds later both players get redirect to clash page
+   * Clash page SSR: jwt token is sent to back end to receive the actual problem, backend reads the jwt token and sets user into their room
+   * Clashing goes on until winner
+   * Clash page: on winner, emit who the winner is
+   * Clash page: checks to see if you are the winner and goes on from there
+   */
+
+  // localStorage.setItem(jwt, jwt)
+
   /**
    * to start the countdown, set timer to problems.timeLimit
-   * To stop the countdown, set timer to null or 0,
+   * To stop the countdown, set timer to null
    */
-  
-  // Development
-  const [timer, setTimer] = useState<number>(null);
-  // Production
-  //   const [timer, setTimer] = useState<number>(problem.timeLimit);
+  // const [timer, setTimer] = useState<number>(problem.timeLimit);
 
+  // console.log(socket);
+
+  const [timer, setTimer] = useState<number>(null);
+
+  useEffect(() => {
+    setSocket(
+      io(`http://localhost:3001`, {
+        // withCredentials: true
+        extraHeaders: {
+          Authorization: `Bearer ${jwt.jwt}`
+        }
+      })
+    );
+  }, []);
+
+  useEffect(() => {
+    if (socket === null) {
+      return;
+    }
+    console.log("Joining room");
+
+    socket.emit("join_room", jwt);
+
+    socket.on("test", data => {
+      console.log("test");
+      console.log(data);
+    });
+
+    /**add all the socket.on(...) */
+    socket.on("submit", data => {
+      console.log("Data: ");
+      console.log(data);
+    });
+  }, [socket]);
 
   useEffect(() => {
     if (timer > 0) {
       setTimeout(() => setTimer(timer - 1), 1000);
-    } 
-
+    }
     if (timer === 0) {
+      socket.emit("timeOut", {
+        id: socket.id,
+        jwt: jwt,
+        code: editorRef.current.getValue()
+      });
       alert("Time limit exceeded!");
     }
   }, [timer]);
@@ -54,7 +110,15 @@ const Dom = ({ problem }: Playground) => {
     /**
      * TODO: send code to sockets for validation
      */
-    alert("Submit: \n\n\n" + editorRef.current.getValue());
+
+    socket.emit("submit", {
+      id: socket.id,
+      // room: socket.room,
+      jwt: jwt,
+      code: editorRef.current.getValue()
+    });
+
+    // alert("Submit: \n\n\n" + editorRef.current.getValue());
   };
 
   const handleTest = () => {
@@ -62,6 +126,13 @@ const Dom = ({ problem }: Playground) => {
      * TODO: Send code to sockets for test cases
      * * editorRef.current.getValue()
      */
+
+    socket.emit("test", {
+      id: socket.id,
+      jwt: jwt,
+      code: editorRef.current.getValue()
+    });
+
     setTabManager(1); // show the results tab
     setTestCases([
       {
@@ -92,6 +163,34 @@ const Dom = ({ problem }: Playground) => {
 
   return (
     <div className="flex">
+      {/* TODO Remove this, only meant for development */}
+      {jwt.jwt == "401" && (
+        <div
+          style={{
+            position: "fixed",
+            background: "black",
+            zIndex: 9999,
+            color: "white",
+            fontSize: "20pt"
+          }}
+        >
+          YOU ARE NOT LOGGED IN
+        </div>
+      )}
+      {jwt.jwt == "401" || (
+        <div
+          style={{
+            position: "fixed",
+            right: 10,
+            zIndex: 9999,
+            background: "black",
+            color: "white",
+            fontSize: "20pt"
+          }}
+        >
+          {jwt.room}
+        </div>
+      )}
       <div className="w-[33vw]">
         <Tabs
           tabs={[
@@ -168,8 +267,41 @@ export default function Playground(props: Playground) {
   );
 }
 
-export const getServerSideProps: GetServerSideProps = async ({ query }) => {
+export const getServerSideProps: GetServerSideProps = async ({
+  req,
+  query
+}) => {
   const { problem } = query;
+  const sessionToken = req.cookies["next-auth.session-token"];
+  const jwtRes = await fetch("http://localhost:3001/auth/me", {
+    method: "GET",
+    headers: { cookies: JSON.stringify({ sessionToken }) }
+  });
+
+  let jwt;
+
+  if (jwtRes.status == 401) {
+    jwt = { jwt: "401" };
+  } else {
+    jwt = await jwtRes.json();
+  }
+  console.log(jwt);
+
+  /**
+   * get a jwt from auth/me (with a time limit set to the match length)
+   * store jwt in cookie
+   * every socket.io transaction will have the jwt, so we know who the user is even if they refresh the page
+   *
+   */
+
+  /**
+   * JWT gets passed down alongside the opponents info
+   * Payload: user email, room id, problem id, experation date is the currenttime+timelimit+buffer
+   */
+
+  /**
+   * code could be saved every time the user clicks test and submit
+   */
 
   const response = await fetch(
     `${process.env.API_ENDPOINT}/problems/${problem}`,
@@ -191,7 +323,8 @@ export const getServerSideProps: GetServerSideProps = async ({ query }) => {
 
   return {
     props: {
-      problem: data
+      problem: data,
+      jwt: jwt
     }
   };
 };
