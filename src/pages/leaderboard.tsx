@@ -1,3 +1,5 @@
+import Navbar from "@/components/Navbar/Navbar";
+import LeaderboardList from "@/components/profile/leaderboard/leaderboard-list";
 import useStore from "@/helpers/store";
 import dynamic from "next/dynamic";
 import { useRouter } from "next/router";
@@ -6,10 +8,8 @@ import { useRouter } from "next/router";
 const DOM = () => {
   return (
     <>
-      <h1 className="text-6xl font-bold mb-5 pt-10 px-6">
-        Leaderboard Page :/
-      </h1>
-      <p className="text-xl text-pink-600">Working on it...</p>
+      <Navbar />
+      <LeaderboardList />
     </>
   );
 };
