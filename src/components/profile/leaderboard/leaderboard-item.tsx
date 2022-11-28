@@ -34,9 +34,7 @@ const LeaderboardItem = ({ name, rank, badgecount, minutes, score }) => {
       className={`flex flex-row rounded-lg ${border} content-center items-center`}
     >
       <div className={`w-[20%] px-5 text-left justify-self-center`}>{name}</div>
-      <div className={`w-[10%] text-left text-green-500 text-green-500`}>
-        {"+" + rank}
-      </div>
+      <div className={`w-[10%] text-left text-green-500`}>{"+" + rank}</div>
       <div className={`w-[40%]`}>
         <BadgeDisplay amount={badgecount} />
       </div>
