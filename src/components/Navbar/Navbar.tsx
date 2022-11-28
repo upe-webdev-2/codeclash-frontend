@@ -57,7 +57,7 @@ const Navbar = ({ hideLogo, hideElements, user }: Navbar) => {
       <div
         style={{
           visibility: hideElements ? "hidden" : "visible",
-          gap: "1rem"
+          gap: status === "authenticated" ? "1rem" : "2.5rem"
         }}
         className="flex my-auto"
       >

@@ -4,6 +4,7 @@ import Description from "@/templates/Playground/Tabs/Description";
 import GameInfo from "@/templates/Playground/GameInfo";
 import { GetServerSideProps } from "next";
 import { useEffect, useRef, useState } from "react";
+import { getSession } from "next-auth/react";
 import Result from "@/templates/Playground/Tabs/Result";
 import io, { Socket } from "socket.io-client";
 
@@ -22,9 +23,12 @@ type Playground = {
     timeLimit: number;
   };
   jwt: { jwt: string; room: string };
+  onSubmitCode: (code: string) => void;
+  onTestCode: (code: string) => void;
+  testCases?: {};
 };
 
-const Dom = ({ problem, jwt }: Playground) => {
+const Dom = ({ problem, jwt, onSubmitCode, onTestCode }: Playground) => {
   const [socket, setSocket] = useState<Socket>(null);
   const editorRef = useRef(null); // monaco editor
   const [tabManager, setTabManager] = useState(0); // instructions - results - (past submissions)?
@@ -243,12 +247,12 @@ const Dom = ({ problem, jwt }: Playground) => {
         <div className="flex flex-col items-center justify-center gap-2 mt-2 [&>*]:p-2 [&>*]:rounded-lg font-gilroy-bold">
           <button
             className="w-full transition duration-1000 polymorphism active:translate-y-1 hover:bg-tertiary"
-            onClick={handleTest}
+            onClick={() => onTestCode(editorRef.current?.getValue())}
           >
             Test
           </button>
           <button
-            onClick={handleSubmit}
+            onClick={() => onSubmitCode(editorRef.current?.getValue())}
             className="w-full transition-all duration-1000 active:translate-y-1 bg-gradient-to-r from-tertiary via-secondary to-tertiary bg-size-200 bg-pos-0 hover:bg-pos-100"
           >
             Submit
@@ -304,7 +308,7 @@ export const getServerSideProps: GetServerSideProps = async ({
    */
 
   const response = await fetch(
-    `${process.env.API_ENDPOINT}/problems/${problem}`,
+    `${process.env.API_ENDPOINT}/problems/${context.query.problem}`,
     {
       method: "GET",
       headers: {

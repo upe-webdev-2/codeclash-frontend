@@ -1,17 +1,19 @@
 import ConclusionModal from "@/components/ConclusionModal";
 import Navbar from "@/components/Navbar/Navbar";
-import Loading from "@/templates/Loading";
 import ProblemsMenu from "@/templates/ProblemsMenu";
 import { useSession } from "next-auth/react";
-import { useState } from "react";
+import { useSession } from "next-auth/react";
+import Router from "next/router";
 
 const Dom = () => {
-  const [isLoading, setLoading] = useState(false);
+  const { status } = useSession();
+
+  if (status === "unauthenticated") {
+    Router.push("/auth");
+    return <></>;
+  }
 
   const searchForGame = (difficulty: string) => {
-    /**
-     * TODO: Use sockets to notify backend to search for a game
-     */
     console.log(`Searching for ${difficulty}`);
     setLoading(true);
   };
@@ -22,12 +24,20 @@ const Dom = () => {
      */
     console.log("Cancel search for game");
     setLoading(false);
-  };  
+  };
   return (
     <>
       <div className="w-screen">
         <Navbar />
-        <ConclusionModal displayModal={true} name={"Daniel"} profileImage={useSession()?.data?.user?.image || "https://avatars.githubusercontent.com/u/83048344?v=4"} didIWin={true} />
+        <ConclusionModal
+          displayModal={true}
+          name={"Daniel"}
+          profileImage={
+            useSession()?.data?.user?.image ||
+            "https://avatars.githubusercontent.com/u/83048344?v=4"
+          }
+          didIWin={true}
+        />
 
         {isLoading ? (
           <Loading onCancel={cancelSearchForGame} />

@@ -6,7 +6,6 @@ import { PrismaAdapter } from "@next-auth/prisma-adapter";
 import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
-
 export const authOptions = {
   // Configure one or more authentication providers
   providers: [
@@ -26,6 +25,9 @@ export const authOptions = {
   pages: {
     signIn: "/auth"
   },
+  pages: {
+    signIn: "/auth"
+  },
   jwt: {
     signingKey: process.env.JWT_SIGNING_PRIVATE_KEY,
     secret: process.env.SECRET
@@ -35,6 +37,6 @@ export const authOptions = {
 
   // If you don't have postgres set up properly comment these two lines
   database: process.env.DATABASE_URL,
-  adapter: PrismaAdapter(prisma),
+  adapter: PrismaAdapter(prisma)
 };
 export default NextAuth(authOptions);

@@ -1,46 +1,136 @@
 import Loading from "@/templates/Loading";
+import { GetServerSideProps } from "next";
+import { useEffect, useState } from "react";
+import { io, Socket } from "socket.io-client";
+import Playground from "./playground";
+import { useRouter } from "next/router";
 import Navbar from "@/components/Navbar/Navbar";
-import React, { useState } from "react";
 
-const LoadingSetup = () => {
-  const cancel = () => {};
-  return (
-    <div className="w-screen">
-      <Navbar />
-      <Loading onCancel={cancel} />
-    </div>
-  );
-};
-
-const ClashSetup = () => {
-  return <>Hi</>;
+type Problem = {
+  id: number;
+  title: string;
+  difficulty: "Easy" | "Medium" | "Hard";
+  objectives: string[];
+  examples: {
+    output: string;
+    input: string;
+    explanation?: string;
+  }[];
+  starterCode: string;
+  timeLimit: number;
 };
 
 const Dom = () => {
-  const [isLoading, setIsLoading] = useState<Boolean>(true);
-  // sockets will be handled here
+  const router = useRouter();
+  const [isLoading, setLoading] = useState(true);
+  const [problem, setProblem] = useState<Problem>({} as Problem);
+  const [socket, setSocket] = useState<Socket>(null);
+  const [tempPlayer] = useState(Date.now().toString()); // FIXME: use session for prod
 
-  return (
+  const cancelGameSearch = () => {
+    socket.emit("playerLeave", {
+      username: tempPlayer
+    });
+    socket.disconnect();
+    router.push("/menu");
+  };
+
+  const handleSubmitCode = (code: string) => {
+    socket.emit("playerSubmit", {
+      userCode: code,
+      username: tempPlayer
+    });
+  };
+
+  const handleTestCode = (code: string) => {
+    socket.emit("playerTest", {
+      userCode: code,
+      username: tempPlayer
+    });
+  };
+
+  useEffect(() => {
+    setSocket(
+      io(`${process.env.NEXT_PUBLIC_SOCKET_ENDPOINT}/play`, {
+        auth: { username: tempPlayer }
+      })
+    );
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  useEffect(() => {
+    if (socket === null) {
+      return;
+    }
+
+    socket.emit("playerJoin", {
+      username: tempPlayer
+    });
+
+    socket.on("readyGame", (data: any) => {
+      console.log("start game socket call\n", data);
+      setProblem(data.problemInfo);
+      setLoading(false);
+    });
+
+    socket.on("finishedWaitingRoom", (data: any) => {
+      console.log("finished waiting room socket call\n", data);
+      socket.emit("readyGame", { roomName: data.roomName });
+    });
+
+    socket.on("playerTestResult", (data: any) => {
+      console.log("Player tested something\n", data);
+    });
+
+    socket.on("playerSubmitResult", (data: any) => {
+      console.log("Player submitted something\n", data);
+    });
+
+    socket.on("finishedGame", (data: any) => {
+      console.log("finished game socket call\n", data);
+    });
+
+    return () => {
+      cancelGameSearch();
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [socket]);
+
+  return isLoading ? (
     <>
-      <button
-        className="fixed left-0 z-50 p-3 bg-white text-black rounded-xl"
-        onClick={() => {
-          setIsLoading(!isLoading);
-        }}
-      >
-        Reverse loading
-      </button>
-      {isLoading ? <LoadingSetup /> : <ClashSetup />}
+      <Navbar />
+      <Loading onCancel={() => cancelGameSearch()} />
     </>
+  ) : (
+    <Playground
+      problem={problem}
+      onSubmitCode={handleSubmitCode}
+      onTestCode={handleTestCode}
+    />
   );
 };
 
-type Clash = any;
-
-export default function Clash(props: Clash) {
+export default function Clash() {
   return (
     <>
-      <Dom {...props} />
+      <Dom />
     </>
   );
 }
+
+export const getServerSideProps: GetServerSideProps = async ({ query }) => {
+  if (!query.difficulty) {
+    return {
+      redirect: {
+        destination: "/menu",
+        permanent: false
+      }
+    };
+  }
+
+  return {
+    props: {
+      difficulty: query.difficulty
+    }
+  };
+};

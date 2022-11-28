@@ -9,9 +9,16 @@ import { ContactShadows, Environment, Html } from "@react-three/drei";
 import { getSession, SessionProvider, signOut } from "next-auth/react";
 import { GetServerSideProps } from "next";
 
-const Canvas = dynamic(() => import("@/components/layout/canvas"), {
-  ssr: false
-});
+// Prefer dynamic import for production builds
+// But if you have issues and need to debug in local development
+// comment these out and import above instead
+// https://github.com/pmndrs/react-three-next/issues/49
+const Shader = dynamic(
+  () => import("@/components/canvas/ShaderExample/ShaderExample"),
+  {
+    ssr: false
+  }
+);
 
 // DOM elements here
 const DOM = ({
@@ -100,6 +107,16 @@ export default function LandingPage({
 
 export const getServerSideProps: GetServerSideProps = async context => {
   const session = await getSession(context);
+
+  if (session) {
+    return {
+      redirect: {
+        destination: "/menu",
+        permanent: false
+      }
+    };
+  }
+
   return {
     props: {
       title: "Landing Page",
