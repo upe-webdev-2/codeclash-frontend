@@ -1,17 +1,13 @@
-import useStore from "@/helpers/store";
 import dynamic from "next/dynamic";
-import Link from "next/link";
 import Navbar from "@/components/Navbar/Navbar";
-import { signIn, signOut, useSession } from "next-auth/react";
-import { Model } from '../components/laptop'
+import { Model } from "../components/laptop";
 import { useSpring } from "react-spring";
 import { Suspense, useState } from "react";
-import { Canvas } from "@react-three/fiber";
 import { a as three } from "@react-spring/three";
-import { a as web } from "@react-spring/web";
-import { ContactShadows, Environment } from "@react-three/drei";
-import { extend } from "@react-three/fiber";
-import { PerspectiveCamera } from "@react-three/drei";
+import { ContactShadows, Environment, Html } from "@react-three/drei";
+
+import { getSession, SessionProvider } from "next-auth/react";
+import { GetServerSideProps } from "next";
 // import Shader from '@/components/canvas/ShaderExample/ShaderExample'
 
 // Prefer dynamic import for production builds
@@ -25,33 +21,18 @@ const Shader = dynamic(
   }
 );
 
+const Canvas = dynamic(() => import("@/components/layout/canvas"), {
+  ssr: false
+});
+
 // DOM elements here
 const DOM = () => {
-  const { router } = useStore();
-  const { data } = useSession();
-
   return (
-    <>
-      <Navbar />
-      <h1 className="px-6 pt-10 mb-5 text-6xl font-bold">Landing Page :/</h1>
-      <p className="text-xl text-pink-600">Working on it...</p>
-      <Link href="/menu">
-        <span className="text-5xl text-pink-500 cursor-pointer">
-          Go to CodeClash Menu!
-        </span>
-      </Link>
-      {data ? (
-        <>
-          <button onClick={() => signOut()}>Sign Out</button>
-          <h3>Signed in as {data.user.name}</h3>
-        </>
-      ) : (
-        <>
-          <button onClick={() => signIn()}>Sign In</button>
-          <h3>not signed in</h3>
-        </>
-      )}
-    </>
+    <div className="relative top-0 left-0 flex flex-col items-center justify-center w-full h-screen">
+      <div className="absolute top-0 w-full">
+        <Navbar />
+      </div>
+    </div>
   );
 };
 
@@ -61,23 +42,28 @@ const R3F = () => {
   const [open, setOpen] = useState(false);
   // We turn this into a spring animation that interpolates between 0 and 1
   const props = useSpring({ open: Number(open) });
+
   return (
     <>
+      <Html fullscreen>
+        <SessionProvider>
+          <DOM />
+        </SessionProvider>
+      </Html>
+
       <three.pointLight
         position={[10, 10, 10]}
         intensity={1.5}
-        // color={props.open.to([0, 1], ["#f0f0f0", "#d25578"])}
+        color={props.open.to([0, 1], ["#f0f0f0", "#0F1021"])}
       />
       <Suspense fallback={null}>
         <group
           rotation={[0, Math.PI, 0]}
           onClick={e => (e.stopPropagation(), setOpen(!open))}
         >
-          <Model open={open} 
-          position={[0, -3.3, 0]}
-          />
+          <Model open={open} position={[0, -3.3, 0]} />
         </group>
-        <Environment preset="city" />
+        <Environment preset="warehouse" />
       </Suspense>
       <ContactShadows
         position={[0, -4.5, 0]}
@@ -90,19 +76,31 @@ const R3F = () => {
   );
 };
 
-export default function landingPage() {
+export default function LandingPage() {
   return (
     <>
-      <DOM />
-      <R3F />
+      <Canvas>
+        <R3F />
+      </Canvas>
     </>
   );
 }
 
-export async function getStaticProps() {
+export const getServerSideProps: GetServerSideProps = async context => {
+  const session = await getSession(context);
+
+  if (session) {
+    return {
+      redirect: {
+        destination: "/menu",
+        permanent: false
+      }
+    };
+  }
+
   return {
     props: {
       title: "Landing Page"
     }
   };
-}
+};

@@ -1,36 +1,20 @@
 import React from "react";
-import Link from "next/link";
 import Button from "../Button";
-import { useRouter } from "next/router";
+import { signIn } from "next-auth/react";
 
-const NavElements = ({
-  setIsLoggedIn
-}: {
-  setIsLoggedIn: React.Dispatch<React.SetStateAction<boolean>>;
-}) => {
-  const router = useRouter();
-
+const NavElements = () => {
   return (
-    <>
-      <Button
-        onclick={() => router.push("/signin")}
-        type="none"
-        movingGradient={false}
-      >
-        Sign In
-      </Button>
+    <div className="font-gilroy">
       <Button
         onclick={() => {
-          setIsLoggedIn(true);
-          console.warn('Redirect user to "/join"');
-          // router.push("/join")
+          signIn();
         }}
         type="outline"
         movingGradient={true}
       >
-        Log in
+        Join
       </Button>
-    </>
+    </div>
   );
 };
 

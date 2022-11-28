@@ -46,7 +46,7 @@ const Loading = ({ onCancel }: Loading) => {
           </div>
 
           <Container>
-            <p className="px-6 py-3 cursor-pointer" onClick={() => onCancel()}>
+            <p className="px-6 py-3 cursor-pointer" onClick={onCancel}>
               Cancel
             </p>
           </Container>

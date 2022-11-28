@@ -1,5 +1,5 @@
 -- CreateEnum
-CREATE TYPE "Winner" AS ENUM ('Player1', 'Player2', 'Tie');
+CREATE TYPE "Winner" AS ENUM ('Player1', 'Player2', 'Draw', 'Ongoing');
 
 -- CreateEnum
 CREATE TYPE "ProblemDifficulty" AS ENUM ('EASY', 'MEDIUM', 'HARD');
@@ -37,13 +37,15 @@ CREATE TABLE "User" (
 -- CreateTable
 CREATE TABLE "MatchHistory" (
     "id" TEXT NOT NULL,
-    "player1Id" TEXT,
-    "player2Id" TEXT,
+    "roomId" TEXT,
+    "player1Id" TEXT NOT NULL,
+    "player2Id" TEXT NOT NULL,
     "problemId" TEXT NOT NULL,
-    "timestamp" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "winner" "Winner" NOT NULL,
-    "winningcode" TEXT NOT NULL,
-    "losingcode" TEXT NOT NULL,
+    "matchStartTimestamp" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "matchEndTimestamp" TIMESTAMP(3),
+    "winner" "Winner" NOT NULL DEFAULT 'Ongoing',
+    "player1Code" TEXT,
+    "player2Code" TEXT,
 
     CONSTRAINT "MatchHistory_pkey" PRIMARY KEY ("id")
 );
@@ -56,6 +58,7 @@ CREATE TABLE "Problem" (
     "difficulty" "ProblemDifficulty" NOT NULL,
     "objectives" TEXT[],
     "examples" TEXT[],
+    "timeLimit" INTEGER NOT NULL,
     "starterCode" TEXT NOT NULL,
     "testCases" TEXT[],
     "functionName" TEXT NOT NULL,
@@ -108,10 +111,10 @@ CREATE UNIQUE INDEX "VerificationToken_identifier_token_key" ON "VerificationTok
 ALTER TABLE "Account" ADD CONSTRAINT "Account_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "MatchHistory" ADD CONSTRAINT "MatchHistory_player1Id_fkey" FOREIGN KEY ("player1Id") REFERENCES "User"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+ALTER TABLE "MatchHistory" ADD CONSTRAINT "MatchHistory_player1Id_fkey" FOREIGN KEY ("player1Id") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "MatchHistory" ADD CONSTRAINT "MatchHistory_player2Id_fkey" FOREIGN KEY ("player2Id") REFERENCES "User"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+ALTER TABLE "MatchHistory" ADD CONSTRAINT "MatchHistory_player2Id_fkey" FOREIGN KEY ("player2Id") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "MatchHistory" ADD CONSTRAINT "MatchHistory_problemId_fkey" FOREIGN KEY ("problemId") REFERENCES "Problem"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
