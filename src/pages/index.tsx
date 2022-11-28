@@ -13,12 +13,15 @@ import { GetServerSideProps } from "next";
 // But if you have issues and need to debug in local development
 // comment these out and import above instead
 // https://github.com/pmndrs/react-three-next/issues/49
-const Shader = dynamic(
-  () => import("@/components/canvas/ShaderExample/ShaderExample"),
-  {
-    ssr: false
-  }
-);
+// const Shader = dynamic(
+//   () => import("@/components/canvas/ShaderExample/ShaderExample"),
+//   {
+//     ssr: false
+//   }
+// );
+const Canvas = dynamic(() => import("@/components/layout/canvas"), {
+  ssr: false
+});
 
 // DOM elements here
 const DOM = ({
