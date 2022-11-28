@@ -10,6 +10,7 @@ const Dom = () => {
   const { status } = useSession();
   const [isLoading, setLoading] = useState(false);
 
+  // FIXME: FOR TESTING ONLY. user should be redirected to auth if they try to play (not logged in)
   if (status === "unauthenticated") {
     Router.push("/auth");
     return <></>;
