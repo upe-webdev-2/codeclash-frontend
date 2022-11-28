@@ -23,6 +23,9 @@ export const authOptions = {
       clientSecret: process.env.LINKEDIN_CLIENT_SECRET
     })
   ],
+  pages: {
+    signIn: "/auth"
+  },
   jwt: {
     signingKey: process.env.JWT_SIGNING_PRIVATE_KEY,
     secret: process.env.SECRET

@@ -1,34 +1,49 @@
-import React, { useState } from "react";
+import React from "react";
 import Image from "next/image";
 import NavElements from "./NavElements";
 import ProfileComponents from "./ProfileComponents";
-import { useRouter } from "next/router";
+import Router from "next/router";
+import { useSession } from "next-auth/react";
 
 type Navbar = {
   hideLogo?: true;
   hideElements?: true;
 };
 
+const NavbarRight = ({
+  status
+}: {
+  status: "authenticated" | "loading" | "unauthenticated";
+}) => {
+  return (
+    <>
+      {status === "authenticated" && <ProfileComponents />}
+      {status === "unauthenticated" && <NavElements />}
+    </>
+  );
+};
+
 const Navbar = ({ hideLogo, hideElements }: Navbar) => {
-  const router = useRouter();
-  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
+  const { status } = useSession();
 
   return (
     <div className="flex justify-between w-full pt-1 text-lg px-28">
       <div
-        className="flex flex-col cursor-pointer"
+        className="flex flex-col cursor-pointer m-3"
         style={{ visibility: hideLogo ? "hidden" : "visible" }}
         onClick={() => {
-          router.push("/");
+          if (!(typeof Router.query === "string" && Router.query === "/")) {
+            Router.push("/");
+          }
         }}
       >
         <Image
           src={"/static/logo.svg"}
           alt="Image of Code Clash Logo"
-          width={"101.94px"}
-          height={"101.88px"}
+          width={"51.22px"}
+          height={"49.22px"}
         />
-        <p className="pt-2 text-center w-100 font-poppins">
+        <p className="text-center w-100 font-poppins text-base">
           Code<span className="font-bold">Clash</span>
         </p>
       </div>
@@ -36,15 +51,11 @@ const Navbar = ({ hideLogo, hideElements }: Navbar) => {
       <div
         style={{
           visibility: hideElements ? "hidden" : "visible",
-          gap: isLoggedIn ? "1rem" : "2.5rem"
+          gap: status === "authenticated" ? "1rem" : "2.5rem"
         }}
         className="flex my-auto"
       >
-        {isLoggedIn ? (
-          <ProfileComponents setIsLoggedIn={setIsLoggedIn} />
-        ) : (
-          <NavElements setIsLoggedIn={setIsLoggedIn} />
-        )}
+        <NavbarRight status={status} />
       </div>
     </div>
   );
