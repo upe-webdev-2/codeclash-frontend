@@ -10,12 +10,12 @@ import LeaderboardList from "@/components/profile/leaderboard/leaderboard-list";
 // But if you have issues and need to debug in local development
 // comment these out and import above instead
 // https://github.com/pmndrs/react-three-next/issues/49
-const Shader = dynamic(
-  () => import("@/components/canvas/ShaderExample/ShaderExample"),
-  {
-    ssr: false
-  }
-);
+// const Shader = dynamic(
+//   () => import("@/components/canvas/ShaderExample/ShaderExample"),
+//   {
+//     ssr: false
+//   }
+// );
 
 // DOM elements here
 const DOM = () => {
@@ -24,7 +24,6 @@ const DOM = () => {
   return (
     <>
       <Navbar />
-      <h1 className="text-6xl font-bold mb-5 pt-10 px-6">Profile Page</h1>
       <LeaderboardList />
     </>
   );
