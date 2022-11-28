@@ -308,7 +308,7 @@ export const getServerSideProps: GetServerSideProps = async ({
    */
 
   const response = await fetch(
-    `${process.env.API_ENDPOINT}/problems/${context.query.problem}`,
+    `${process.env.API_ENDPOINT}/problems/${query.problem}`,
     {
       method: "GET",
       headers: {
