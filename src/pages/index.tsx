@@ -37,6 +37,14 @@ const DOM = ({
     <div className="relative top-0 left-0 flex flex-col items-center justify-center w-full h-screen">
       <div className="absolute top-0 w-full">
         <Navbar user={user} />
+        <h1 className="ml-80 text-5xl font-gilroy-bold">
+          Unleash Your <span className="text-purple-600">Code</span>
+        </h1>
+        <p className="text-center my-5 ml-80 w-1/2">
+          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quaerat
+          expedita corporis cum veritatis officiis fuga sit recusandae quidem
+          minus consequatur officia, sed iusto.
+        </p>
       </div>
     </div>
   );
