@@ -1,12 +1,14 @@
 import ConclusionModal from "@/components/ConclusionModal";
 import Navbar from "@/components/Navbar/Navbar";
+import Loading from "@/templates/Loading";
 import ProblemsMenu from "@/templates/ProblemsMenu";
 import { useSession } from "next-auth/react";
-import { useSession } from "next-auth/react";
 import Router from "next/router";
+import { useState } from "react";
 
 const Dom = () => {
   const { status } = useSession();
+  const [isLoading, setLoading] = useState(false);
 
   if (status === "unauthenticated") {
     Router.push("/auth");
@@ -29,7 +31,9 @@ const Dom = () => {
     <>
       <div className="w-screen">
         <Navbar />
-        <ConclusionModal
+        {/* TODO: conditionally render the "end of game" component if the match is over*/}
+
+        {/* <ConclusionModal
           displayModal={true}
           name={"Daniel"}
           profileImage={
@@ -37,8 +41,7 @@ const Dom = () => {
             "https://avatars.githubusercontent.com/u/83048344?v=4"
           }
           didIWin={true}
-        />
-
+        /> */}
         {isLoading ? (
           <Loading onCancel={cancelSearchForGame} />
         ) : (
