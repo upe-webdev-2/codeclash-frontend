@@ -1,4 +1,3 @@
-import type { AppProps } from "next/app";
 import { useRouter } from "next/router";
 import React from "react";
 import useStore from "@/helpers/store";

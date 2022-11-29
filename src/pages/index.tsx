@@ -5,21 +5,8 @@ import { useSpring } from "react-spring";
 import { Suspense, useState } from "react";
 import { a as three } from "@react-spring/three";
 import { ContactShadows, Environment, Html } from "@react-three/drei";
-
-import { getSession, SessionProvider, signOut } from "next-auth/react";
+import { getSession, SessionProvider } from "next-auth/react";
 import { GetServerSideProps } from "next";
-// import Shader from '@/components/canvas/ShaderExample/ShaderExample'
-
-// Prefer dynamic import for production builds
-// But if you have issues and need to debug in local development
-// comment these out and import above instead
-// https://github.com/pmndrs/react-three-next/issues/49
-const Shader = dynamic(
-  () => import("@/components/canvas/ShaderExample/ShaderExample"),
-  {
-    ssr: false
-  }
-);
 
 const Canvas = dynamic(() => import("@/components/layout/canvas"), {
   ssr: false
@@ -40,8 +27,6 @@ const DOM = ({
       <div className="absolute top-0 w-full">
         <Navbar user={user} />
       </div>
-      <h1 className="mb-5 text-6xl font-bold">Landing Page :/</h1>
-      <h3 className="text-xl text-pink-600">Working on it...</h3>
     </div>
   );
 };
@@ -72,7 +57,7 @@ const R3F = ({
       <three.pointLight
         position={[10, 10, 10]}
         intensity={1.5}
-        // color={props.open.to([0, 1], ["#f0f0f0", "#d25578"])}
+        color={props.open.to([0, 1], ["#f0f0f0", "#0F1021"])}
       />
       <Suspense fallback={null}>
         <group
@@ -81,7 +66,7 @@ const R3F = ({
         >
           <Model open={open} position={[0, -3.3, 0]} />
         </group>
-        <Environment preset="city" />
+        <Environment preset="warehouse" />
       </Suspense>
       <ContactShadows
         position={[0, -4.5, 0]}
@@ -117,7 +102,7 @@ export const getServerSideProps: GetServerSideProps = async context => {
   return {
     props: {
       title: "Landing Page",
-      user: session?.user?session?.user:null 
+      user: session?.user ? session?.user : null
     }
   };
 };
