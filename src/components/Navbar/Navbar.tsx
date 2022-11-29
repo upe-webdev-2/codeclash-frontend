@@ -38,8 +38,16 @@ const Navbar = ({ hideLogo, hideElements, user }: Navbar) => {
         className="flex flex-col cursor-pointer m-3"
         style={{ visibility: hideLogo ? "hidden" : "visible" }}
         onClick={() => {
-          if (!(typeof Router.query === "string" && Router.query === "/")) {
+          if (
+            !(typeof Router.query === "string" && Router.query === "/") &&
+            status === "unauthenticated"
+          ) {
             Router.push("/");
+          } else if (
+            !(typeof Router.query === "string" && Router.query === "/menu") &&
+            status === "authenticated"
+          ) {
+            Router.push("/menu");
           }
         }}
       >
