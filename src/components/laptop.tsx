@@ -60,7 +60,7 @@ export function Model({ open, ...props }) {
     );
     group.current.rotation.y = THREE.MathUtils.lerp(
       group.current.rotation.y,
-      open ? Math.sin(t / 10) / 2 - 3 : -Math.PI / 1.2,
+      open ? Math.sin(t / 10) / 2 - 3 : -Math.PI / 1.15,
       0.025
     );
     group.current.rotation.z = THREE.MathUtils.lerp(
@@ -70,7 +70,7 @@ export function Model({ open, ...props }) {
     );
     group.current.position.y = THREE.MathUtils.lerp(
       group.current.position.y,
-      open ? (-5 + Math.sin(t)) / 3 : -4.3,
+      open ? (-5 + Math.sin(t)) / 3 : -4,
       0.075
     );
   });

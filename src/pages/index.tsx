@@ -15,11 +15,26 @@ const Canvas = dynamic(() => import("@/components/layout/canvas"), {
 // DOM elements here
 const DOM = () => {
   return (
-    <div className="relative top-0 left-0 flex flex-col items-center justify-center w-full h-screen">
-      <div className="absolute top-0 w-full">
-        <Navbar />
+    <>
+      <div className="relative top-0 left-0 flex flex-col items-center justify-center w-full h-screen">
+        <div className="absolute top-0 w-full">
+          <Navbar />
+        </div>
       </div>
-    </div>
+      <div className="absolute top-0 left-12 flex flex-col justify-center w-1/2 h-screen">
+        <div className="text-7xl font-bold tracking-normal">
+          Unleash Your Code
+        </div>
+        <div className="text-xl mt-8">
+          Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+          Necessitatibus, id quaerat doloremque molestiae velit rem quis? Veniam
+          tenetur illum quo
+        </div>
+      </div>
+      <button className="absolute bottom-0 left-0 w-1/2">
+        Sexy ass button
+      </button>
+    </>
   );
 };
 
