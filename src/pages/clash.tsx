@@ -67,7 +67,7 @@ const Dom = () => {
             username: tempPlayer
         });
 
-        socket.on("readyGame", (data: any) => {
+        socket.on("startGame", (data: any) => {
             console.log("start game socket call\n", data);
             setProblem(data.problemInfo);
             setLoading(false);
