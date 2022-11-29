@@ -19,17 +19,18 @@ const nextConfig = {
       exclude: /node_modules/,
       use: ["raw-loader", "glslify-loader"]
     });
+
     return config;
   },
+
   // Internationalized Routing
   // @see: https://nextjs.org/docs/advanced-features/i18n-routing
   i18n: {
     locales: ["en-US"],
     defaultLocale: "en-US"
   },
-  // so the the profile images could work
   images: {
-    domains: ["lh3.googleusercontent.com"]
+    domains: ["avatars.githubusercontent.com", "lh3.googleusercontent.com"]
   }
 };
 

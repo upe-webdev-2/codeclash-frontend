@@ -35,16 +35,18 @@ const Dom = ({ problem, onSubmitCode, onTestCode }: Playground) => {
    * To stop the countdown, set timer to null or 0,
    */
 
-  const [timer, setTimer] = useState<number>(problem.timeLimit);
+  // Development
+  const [timer, setTimer] = useState<number>(null);
+  // Production
+  //   const [timer, setTimer] = useState<number>(problem.timeLimit);
+
 
   useEffect(() => {
     if (timer > 0) {
       setTimeout(() => setTimer(timer - 1), 1000);
-    } else if (timer === 0) {
-      setTimer(null);
     }
 
-    if (timer === null) {
+    if (timer === 0) {
       alert("Time limit exceeded!");
     }
   }, [timer]);

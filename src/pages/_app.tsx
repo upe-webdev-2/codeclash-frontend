@@ -21,7 +21,7 @@ function App({ Component, pageProps }) {
   return (
     <SessionProvider session={pageProps.session}>
       <Header title={pageProps.title} />
-      <Dom>{children}</Dom>
+      <Dom {...pageProps}>{children}</Dom>
     </SessionProvider>
   );
 }

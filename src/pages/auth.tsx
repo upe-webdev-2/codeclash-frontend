@@ -1,32 +1,35 @@
 import Container from "@/components/Container";
 import Navbar from "@/components/Navbar/Navbar";
 import { GetServerSideProps } from "next";
-import { getSession, signIn, useSession } from "next-auth/react";
+import { signIn, useSession } from "next-auth/react";
 import Image from "next/image";
 import Router from "next/router";
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import { AiFillLinkedin, AiFillGoogleCircle, AiFillGithub } from "react-icons/ai";
 
-const Dom = ({}) => {
+const Dom = ({ }) => {
   const { status } = useSession();
 
   if (status === "authenticated") {
     Router.push("/menu");
   }
 
+  const size = 35;
+
   const [loginMethods] = useState([
     {
       name: "Google",
-      icon: "/static/auth/google.svg",
+      icon: <AiFillGoogleCircle size={size} />,
       providerId: "google"
     },
     {
       name: "Linkedin",
-      icon: "/static/auth/facebook.svg",
+      icon: <AiFillLinkedin size={size} />,
       providerId: "linkedin"
     },
     {
       name: "GitHub",
-      icon: "/static/auth/github.svg",
+      icon: <AiFillGithub size={size} />,
       providerId: "github"
     }
   ]);
@@ -46,7 +49,7 @@ const Dom = ({}) => {
         </div>
 
         <h1 className="mt-6 text-5xl capitalize font-gilroy-bold">
-          Login | Register
+          Sign in
         </h1>
 
         <div className="flex flex-col items-center justify-center gap-3 mt-10">
@@ -56,7 +59,8 @@ const Dom = ({}) => {
                 className="flex items-center justify-center h-16 cursor-pointer w-[768px]"
                 onClick={() => signIn(providerId, { callbackUrl: "/menu" })}
               >
-                <Image src={icon} alt={name} width={30} height={30} />
+                {icon}
+                {/* <Image src={icon} alt={name} width={30} height={30} /> */}
               </button>
             </Container>
           ))}

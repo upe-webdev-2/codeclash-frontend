@@ -2,59 +2,110 @@
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
 generator client {
-    provider = "prisma-client-js"
+  provider = "prisma-client-js"
 }
 
 datasource db {
-    provider = "postgres"
-    url      = env("DATABASE_URL")
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+  //   shadowDatabaseUrl = env("SHADOW_DATABASE_URL") // Only needed when using a cloud provider that doesn't support the creation of new databases, like Heroku. Learn more: https://pris.ly/migrate-shadow
 }
 
-model Example {
-    id String @id @default(cuid())
-}
-
-// Necessary for Next Auth
 model Account {
-    id                String  @id @default(cuid())
-    userId            String
-    type              String
-    provider          String
-    providerAccountId String // maybe Int
-    refresh_token     String?
-    access_token      String?
-    expires_at        Int?
-    token_type        String?
-    scope             String?
-    id_token          String?
-    session_state     String?
-    user              User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String? @db.Text
+  access_token      String? @db.Text
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String? @db.Text
+  session_state     String?
+  user              User    @relation(fields: [userId], references: [id], onDelete: Cascade)
 
-    @@unique([provider, providerAccountId])
-}
-
-model Session {
-    id           String   @id @default(cuid())
-    sessionToken String   @unique
-    userId       String
-    expires      DateTime
-    user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  @@unique([provider, providerAccountId])
 }
 
 model User {
-    id            String    @id @default(cuid())
-    name          String?
-    email         String?   @unique
-    emailVerified DateTime?
-    image         String?
-    accounts      Account[]
-    sessions      Session[]
+  id            String         @id @default(cuid())
+  name          String?
+  email         String         @unique
+  emailVerified DateTime?
+  xp            Int            @default(0)
+  image         String?
+  accounts      Account[]
+  sessions      Session[]
+  player1       MatchHistory[] @relation("Player1Id")
+  player2       MatchHistory[] @relation("Player2Id")
+
+  // @@index([xp(sort: Desc)])
+  @@index([email])
+}
+
+enum Winner {
+  Player1
+  Player2
+  Draw
+  Ongoing
+}
+
+model MatchHistory {
+  id                  String    @id @default(cuid())
+  roomId              String?
+  player1Id           String
+  player2Id           String
+  problemId           String
+  matchStartTimestamp DateTime  @default(now())
+  matchEndTimestamp   DateTime?
+  winner              Winner    @default(Ongoing) //Player1 Player2 Draw Ongoing
+  player1Code         String?
+  player2Code         String?
+  player1             User      @relation(fields: [player1Id], references: [id], name: "Player1Id")
+  player2             User      @relation(fields: [player2Id], references: [id], name: "Player2Id")
+  problem             Problem   @relation(fields: [problemId], references: [id])
+  // @@index([userId, problemId])
+  // maybe use an @@index somewhere
+}
+
+enum ProblemDifficulty {
+  EASY
+  MEDIUM
+  HARD
+}
+
+model Problem {
+  id            String            @id @default(cuid())
+  problemNumber Int               @unique @default(autoincrement())
+  title         String
+  difficulty    ProblemDifficulty
+  objectives    String[]
+  examples      String[]
+  timeLimit     Int
+  starterCode   String
+  testCases     String[]
+  functionName  String
+  MatchHistory  MatchHistory[]
+  // @@index([difficulty, problemNumber(sort: Desc)], map: "by_difficulty_decending") //this can stay but it needs to be commented out, I think the only difficulty will be easy
+  // @@index([difficulty, problemNumber(sort: Asc)], map: "by_difficulty_ascending") //this can stay but it needs to be commented out, I think the only difficulty will be easy
+
+  @@index([problemNumber(sort: Desc)])
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 model VerificationToken {
-    identifier String
-    token      String   @unique
-    expires    DateTime
+  identifier String
+  token      String   @unique
+  expires    DateTime
 
-    @@unique([identifier, token])
+  @@unique([identifier, token])
 }
