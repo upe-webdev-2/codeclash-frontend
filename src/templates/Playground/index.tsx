@@ -1,11 +1,9 @@
-import Tabs from "@/templates/Playground/Tabs";
 import CustomEditor from "@/templates/Playground/CustomEditor";
-import Description from "@/templates/Playground/Tabs/Description";
 import GameInfo from "@/templates/Playground/GameInfo";
-import { GetServerSideProps } from "next";
-import { useEffect, useRef, useState } from "react";
-import { getSession } from "next-auth/react";
+import Tabs from "@/templates/Playground/Tabs";
+import Description from "@/templates/Playground/Tabs/Description";
 import Result from "@/templates/Playground/Tabs/Result";
+import { useEffect, useRef, useState } from "react";
 
 type Playground = {
   problem: {
@@ -26,7 +24,7 @@ type Playground = {
   testCases?: {};
 };
 
-const Dom = ({ problem, onSubmitCode, onTestCode }: Playground) => {
+const Playground = ({ problem, onSubmitCode, onTestCode }: Playground) => {
   const editorRef = useRef(null); // monaco editor
   const [tabManager, setTabManager] = useState(0); // instructions - results - (past submissions)?
 
@@ -124,47 +122,4 @@ const Dom = ({ problem, onSubmitCode, onTestCode }: Playground) => {
   );
 };
 
-export default function Playground(props: Playground) {
-  return (
-    <>
-      <Dom {...props} />
-    </>
-  );
-}
-
-export const getServerSideProps: GetServerSideProps = async context => {
-  const session = await getSession(context);
-
-  if (!session) {
-    return {
-      redirect: {
-        destination: "/auth",
-        permanent: false
-      }
-    };
-  }
-
-  const response = await fetch(
-    `${process.env.API_ENDPOINT}/problems/${context.query.problem}`,
-    {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json"
-      }
-    }
-  );
-
-  const data = await response.json();
-
-  if (!data.id) {
-    return {
-      notFound: true
-    };
-  }
-
-  return {
-    props: {
-      problem: data
-    }
-  };
-};
+export default Playground

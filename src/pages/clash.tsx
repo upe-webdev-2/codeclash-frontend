@@ -1,10 +1,10 @@
+import Navbar from "@/components/Navbar/Navbar";
 import Loading from "@/templates/Loading";
+import Playground from "@/templates/Playground";
 import { GetServerSideProps } from "next";
+import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { io, Socket } from "socket.io-client";
-import Playground from "./playground";
-import { useRouter } from "next/router";
-import Navbar from "@/components/Navbar/Navbar";
 
 type Problem = {
   id: number;
