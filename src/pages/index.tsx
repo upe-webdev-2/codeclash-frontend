@@ -5,21 +5,8 @@ import { useSpring } from "react-spring";
 import { Suspense, useState } from "react";
 import { a as three } from "@react-spring/three";
 import { ContactShadows, Environment, Html } from "@react-three/drei";
-
 import { getSession, SessionProvider } from "next-auth/react";
 import { GetServerSideProps } from "next";
-// import Shader from '@/components/canvas/ShaderExample/ShaderExample'
-
-// Prefer dynamic import for production builds
-// But if you have issues and need to debug in local development
-// comment these out and import above instead
-// https://github.com/pmndrs/react-three-next/issues/49
-const Shader = dynamic(
-  () => import("@/components/canvas/ShaderExample/ShaderExample"),
-  {
-    ssr: false
-  }
-);
 
 const Canvas = dynamic(() => import("@/components/layout/canvas"), {
   ssr: false
