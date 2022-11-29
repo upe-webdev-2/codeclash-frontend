@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Image from "next/image";
 import { useSession } from "next-auth/react";
 import Button from "./Button";
@@ -19,7 +19,13 @@ const ConclusionModal = ({
 }: ConclusionModalProps) => {
   const { data } = useSession();
 
-  const handleClose = () => {};
+  const handleClose = () => {
+    console.log("Close");
+  };
+
+  useEffect(()=>{
+    
+  })
 
   return (
     <div className="fixed rounded-[15px] z-50 w-96 bg-primary top-[50vh] left-[50vw] -translate-x-2/4 -translate-y-2/4 border border-blue-500/30 p-5 child:self-center flex    flex-col child:my-1">
