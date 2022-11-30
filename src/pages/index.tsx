@@ -1,12 +1,14 @@
-import dynamic from "next/dynamic";
+import Button from "@/components/Button";
 import Navbar from "@/components/Navbar/Navbar";
-import { Model } from "../components/laptop";
-import { useSpring } from "react-spring";
-import { Suspense, useState } from "react";
 import { a as three } from "@react-spring/three";
 import { ContactShadows, Environment, Html } from "@react-three/drei";
-import { getSession, SessionProvider } from "next-auth/react";
 import { GetServerSideProps } from "next";
+import { SessionProvider } from "next-auth/react";
+import dynamic from "next/dynamic";
+import Router from "next/router";
+import { Suspense, useState } from "react";
+import { useSpring } from "react-spring";
+import { Model } from "../components/laptop";
 
 const Canvas = dynamic(() => import("@/components/layout/canvas"), {
   ssr: false
@@ -15,28 +17,28 @@ const Canvas = dynamic(() => import("@/components/layout/canvas"), {
 // DOM elements here
 const DOM = () => {
   return (
-    <>
-      <div className="relative top-0 left-0 flex flex-col items-center justify-center w-full h-screen">
-        <div className="absolute top-0 w-full">
-          <Navbar />
-        </div>
+    <div className="relative">
+      <div className="absolute top-0 w-full">
+        <Navbar />
       </div>
-      <div className="absolute top-0 left-12 flex flex-col justify-center w-1/2 h-screen">
-        <div className="text-7xl font-bold tracking-normal">
-          Unleash Your Code
-        </div>
-        <div className="text-xl mt-8">
+      <div className="w-[50vw] h-screen flex items-center justify-center flex-col gap-8 pl-5">
+        <h1 className="font-gilroy-bold text-7xl">
+          Unleash Your <span className="animated-text">Code</span>
+        </h1>
+        <p className="text-center font-gilroy">
           Lorem ipsum, dolor sit amet consectetur adipisicing elit.
           Necessitatibus, id quaerat doloremque molestiae velit rem quis? Veniam
           tenetur illum quo
-        </div>
+        </p>
+
+        <Button type="fill" onclick={() => Router.push("/menu")} movingGradient>Play Now</Button>
       </div>
-      <button className="absolute bottom-0 left-0 w-1/2">
-        Sexy ass button
-      </button>
-    </>
-  );
-};
+
+      <div className="absolute bottom-32 right-[50%] translate-x-1/2">
+      </div>
+    </div>
+  )
+}
 
 // Canvas/R3F components here
 const R3F = () => {
@@ -89,17 +91,6 @@ export default function LandingPage() {
 }
 
 export const getServerSideProps: GetServerSideProps = async context => {
-  const session = await getSession(context);
-
-  if (session) {
-    return {
-      redirect: {
-        destination: "/menu",
-        permanent: false
-      }
-    };
-  }
-
   return {
     props: {
       title: "Landing Page"
