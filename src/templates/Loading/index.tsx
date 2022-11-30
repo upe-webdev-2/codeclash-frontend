@@ -1,13 +1,18 @@
 import Container from "@/components/Container";
+import { useSession } from "next-auth/react";
 import Image from "next/image";
 import { useEffect } from "react";
+import { UserInfo } from "../Playground/data";
 import PlayerStats from "./PlayerStats";
 
 type Loading = {
   onCancel: () => void;
+  opponent: UserInfo
 };
 
-const Loading = ({ onCancel }: Loading) => {
+const Loading = ({ onCancel, opponent }: Loading) => {
+  const session = useSession()
+
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   }, []);
@@ -18,8 +23,8 @@ const Loading = ({ onCancel }: Loading) => {
         <div className="flex flex-col items-center justify-center gap-10 px-32 py-10">
           <div className="flex items-center justify-center gap-24">
             <PlayerStats
-              image="/static/placeholder.jpeg"
-              username="SEBAS0228"
+              image={session.data?.user.image}
+              username={session.data?.user.name}
               achievements={12}
             />
 
@@ -28,9 +33,9 @@ const Loading = ({ onCancel }: Loading) => {
             </Container>
 
             <PlayerStats
-              image="/static/placeholder.jpeg"
-              username="ROXXY345"
-              achievements={18}
+              username={opponent?.username || "...."}
+              achievements={opponent?.achievements || 0}
+              image={opponent?.profilePicture || "/static/placeholder.jpeg"}
               extraCrystal
             />
           </div>

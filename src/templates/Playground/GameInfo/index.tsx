@@ -1,3 +1,4 @@
+import { useSession } from "next-auth/react";
 import { ElementRef, useRef, useState } from "react";
 import PlayerStats from "./PlayerStats";
 import Timer from "./Timer";
@@ -22,12 +23,13 @@ type GameInfo = {
 };
 
 const GameInfo = ({ opponent, testCases, timer }: GameInfo) => {
+  const { data } = useSession()
   /**
    * TODO: Get user from next/auth
    */
   const [user] = useState<Player>({
-    username: "SEBAS0228",
-    profilePicture: "/static/placeholder.jpeg",
+    username: data.user.name,
+    profilePicture: data.user.image,
     achievements: 12
   });
 

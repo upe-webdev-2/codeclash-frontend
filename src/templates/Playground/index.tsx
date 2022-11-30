@@ -4,27 +4,17 @@ import Tabs from "@/templates/Playground/Tabs";
 import Description from "@/templates/Playground/Tabs/Description";
 import Result from "@/templates/Playground/Tabs/Result";
 import { useEffect, useRef, useState } from "react";
+import { Problem, UserInfo } from "./data";
 
 type Playground = {
-  problem: {
-    id: number;
-    title: string;
-    difficulty: "Easy" | "Medium" | "Hard";
-    objectives: string[];
-    examples: {
-      output: string;
-      input: string;
-      explanation?: string;
-    }[];
-    starterCode: string;
-    timeLimit: number;
-  };
+  problem: Problem
   onSubmitCode: (code: string) => void;
   onTestCode: (code: string) => void;
   testCases?: {};
+  opponent: UserInfo
 };
 
-const Playground = ({ problem, onSubmitCode, onTestCode }: Playground) => {
+const Playground = ({ problem, onSubmitCode, onTestCode, opponent }: Playground) => {
   const editorRef = useRef(null); // monaco editor
   const [tabManager, setTabManager] = useState(0); // instructions - results - (past submissions)?
 
@@ -76,11 +66,7 @@ const Playground = ({ problem, onSubmitCode, onTestCode }: Playground) => {
       <div className="pr-10 w-[67vw]">
         <div className="h-32">
           <GameInfo
-            opponent={{
-              username: "ROXXY345",
-              profilePicture: "/static/placeholder.jpeg",
-              achievements: 12
-            }}
+            opponent={opponent}
             testCases={{
               total: 10,
               opponentCompletion: 8,
