@@ -9,17 +9,26 @@ import Router from "next/router";
 import { Suspense, useState } from "react";
 import { useSpring } from "react-spring";
 import { Model } from "../components/laptop";
+import { getSession } from "next-auth/react"
 
 const Canvas = dynamic(() => import("@/components/layout/canvas"), {
   ssr: false
 });
 
 // DOM elements here
-const DOM = () => {
+const DOM = ({
+  user
+}: {
+  user: {
+    name?: string;
+    email?: string;
+    image?: string;
+  };
+}) => {
   return (
     <div className="relative">
       <div className="absolute top-0 w-full">
-        <Navbar />
+        <Navbar user={user} />
       </div>
       <div className="w-[50vw] h-screen flex items-center justify-center flex-col gap-8 pl-5">
         <h1 className="font-gilroy-bold text-7xl">
@@ -41,7 +50,15 @@ const DOM = () => {
 }
 
 // Canvas/R3F components here
-const R3F = () => {
+const R3F = ({
+  user
+}: {
+  user: {
+    name?: string;
+    email?: string;
+    image?: string;
+  };
+}) => {
   // This flag controls open state, alternates between true & false
   const [open, setOpen] = useState(false);
   // We turn this into a spring animation that interpolates between 0 and 1
@@ -51,7 +68,7 @@ const R3F = () => {
     <>
       <Html fullscreen>
         <SessionProvider>
-          <DOM />
+          <DOM user={user} />
         </SessionProvider>
       </Html>
 
@@ -80,20 +97,30 @@ const R3F = () => {
   );
 };
 
-export default function LandingPage() {
+export default function LandingPage({
+  user
+}: {
+  user: {
+    name?: string;
+    email?: string;
+    image?: string;
+  };
+}) {
   return (
     <>
       <Canvas>
-        <R3F />
+        <R3F user={user} />
       </Canvas>
     </>
   );
 }
 
 export const getServerSideProps: GetServerSideProps = async context => {
+  const session = await getSession(context);
   return {
     props: {
-      title: "Landing Page"
+      title: "Landing Page",
+      user: session?.user ? session?.user : null
     }
   };
 };

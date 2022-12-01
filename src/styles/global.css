@@ -71,7 +71,7 @@
 /* https://tailwindcss.com/docs/adding-custom-styles#removing-unused-custom-css  */
 /* https://v2.tailwindcss.com/docs/just-in-time-mode#arbitrary-value-support */
 .button-gradient {
-  @apply bg-gradient-to-r p-[3px] from-tertiary to-secondary;
+  @apply bg-gradient-to-r p-[3px] from-tertiary via-secondary to-tertiary;
 }
 
 .button-gradient.button-moving-gradient {
