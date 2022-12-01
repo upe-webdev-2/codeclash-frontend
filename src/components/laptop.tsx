@@ -70,7 +70,7 @@ export function Model({ open, ...props }) {
     );
     group.current.position.y = THREE.MathUtils.lerp(
       group.current.position.y,
-      open ? (-5 + Math.sin(t)) / 3 : -4,
+      open ? (-3.5 + Math.cos(t)) + 3.5 : -1,
       0.075
     );
   });

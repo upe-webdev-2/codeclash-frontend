@@ -1,7 +1,7 @@
 import Button from "@/components/Button";
 import Navbar from "@/components/Navbar/Navbar";
 import { a as three } from "@react-spring/three";
-import { ContactShadows, Environment, Html } from "@react-three/drei";
+import { ContactShadows, Environment, Html, Stars } from "@react-three/drei";
 import { GetServerSideProps } from "next";
 import { SessionProvider } from "next-auth/react";
 import dynamic from "next/dynamic";
@@ -30,23 +30,24 @@ const DOM = ({
       <div className="absolute top-0 w-full">
         <Navbar user={user} />
       </div>
-      <div className="w-[50vw] h-screen flex items-center justify-center flex-col gap-8 pl-5">
-        <h1 className="font-gilroy-bold text-7xl">
+      <div className="w-[50vw] h-screen flex justify-center flex-col gap-8 pl-[5rem]">
+        <h1 className="font-gilroy-bold text-[60px]">
           Unleash Your <span className="animated-text">Code</span>
         </h1>
-        <p className="text-center font-gilroy">
-          Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-          Necessitatibus, id quaerat doloremque molestiae velit rem quis? Veniam
-          tenetur illum quo
+        <p className="font-gilroy -mt-7">
+          <i>CodeClash</i> is a competitive coding platform for developers to
+          showcase their skills and learn from each other all while enhancing
+          their technical interview abilities. Join the community today!
         </p>
-
-        <Button type="fill" onclick={() => Router.push("/menu")} movingGradient>Play Now</Button>
       </div>
 
-      <div className="absolute bottom-32 right-[50%] translate-x-1/2">
+      <div className="absolute bottom-16 right-[50%] translate-x-1/2">
+        <Button type="fill" onclick={() => Router.push("/menu")} movingGradient>
+          Play Now
+        </Button>
       </div>
     </div>
-  )
+  );
 }
 
 // Canvas/R3F components here
@@ -83,6 +84,7 @@ const R3F = ({
           onClick={e => (e.stopPropagation(), setOpen(!open))}
         >
           <Model open={open} position={[0, -3.3, 0]} />
+          <Stars count={2000} />
         </group>
         <Environment preset="warehouse" />
       </Suspense>
