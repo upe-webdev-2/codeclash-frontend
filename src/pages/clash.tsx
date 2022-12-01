@@ -21,6 +21,7 @@ const Dom = () => {
       username: session.data?.user.email
     });
     socket.disconnect();
+    router.push("/menu")
   };
 
   const handleSubmitCode = (code: string) => {
