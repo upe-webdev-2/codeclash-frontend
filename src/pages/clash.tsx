@@ -3,9 +3,7 @@ import Navbar from "@/components/Navbar/Navbar";
 import React, { useState } from "react";
 
 const LoadingSetup = () => {
-  const cancel = () => {
-    console.log("Hi");
-  };
+  const cancel = () => {};
   return (
     <div className="w-screen">
       <Navbar />
