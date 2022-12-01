@@ -35,7 +35,7 @@ const Navbar = ({ hideLogo, hideElements, user }: Navbar) => {
   return (
     <div className="flex justify-between w-full pt-1 text-lg px-28">
       <div
-        className="flex flex-col cursor-pointer m-3"
+        className="flex flex-col m-3 cursor-pointer"
         style={{ visibility: hideLogo ? "hidden" : "visible" }}
         onClick={() => {
           if (
@@ -57,7 +57,7 @@ const Navbar = ({ hideLogo, hideElements, user }: Navbar) => {
           width={"51.22px"}
           height={"49.22px"}
         />
-        <p className="text-center w-100 font-poppins text-base">
+        <p className="text-base text-center w-100 font-poppins">
           Code<span className="font-bold">Clash</span>
         </p>
       </div>

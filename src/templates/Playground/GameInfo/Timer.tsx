@@ -42,7 +42,7 @@ const Timer = ({ timeLimit, timeRemaining }: Timer) => {
   };
 
   return (
-    <div className="relative w-28">
+    <div className="relative z-10 w-28">
       <svg
         viewBox="0 0 100 100"
         xmlns="http://www.w3.org/2000/svg"
@@ -68,7 +68,11 @@ const Timer = ({ timeLimit, timeRemaining }: Timer) => {
         </g>
       </svg>
       <span className="absolute top-0 flex items-center justify-center w-full h-full font-gilroy-bold">
-        {formatTime(timeRemaining)}
+        {/** Since the backend doesn't send a time currently, always display 00:00 */}
+        <div className="hidden">
+          {formatTime(timeRemaining)}
+        </div>
+        00:00
       </span>
     </div>
   );

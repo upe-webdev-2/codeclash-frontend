@@ -17,11 +17,12 @@ const PlayerStats = (props: PlayerStats) => {
 
       <div className="rounded-full">
         <Image
-          src={image}
+          src={image || "/static/placeholder.jpeg"}
           alt=""
           width={150}
           height={150}
           className="object-cover rounded-full"
+          priority
         />
       </div>
 
