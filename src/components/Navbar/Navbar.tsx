@@ -54,8 +54,8 @@ const Navbar = ({ hideLogo, hideElements, user }: Navbar) => {
         <Image
           src={"/static/logo.svg"}
           alt="Image of Code Clash Logo"
-          width={"51.22px"}
-          height={"49.22px"}
+          width={75}
+          height={75}
         />
         <p className="text-base text-center w-100 font-poppins">
           Code<span className="font-bold">Clash</span>

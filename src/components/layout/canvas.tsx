@@ -6,7 +6,7 @@ const CanvasWrapper = ({ children }) => {
   return (
     <>
       <Canvas
-      camera={{ position: [35, -3, 20], fov: 35 }}
+      camera={{ position: [33, -3, 22], fov: 40 }}
         // Is this deprecated or typed wrong? Ignoring for now.
         // @ts-ignore
         // mode="concurrent"

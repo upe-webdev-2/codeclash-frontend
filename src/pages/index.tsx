@@ -1,12 +1,15 @@
-import dynamic from "next/dynamic";
+import Button from "@/components/Button";
 import Navbar from "@/components/Navbar/Navbar";
-import { Model } from "../components/laptop";
-import { useSpring } from "react-spring";
-import { Suspense, useState } from "react";
 import { a as three } from "@react-spring/three";
 import { ContactShadows, Environment, Html } from "@react-three/drei";
-import { getSession, SessionProvider } from "next-auth/react";
 import { GetServerSideProps } from "next";
+import { SessionProvider } from "next-auth/react";
+import dynamic from "next/dynamic";
+import Router from "next/router";
+import { Suspense, useState } from "react";
+import { useSpring } from "react-spring";
+import { Model } from "../components/laptop";
+import { getSession } from "next-auth/react"
 
 const Canvas = dynamic(() => import("@/components/layout/canvas"), {
   ssr: false
@@ -23,13 +26,28 @@ const DOM = ({
   };
 }) => {
   return (
-    <div className="relative top-0 left-0 flex flex-col items-center justify-center w-full h-screen">
+    <div className="relative">
       <div className="absolute top-0 w-full">
         <Navbar user={user} />
       </div>
+      <div className="w-[50vw] h-screen flex items-center justify-center flex-col gap-8 pl-5">
+        <h1 className="font-gilroy-bold text-7xl">
+          Unleash Your <span className="animated-text">Code</span>
+        </h1>
+        <p className="text-center font-gilroy">
+          Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+          Necessitatibus, id quaerat doloremque molestiae velit rem quis? Veniam
+          tenetur illum quo
+        </p>
+
+        <Button type="fill" onclick={() => Router.push("/menu")} movingGradient>Play Now</Button>
+      </div>
+
+      <div className="absolute bottom-32 right-[50%] translate-x-1/2">
+      </div>
     </div>
-  );
-};
+  )
+}
 
 // Canvas/R3F components here
 const R3F = ({
