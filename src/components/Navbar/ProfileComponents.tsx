@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { useRouter } from "next/router";
+import Router from "next/router";
 import { signOut, useSession } from "next-auth/react";
 import React, { useState } from "react";
 import Crystal from "../Crystal";
@@ -9,19 +9,18 @@ type Profile = {
 };
 
 const ProfileOptions = () => {
-  const router = useRouter();
   return (
     <nav className="my-2">
       <ul className="text-sm text-center text-white">
         <li
           className="cursor-pointer hover:text-secondary"
-          onClick={() => router.push("/profile")}
+          onClick={() => Router.push("/profile")}
         >
           Profile
         </li>
         <li
           className="cursor-pointer hover:text-secondary"
-          onClick={() => router.push("/settings")}
+          onClick={() => Router.push("/settings")}
         >
           Settings
         </li>
@@ -58,7 +57,20 @@ const ProfileBox = ({ isHovering }: Profile) => {
   );
 };
 
-const ProfileComponents = () => {
+const ProfileComponents = ({
+  user
+}: {
+  user?: {
+    name?: string;
+    email?: string;
+    image?: string;
+  };
+}) => {
+  /**
+   * user is being passed down to take care of a bug in the landing page
+   * landing page is unable to get the information from useSession properly, navbar thinks the user is not logged in, until the user clicks unfocuses on the webpage.
+   */
+   
   const { data } = useSession();
   const [XP, setXP] = useState(12);
 
@@ -71,7 +83,6 @@ const ProfileComponents = () => {
   const handleMouseOut = () => {
     setIsHovering(false);
   };
-  const router = useRouter();
 
   return (
     <>
@@ -84,8 +95,8 @@ const ProfileComponents = () => {
       >
         <Image
           className="cursor-pointer z-[1] rounded-full"
-          onClick={() => router.push("/profile")}
-          src={data.user.image}
+          onClick={() => Router.push("/profile")}
+          src={user?user.image:data?.user?.image}
           alt=""
           width="49"
           height="49"

@@ -30,7 +30,11 @@ export const authOptions = {
     signingKey: process.env.JWT_SIGNING_PRIVATE_KEY,
     secret: process.env.SECRET
   },
+  debug: process.env.NODE_ENV !== "production",
+  secret: process.env.SECRET,
+
+  // If you don't have postgres set up properly comment these two lines
   database: process.env.DATABASE_URL,
-  adapter: PrismaAdapter(prisma)
+  adapter: PrismaAdapter(prisma),
 };
 export default NextAuth(authOptions);
