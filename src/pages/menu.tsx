@@ -15,6 +15,12 @@ const Dom = () => {
     console.log(`Searching for ${difficulty}`);
     setLoading(true);
   };
+  const [displayModal, setDisplayModal] = useState<boolean>(true);
+  const [didIWin, setDidIWin] = useState<boolean>(true);
+
+
+  console.log(useSession());
+  
 
   const cancelSearchForGame = () => {
     /**
@@ -27,7 +33,34 @@ const Dom = () => {
     <>
       <div className="w-screen">
         <Navbar />
-        <ConclusionModal displayModal={true} name={"Daniel"} profileImage={useSession()?.data?.user?.image || "https://avatars.githubusercontent.com/u/83048344?v=4"} didIWin={true} />
+        <div className="fixed z-[100]">
+          <button
+            onClick={() => {
+              setDisplayModal(!displayModal);
+            }}
+          >
+            Flip Display
+          </button>{" "}
+          |{" "}
+          <button
+            onClick={() => {
+              setDidIWin(!didIWin);
+            }}
+          >
+            Flip Win
+          </button>
+        </div>
+        <ConclusionModal
+          difficulty={"easy"}
+          displayModal={displayModal}
+          setDisplayModal={setDisplayModal}
+          name={"Daniel"}
+          profileImage={
+            useSession()?.data?.user?.image ||
+            "https://avatars.githubusercontent.com/u/83048344?v=4"
+          }
+          didIWin={didIWin}
+        />
 
         {isLoading ? (
           <Loading onCancel={cancelSearchForGame} />
