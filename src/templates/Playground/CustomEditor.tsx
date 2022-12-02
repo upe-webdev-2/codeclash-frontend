@@ -54,6 +54,7 @@ const CustomEditor = ({ editorConfig, editorRef }: CustomEditor) => {
           smoothScrolling: true
         }}
         onMount={editor => (editorRef.current = editor)}
+        theme="code-clash"
       />
     </div>
   );
