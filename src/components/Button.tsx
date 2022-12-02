@@ -23,7 +23,7 @@ const Button = ({
   disabled = false
 }: Button) => (
   <button
-    onClick={onclick}
+    onClick={disabled?()=>{}:onclick}
     style={{ height, width, ...style }}
     className={
       disabled
