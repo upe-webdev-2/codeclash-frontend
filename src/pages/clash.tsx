@@ -45,22 +45,21 @@ const Dom = () => {
   };
 
   useEffect(() => {
-    setSocket(
-      io(`${process.env.NEXT_PUBLIC_SOCKET_ENDPOINT}/play`, {
-        auth: { username: session.data?.user.email }
-      })
-    );
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  useEffect(() => {
     if (socket === null) {
+      setSocket(
+        io(`${process.env.NEXT_PUBLIC_SOCKET_ENDPOINT}/play`, {
+          auth: { username: session.data?.user.email }
+        })
+      );
+      console.log("sockets have been defined")
       return;
     }
 
     socket.emit("playerJoin", {
-      username: session.data?.user.email
+      username: session.data?.user.email,
+      somethingRnaomd: "nothing"
     });
+    console.log("emited join for sockets")
 
     socket.on("startGame", (data: any) => {
       console.log("start game socket call\n", data);
@@ -81,6 +80,7 @@ const Dom = () => {
 
     socket.on("playerTestResult", (data: any) => {
       console.log("Player tested something\n", data);
+
     });
 
     socket.on("playerSubmitResult", (data: any) => {
@@ -97,7 +97,7 @@ const Dom = () => {
       cancelGameSearch();
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [socket]);
+  }, [session.data?.user.email, socket]);
 
   return (
     <>
