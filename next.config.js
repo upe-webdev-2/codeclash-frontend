@@ -26,17 +26,13 @@ const nextConfig = {
   // Internationalized Routing
   // @see: https://nextjs.org/docs/advanced-features/i18n-routing
   i18n: {
-    locales: ["en-US"],
-    defaultLocale: "en-US"
-  },
-  images: {
-    domains: [
-      "avatars.githubusercontent.com",
-      "lh3.googleusercontent.com",
-      "media-exp1.licdn.com"
-    ]
-  }
-};
+		locales: ["en-US"],
+		defaultLocale: "en-US",
+	},
+	images: {
+		domains: ["avatars.githubusercontent.com", "lh3.googleusercontent.com", "media-exp1.licdn.com"]
+	}
+}
 
 module.exports = plugins(
   [
