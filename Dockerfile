@@ -8,7 +8,9 @@ WORKDIR /frontend
 
 COPY . /frontend/
 
-RUN apk apt nodejs npm 
+RUN sudo apt install nodejs
+
+RUN sudo apt install npm
 
 RUN npm i
 
