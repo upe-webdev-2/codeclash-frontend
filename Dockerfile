@@ -8,7 +8,7 @@ WORKDIR /frontend
 
 COPY . /frontend/
 
-RUN apk add nodejs
+RUN apk add --update nodejs npm 
 
 RUN npm i
 
