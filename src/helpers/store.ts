@@ -1,6 +1,6 @@
 import { Router } from "next/router";
 import create from "zustand";
-import { devtools, persist } from "zustand/middleware";
+import { devtools } from "zustand/middleware";
 
 export interface AppState {
   // NextJS router

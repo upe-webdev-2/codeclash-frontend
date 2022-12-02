@@ -1,36 +1,25 @@
 import Navbar from "@/components/Navbar/Navbar";
-import Loading from "@/templates/Loading";
 import ProblemsMenu from "@/templates/ProblemsMenu";
 import { useSession } from "next-auth/react";
-import { useState } from "react";
+import Router from "next/router";
 
 const Dom = () => {
-  const [isLoading, setLoading] = useState(false);
+  const { status } = useSession();
+
+  if (status === "unauthenticated") {
+    Router.push("/auth");
+    return <></>;
+  }
 
   const searchForGame = (difficulty: string) => {
-    /**
-     * TODO: Use sockets to notify backend to search for a game
-     */
     console.log(`Searching for ${difficulty}`);
-    setLoading(true);
-  };
-
-  const cancelSearchForGame = () => {
-    /**
-     * TODO: Use sockets to notify backend to stop the search for a game
-     */
-    console.log("Cancel search for game");
-    setLoading(false);
+    Router.push(`/clash?difficulty=${difficulty.toLowerCase()}`);
   };
   return (
     <>
       <div className="w-screen">
         <Navbar />
-        {isLoading ? (
-          <Loading onCancel={cancelSearchForGame} />
-        ) : (
-          <ProblemsMenu searchForGame={searchForGame} />
-        )}
+        <ProblemsMenu searchForGame={searchForGame} />
       </div>
     </>
   );

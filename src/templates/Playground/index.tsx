@@ -1,28 +1,20 @@
-import Tabs from "@/templates/Playground/Tabs";
 import CustomEditor from "@/templates/Playground/CustomEditor";
-import Description from "@/templates/Playground/Tabs/Description";
 import GameInfo from "@/templates/Playground/GameInfo";
-import { GetServerSideProps } from "next";
-import { useEffect, useRef, useState } from "react";
+import Tabs from "@/templates/Playground/Tabs";
+import Description from "@/templates/Playground/Tabs/Description";
 import Result from "@/templates/Playground/Tabs/Result";
+import { useEffect, useRef, useState } from "react";
+import { Problem, UserInfo } from "./data";
 
 type Playground = {
-  problem: {
-    id: number;
-    title: string;
-    difficulty: "Easy" | "Medium" | "Hard";
-    objectives: string[];
-    examples: {
-      output: string;
-      input: string;
-      explanation?: string;
-    }[];
-    starterCode: string;
-    timeLimit: number;
-  };
+  problem: Problem
+  onSubmitCode: (code: string) => void;
+  onTestCode: (code: string) => void;
+  testCases?: {};
+  opponent: UserInfo
 };
 
-const Dom = ({ problem }: Playground) => {
+const Playground = ({ problem, onSubmitCode, onTestCode, opponent }: Playground) => {
   const editorRef = useRef(null); // monaco editor
   const [tabManager, setTabManager] = useState(0); // instructions - results - (past submissions)?
 
@@ -30,7 +22,7 @@ const Dom = ({ problem }: Playground) => {
    * to start the countdown, set timer to problems.timeLimit
    * To stop the countdown, set timer to null or 0,
    */
-  
+
   // Development
   const [timer, setTimer] = useState<number>(null);
   // Production
@@ -40,7 +32,7 @@ const Dom = ({ problem }: Playground) => {
   useEffect(() => {
     if (timer > 0) {
       setTimeout(() => setTimer(timer - 1), 1000);
-    } 
+    }
 
     if (timer === 0) {
       alert("Time limit exceeded!");
@@ -49,46 +41,6 @@ const Dom = ({ problem }: Playground) => {
 
   const [testCases, setTestCases] = useState(null);
   const [completedAllTestCases, setCompletedAllTestCases] = useState(false); // from the sockets if the user was able to do all the test cases
-
-  const handleSubmit = () => {
-    /**
-     * TODO: send code to sockets for validation
-     */
-    alert("Submit: \n\n\n" + editorRef.current.getValue());
-  };
-
-  const handleTest = () => {
-    /**
-     * TODO: Send code to sockets for test cases
-     * * editorRef.current.getValue()
-     */
-    setTabManager(1); // show the results tab
-    setTestCases([
-      {
-        input: "nums = [2,7,11,15], target = 9",
-        output: "[0]",
-        expected: "[0,1]",
-        Stdout: "{}"
-      },
-      {
-        input: "nums = [2,7,11,15], target = 9",
-        output: "[]",
-        expected: "[0,1]"
-      },
-      {
-        input: "nums = [2,7,11,15], target = 9",
-        output: "[0,1]",
-        expected: "[0,1]"
-      },
-      {
-        input: "nums = [2,7,11,15], target = 9",
-        output: "[0,1]",
-        expected: "[0,1]",
-        Stdout: "[2,7,11,15]"
-      }
-    ]);
-    setCompletedAllTestCases(false);
-  };
 
   return (
     <div className="flex">
@@ -114,11 +66,7 @@ const Dom = ({ problem }: Playground) => {
       <div className="pr-10 w-[67vw]">
         <div className="h-32">
           <GameInfo
-            opponent={{
-              username: "ROXXY345",
-              profilePicture: "/static/placeholder.jpeg",
-              achievements: 12
-            }}
+            opponent={opponent}
             testCases={{
               total: 10,
               opponentCompletion: 8,
@@ -144,12 +92,12 @@ const Dom = ({ problem }: Playground) => {
         <div className="flex flex-col items-center justify-center gap-2 mt-2 [&>*]:p-2 [&>*]:rounded-lg font-gilroy-bold">
           <button
             className="w-full transition duration-1000 polymorphism active:translate-y-1 hover:bg-tertiary"
-            onClick={handleTest}
+            onClick={() => onTestCode(editorRef.current?.getValue())}
           >
             Test
           </button>
           <button
-            onClick={handleSubmit}
+            onClick={() => onSubmitCode(editorRef.current?.getValue())}
             className="w-full transition-all duration-1000 active:translate-y-1 bg-gradient-to-r from-tertiary via-secondary to-tertiary bg-size-200 bg-pos-0 hover:bg-pos-100"
           >
             Submit
@@ -160,38 +108,4 @@ const Dom = ({ problem }: Playground) => {
   );
 };
 
-export default function Playground(props: Playground) {
-  return (
-    <>
-      <Dom {...props} />
-    </>
-  );
-}
-
-export const getServerSideProps: GetServerSideProps = async ({ query }) => {
-  const { problem } = query;
-
-  const response = await fetch(
-    `${process.env.API_ENDPOINT}/problems/${problem}`,
-    {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json"
-      }
-    }
-  );
-
-  const data = await response.json();
-
-  if (!data.id) {
-    return {
-      notFound: true
-    };
-  }
-
-  return {
-    props: {
-      problem: data
-    }
-  };
-};
+export default Playground
