@@ -1,4 +1,4 @@
-import React, { useEffect, Dispatch, SetStateAction, useState } from "react";
+import React, { useEffect, Dispatch, SetStateAction } from "react";
 import Image from "next/image";
 import Button from "./Button";
 import { AiOutlineClose } from "react-icons/ai";
@@ -41,8 +41,6 @@ const ConclusionModal = ({
   const handleClose = () => {
     setDisplayModal(false);
   };
-
-  useEffect(() => {});
 
   return (
     <div
