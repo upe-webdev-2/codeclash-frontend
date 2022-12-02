@@ -1,4 +1,6 @@
 import { ReactNode } from "react";
+import CSS from 'csstype';
+
 
 type Button = {
   children: ReactNode;
@@ -7,7 +9,7 @@ type Button = {
   movingGradient: boolean;
   width?: string;
   height?: string;
-  style?: {};
+  style?: CSS.Properties;
 };
 
 const Button = ({
