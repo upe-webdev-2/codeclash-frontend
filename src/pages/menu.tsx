@@ -29,34 +29,6 @@ const Dom = () => {
     <>
       <div className="w-screen">
         <Navbar />
-        <div className="fixed z-[100]">
-          <button
-            onClick={() => {
-              setDisplayModal(!displayModal);
-            }}
-          >
-            Flip Display
-          </button>{" "}
-          |{" "}
-          <button
-            onClick={() => {
-              setDidIWin(!didIWin);
-            }}
-          >
-            Flip Win
-          </button>
-        </div>
-        <ConclusionModal
-          displayModal={displayModal}
-          setDisplayModal={setDisplayModal}
-          name={"Daniel"}
-          profileImage={
-            useSession()?.data?.user?.image ||
-            "https://avatars.githubusercontent.com/u/83048344?v=4"
-          }
-          didIWin={didIWin}
-        />
-
         {isLoading ? (
           <Loading onCancel={cancelSearchForGame} />
         ) : (
