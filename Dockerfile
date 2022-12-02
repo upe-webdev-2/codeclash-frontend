@@ -8,7 +8,7 @@ WORKDIR /frontend
 
 COPY . /frontend/
 
-RUN sudo yum install npm
+RUN sudo yum install node
 
 RUN npm i
 
