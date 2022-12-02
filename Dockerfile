@@ -10,5 +10,5 @@ COPY . /frontend/
 
 # install dependencies
 RUN npm i
-RUN next build
-RUN next start
+RUN npm run build
+RUN npm start
