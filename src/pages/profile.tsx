@@ -1,7 +1,5 @@
-import useStore from "@/helpers/store";
-import dynamic from "next/dynamic";
-import { signIn, signOut, useSession } from "next-auth/react";
-import { useRouter } from "next/router";
+import { getSession, useSession } from "next-auth/react";
+import { GetServerSideProps } from "next";
 import Image from "next/image";
 import Navbar from "@/components/Navbar/Navbar";
 import LeaderboardList from "@/components/profile/leaderboard-list";
@@ -14,8 +12,7 @@ const DOM = () => {
   const radialBackground =
     "bg-gradient-radial from-cardGradient-primary to-cardGradient-secondary";
 
-  const user = "Mike";
-
+  const user = useSession().data?.user?.name||".....";
   return (
     <>
       <Navbar />
@@ -29,9 +26,11 @@ const DOM = () => {
             Welcome back, {user}!
           </div>
           <div className="text-slate-200 mx-9 pr-32 text-lg">
-            Problem solved: 64
+            Problem solved: 21
           </div>
-          <div className="text-slate-200 mx-9 pr-32 -mt-4 text-lg">Total Problems: 159</div>
+          <div className="text-slate-200 mx-9 pr-32 -mt-4 text-lg">
+            Total Problems: 159
+          </div>
         </div>
 
         {/* Video recommendation */}
@@ -136,10 +135,21 @@ export default function leaderboard() {
   );
 }
 
-export async function getStaticProps() {
+export const getServerSideProps: GetServerSideProps = async context => {
+  const session = await getSession(context);
+
+  if (!session?.user) {
+    return {
+      redirect: {
+        destination: "/auth",
+        permanent: false
+      }
+    };
+  }
+
   return {
     props: {
       title: "Profile"
     }
   };
-}
+};

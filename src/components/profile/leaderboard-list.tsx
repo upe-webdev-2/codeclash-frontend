@@ -57,7 +57,7 @@ const LeaderboardList = () => {
       rank: 8,
       badgeCount: 3,
       minutes: 754,
-      score: 109
+      score: 80
     },
     {
       name: "Jackson Perez",

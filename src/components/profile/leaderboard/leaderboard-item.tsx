@@ -11,7 +11,7 @@ function BadgeDisplay(props) {
     list.push(<Crystal />);
   }
   //Iterate through the list and render items
-  const listBadges = list.map(badge => <div key={badge}>{badge}</div>);
+  const listBadges = list.map((badge, index) => <div key={index}>{badge}</div>);
   return (
     //Put everything in a flex box
     <div className={`flex flex-row h-20 content-center items-center`}>
