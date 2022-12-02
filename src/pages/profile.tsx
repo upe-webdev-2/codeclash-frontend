@@ -14,9 +14,7 @@ const DOM = () => {
   const radialBackground =
     "bg-gradient-radial from-cardGradient-primary to-cardGradient-secondary";
 
-  const user = "Nick";
-  const description =
-    "is simply dummy text of the printing and typesetting industry.";
+  const user = "Mike";
 
   return (
     <>
@@ -30,7 +28,10 @@ const DOM = () => {
           <div className="font-gilroy-bold text-xl mx-9 mt-6">
             Welcome back, {user}!
           </div>
-          <div className="text-slate-200 mx-9 pr-32">{description}</div>
+          <div className="text-slate-200 mx-9 pr-32 text-lg">
+            Problem solved: 64
+          </div>
+          <div className="text-slate-200 mx-9 pr-32 -mt-4 text-lg">Total Problems: 159</div>
         </div>
 
         {/* Video recommendation */}
@@ -39,7 +40,7 @@ const DOM = () => {
             className={`flex items-center px-10 justify-between ${radialBackground} rounded-2xl h-[157px] w-[625px]`}
           >
             <div className="text-slate-200 text-lg">
-              2. View Basic Interviewing Skills video
+              2. Basic Interviewing Skills
             </div>
 
             <Image
@@ -66,8 +67,8 @@ const DOM = () => {
                   height={"50px"}
                 />
 
-                <div className="text-xs text-center text-slate-200 p-6">
-                  {description}
+                <div className="text-lg text-center text-slate-200 p-6">
+                  Two Sum
                 </div>
               </div>
 
@@ -79,8 +80,8 @@ const DOM = () => {
                   height={"50px"}
                 />
 
-                <div className="text-xs text-center text-slate-200 p-6">
-                  {description}
+                <div className="text-center text-slate-200 p-6 text-lg">
+                  Valid Anagrams
                 </div>
               </div>
 
@@ -95,8 +96,8 @@ const DOM = () => {
                     height={"70px"}
                   />
 
-                  <div className="text-xs text-center text-slate-300 px-6 pb-6 pt-3">
-                    {description}
+                  <div className="text-center text-slate-300 px-6 pb-6 pt-3 text-lg">
+                    LRU Cache
                   </div>
                 </div>
               </div>
@@ -112,8 +113,8 @@ const DOM = () => {
                     height={"70px"}
                   />
 
-                  <div className="text-xs text-center text-slate-300 px-6 pb-6 pt-3">
-                    {description}
+                  <div className="text-lg text-center text-slate-300 px-6 pb-6 pt-3">
+                    Alien Dictionary
                   </div>
                 </div>
               </div>
