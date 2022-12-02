@@ -1,6 +1,6 @@
 # syntax=docker/dockerfile:1
 
-FROM ubuntu:latest
+FROM node
 
 RUN mkdir /frontend
 
@@ -9,8 +9,7 @@ WORKDIR /frontend
 COPY . /frontend/
 
 # install nodejs
-RUN sudo apt install nodejs
-RUN sudo apt install npm
+RUN npm intall
 
 # install dependencies
 RUN npm i
