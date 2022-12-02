@@ -20,7 +20,7 @@ const Button = ({
   width,
   height,
   style = {},
-  disabled = true
+  disabled = false
 }: Button) => (
   <button
     onClick={onclick}
