@@ -8,7 +8,7 @@ WORKDIR /frontend
 
 COPY . /frontend/
 
-RUN sudo dnf install nodejs
+RUN dnf install nodejs
 
 RUN npm i
 
