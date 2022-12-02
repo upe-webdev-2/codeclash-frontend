@@ -9,7 +9,7 @@ WORKDIR /frontend
 COPY . /frontend/
 
 # install nodejs
-RUN npm intall
+RUN npm install
 
 # install dependencies
 RUN npm i
