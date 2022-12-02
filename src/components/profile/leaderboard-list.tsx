@@ -4,25 +4,60 @@ import LeaderboardItem from "./leaderboard-item";
 const LeaderboardList = () => {
   const [leaderboardMockData] = useState([
     {
-      name: "Tim Roberts",
+      name: "Mike Perez",
       rank: 1,
+      badgeCount: 6,
+      minutes: 854,
+      score: 148
+    },
+    {
+      name: "Smyvens Estime",
+      rank: 2,
       badgeCount: 4,
-      minutes: 754,
+      minutes: 701,
+      score: 127
+    },
+    {
+      name: "Daniel Jonas",
+      rank: 3,
+      badgeCount: 7,
+      minutes: 774,
       score: 124
     },
     {
-      name: "Johnny Appleseed",
-      rank: 3,
-      badgeCount: 3,
+      name: "David Ulloa",
+      rank: 4,
+      badgeCount: 4,
+      minutes: 798,
+      score: 117
+    },
+    {
+      name: "Sebastian Martinez",
+      rank: 5,
+      badgeCount: 5,
+      minutes: 754,
+      score: 109
+    },
+    {
+      name: "Gabriel Pedroza",
+      rank: 6,
+      badgeCount: 7,
       minutes: 516,
       score: 87
     },
     {
-      name: "Nick James",
-      rank: 4,
-      badgeCount: 1,
+      name: "Gino Rey",
+      rank: 7,
+      badgeCount: 2,
       minutes: 824,
-      score: 12
+      score: 79
+    },
+    {
+      name: "Vincent Carrancho",
+      rank: 8,
+      badgeCount: 1,
+      minutes: 801,
+      score: 69
     }
   ]);
 
