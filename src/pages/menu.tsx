@@ -1,4 +1,3 @@
-import ConclusionModal from "@/components/ConclusionModal";
 import Navbar from "@/components/Navbar/Navbar";
 import Loading from "@/templates/Loading";
 import ProblemsMenu from "@/templates/ProblemsMenu";
@@ -15,8 +14,6 @@ const Dom = () => {
     console.log(`Searching for ${difficulty}`);
     setLoading(true);
   };
-  const [displayModal, setDisplayModal] = useState<boolean>(true);
-  const [didIWin, setDidIWin] = useState<boolean>(true);
 
   const cancelSearchForGame = () => {
     /**
