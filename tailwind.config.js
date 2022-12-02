@@ -37,5 +37,9 @@ module.exports = {
       jetBrains: ["JetBrains Mono", "sans-serif"]
     },
   },
-  plugins: []
+  plugins: [
+    function ({ addVariant }) {
+        addVariant('child', '& > *');
+    }
+],
 };

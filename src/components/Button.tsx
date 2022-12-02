@@ -1,4 +1,5 @@
 import { ReactNode } from "react";
+import CSS from "csstype";
 
 type Button = {
   children: ReactNode;
@@ -7,7 +8,8 @@ type Button = {
   movingGradient: boolean;
   width?: string;
   height?: string;
-  style?: {};
+  style?: CSS.Properties;
+  disabled?: boolean;
 };
 
 const Button = ({
@@ -17,16 +19,19 @@ const Button = ({
   movingGradient,
   width,
   height,
-  style = {}
+  style = {},
+  disabled = false
 }: Button) => (
   <button
-    onClick={onclick}
+    onClick={disabled?()=>{}:onclick}
     style={{ height, width, ...style }}
-    className={`rounded-[30px] transition-all duration-1000 bg-primary cursor-pointer 
-        ${type !== "none" && " button-gradient "} ${
-      movingGradient && " button-moving-gradient "
+    className={
+      disabled
+        ? `rounded-[30px] transition-all duration-1000 p-[3px] bg-gray-700 cursor-not-allowed`
+        : `rounded-[30px] transition-all duration-1000 p-[3px] bg-primary cursor-pointer 
+          ${type !== "none" && " button-gradient "} 
+          ${movingGradient && " button-moving-gradient "}`
     }
-    `}
   >
     <div
       className={`rounded-[30px] py-3 px-10  ${

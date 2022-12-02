@@ -40,6 +40,7 @@ const DifficultyCard = (params: DifficultyCardParams) => {
             onclick={() => clickHandler(difficulty)}
             type="outline"
             movingGradient
+            disabled={difficulty.toLowerCase() !== "easy"}
           >
             Play Now
           </Button>
