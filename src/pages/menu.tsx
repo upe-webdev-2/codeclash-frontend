@@ -18,17 +18,13 @@ const Dom = () => {
   const [displayModal, setDisplayModal] = useState<boolean>(true);
   const [didIWin, setDidIWin] = useState<boolean>(true);
 
-
-  console.log(useSession());
-  
-
   const cancelSearchForGame = () => {
     /**
      * TODO: Use sockets to notify backend to stop the search for a game
      */
     console.log("Cancel search for game");
     setLoading(false);
-  };  
+  };
   return (
     <>
       <div className="w-screen">
@@ -51,7 +47,6 @@ const Dom = () => {
           </button>
         </div>
         <ConclusionModal
-          difficulty={"easy"}
           displayModal={displayModal}
           setDisplayModal={setDisplayModal}
           name={"Daniel"}
