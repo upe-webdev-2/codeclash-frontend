@@ -12,9 +12,10 @@ type Playground = {
   onTestCode: (code: string) => void;
   testCases?: {};
   opponent: UserInfo
+  results: any[]
 };
 
-const Playground = ({ problem, onSubmitCode, onTestCode, opponent }: Playground) => {
+const Playground = ({ problem, onSubmitCode, onTestCode, opponent, results }: Playground) => {
   const editorRef = useRef(null); // monaco editor
   const [tabManager, setTabManager] = useState(0); // instructions - results - (past submissions)?
 
@@ -39,7 +40,6 @@ const Playground = ({ problem, onSubmitCode, onTestCode, opponent }: Playground)
     }
   }, [timer]);
 
-  const [testCases, setTestCases] = useState(null);
   const [completedAllTestCases, setCompletedAllTestCases] = useState(false); // from the sockets if the user was able to do all the test cases
 
   return (
@@ -54,7 +54,7 @@ const Playground = ({ problem, onSubmitCode, onTestCode, opponent }: Playground)
             {
               name: "Result",
               element: (
-                <Result testCases={testCases} passed={completedAllTestCases} />
+                <Result testCases={results} passed={completedAllTestCases} />
               )
             }
           ]}

@@ -1,17 +1,17 @@
 type Result = {
   testCases:
-    | {
-        input: string;
-        output: string;
-        expected: string;
-        Stdout?: string;
-      }[]
-    | null;
+  | {
+    input: string;
+    output: string;
+    expected: string;
+    Stdout?: string;
+  }[]
+  | null;
   passed: boolean;
 };
 
 const Result = ({ testCases, passed }: Result) => {
-  if (testCases === null) {
+  if (testCases.length === 0) {
     return (
       <div className="flex items-center justify-center w-full h-full">
         <h3 className="text-xl text-gray-500 font-gilroy">
@@ -24,9 +24,8 @@ const Result = ({ testCases, passed }: Result) => {
   return (
     <div>
       <h1
-        className={`${
-          passed ? "text-green-600" : "text-red-600"
-        } mb-5 text-2xl  opacity-70 font-gilroy-bold`}
+        className={`${passed ? "text-green-600" : "text-red-600"
+          } mb-5 text-2xl  opacity-70 font-gilroy-bold`}
       >
         {passed ? "Congratulations!!!" : "At least one test case Failed!"}
       </h1>
@@ -36,11 +35,10 @@ const Result = ({ testCases, passed }: Result) => {
           <div key={index}>
             <div className="flex items-center justify-start gap-3">
               <div
-                className={`${
-                  testC.output === testC.expected
+                className={`${testC.output === testC.expected
                     ? "bg-green-600"
                     : "bg-red-600"
-                } rounded-full p-1`}
+                  } rounded-full p-1`}
               />
               <h1 className="font-gilroy-bold">Case: {index + 1}</h1>
             </div>

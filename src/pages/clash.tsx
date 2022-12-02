@@ -20,6 +20,7 @@ const Dom = () => {
   const [socket, setSocket] = useState<Socket>(null);
   const [gameOver, setGameOver] = useState(false)
   const [gameInfo, setGameInfo] = useState<GameInfo | never>();
+  const [testResults, setTestResults] = useState<any[]>([])
   const session = useSession()
 
   const cancelGameSearch = () => {
@@ -31,6 +32,14 @@ const Dom = () => {
   };
 
   const handleSubmitCode = (code: string) => {
+    if (gameOver) {
+      return
+    }
+
+    if (code.replaceAll(" ", "").charAt(code.length - 1) == ":") {
+      return
+    }
+
     socket.emit("playerSubmit", {
       userCode: code,
       username: session.data?.user.email
@@ -79,12 +88,35 @@ const Dom = () => {
     });
 
     socket.on("playerTestResult", (data: any) => {
-      console.log("Player tested something\n", data);
+      console.log("Player tested something\n", data.testResults);
+      const resultBuilder = []
 
+      data.testResults.forEach(result => {
+        resultBuilder.push({
+          input: JSON.stringify(result.input),
+          expected: JSON.stringify(result.expectedOutput),
+          output: JSON.stringify(result.userOutput),
+        })
+      })
+
+      console.log("all results", resultBuilder)
+      setTestResults(resultBuilder)
     });
 
     socket.on("playerSubmitResult", (data: any) => {
-      console.log("Player submitted something\n", data);
+      console.log("Player tested something\n", data);
+      const resultBuilder = []
+
+      data.testResults.forEach(result => {
+        resultBuilder.push({
+          input: JSON.stringify(result.input),
+          expected: JSON.stringify(result.expectedOutput),
+          output: JSON.stringify(result.userOutput),
+        })
+      })
+
+      console.log("all results", resultBuilder)
+      setTestResults(resultBuilder)
     });
 
     socket.on("finishedGame", (data: any) => {
@@ -93,8 +125,8 @@ const Dom = () => {
       setGameInfo(data)
     });
 
-    return () => {
-      cancelGameSearch();
+    return function unLoad() {
+      socket.disconnect()
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [session.data?.user.email, socket]);
@@ -121,6 +153,7 @@ const Dom = () => {
             onSubmitCode={handleSubmitCode}
             onTestCode={handleTestCode}
             opponent={opponent}
+            results={testResults}
           />
         )
       }
