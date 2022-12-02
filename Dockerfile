@@ -8,9 +8,6 @@ WORKDIR /frontend
 
 COPY . /frontend/
 
-# install nodejs
-RUN npm install
-
 # install dependencies
 RUN npm i
 RUN next build
