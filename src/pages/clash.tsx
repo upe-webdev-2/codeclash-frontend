@@ -1,12 +1,16 @@
+import ConclusionModal from "@/components/ConclusionModal";
 import Navbar from "@/components/Navbar/Navbar";
 import Loading from "@/templates/Loading";
 import Playground from "@/templates/Playground";
-import { UserInfo, Problem } from "@/templates/Playground/data";
+import { GameInfo, Problem, UserInfo } from "@/templates/Playground/data";
 import { GetServerSideProps } from "next";
 import { getSession, useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { io, Socket } from "socket.io-client";
+
+
+
 
 const Dom = () => {
   const router = useRouter();
@@ -14,6 +18,8 @@ const Dom = () => {
   const [problem, setProblem] = useState<Problem>({} as Problem);
   const [opponent, setOpponent] = useState<UserInfo>({} as UserInfo)
   const [socket, setSocket] = useState<Socket>(null);
+  const [gameOver, setGameOver] = useState(false)
+  const [gameInfo, setGameInfo] = useState<GameInfo | never>();
   const session = useSession()
 
   const cancelGameSearch = () => {
@@ -83,6 +89,8 @@ const Dom = () => {
 
     socket.on("finishedGame", (data: any) => {
       console.log("finished game socket call\n", data);
+      setGameOver(true)
+      setGameInfo(data)
     });
 
     return () => {
@@ -91,19 +99,33 @@ const Dom = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [socket]);
 
-  return isLoading ? (
+  return (
     <>
-      <Navbar />
-      <Loading onCancel={() => cancelGameSearch()} opponent={opponent} />
+      <ConclusionModal
+        name={gameInfo?.wonPlayerInfo.name}
+        profileImage={gameInfo?.wonPlayerInfo.image}
+        didIWin={gameInfo?.wonPlayerInfo.name === session.data?.user.name}
+        displayModal={gameOver}
+        setDisplayModal={setGameOver}
+      />
+
+      {
+        isLoading ? (
+          <>
+            <Navbar />
+            <Loading onCancel={() => cancelGameSearch()} opponent={opponent} />
+          </>
+        ) : (
+          <Playground
+            problem={problem}
+            onSubmitCode={handleSubmitCode}
+            onTestCode={handleTestCode}
+            opponent={opponent}
+          />
+        )
+      }
     </>
-  ) : (
-    <Playground
-      problem={problem}
-      onSubmitCode={handleSubmitCode}
-      onTestCode={handleTestCode}
-      opponent={opponent}
-    />
-  );
+  )
 };
 
 export default function Clash() {

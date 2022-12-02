@@ -18,3 +18,21 @@ export type UserInfo = {
   achievements: number
 }
 
+export type PlayerInfo = {
+  id: string
+  name: string
+  emailVerified: boolean | null
+  xp: number
+  image: string
+  Account: null
+  MatchHistory_MatchHistory_player1IdToUser: null
+  MatchHistory_MatchHistory_player2IdToUser: null
+  Session: null
+}
+
+export type GameInfo = {
+  wonPlayer: string,
+  lostPlayer: string
+  wonPlayerInfo: PlayerInfo,
+  lostPlayerInfo: PlayerInfo
+}

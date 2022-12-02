@@ -7,7 +7,7 @@ import Router from "next/router";
 
 type ConclusionModalProps = {
   name: string;
-  profileImage: string;
+  profileImage?: string;
   didIWin: boolean;
   displayModal: boolean;
   setDisplayModal: Dispatch<SetStateAction<boolean>>;
@@ -25,7 +25,7 @@ const ConclusionModal = ({
     window.scrollTo(0, 0);
   }
 
-  useEffect(() => {    
+  useEffect(() => {
     function watchScroll() {
       window.addEventListener("scroll", scrollToTop);
     }
@@ -67,9 +67,9 @@ const ConclusionModal = ({
             <AiOutlineClose size={20} />
           </div>
 
-          <div className="text-5xl pb-1 font-gilroy-bold">{name}</div>
+          <div className="pb-1 text-5xl font-gilroy-bold">{name}</div>
 
-          <div className="text-xl pb-5 font-gilroy">
+          <div className="pb-5 text-xl font-gilroy">
             {didIWin ? (
               <p className="text-green-500">Congratulations! You Won!</p>
             ) : (
@@ -79,7 +79,7 @@ const ConclusionModal = ({
           <Image
             className="rounded-full"
             alt="winner's profile picture"
-            src={profileImage}
+            src={profileImage || "/static/placeholder.jpeg"}
             width="150px"
             height={"150px"}
           />
