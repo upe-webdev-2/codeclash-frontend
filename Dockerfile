@@ -1,6 +1,6 @@
 # syntax=docker/dockerfile:1
 
-FROM alpine:3.14
+FROM ubuntu:latest
 
 RUN mkdir /frontend
 
@@ -8,7 +8,7 @@ WORKDIR /frontend
 
 COPY . /frontend/
 
-RUN apk add --update nodejs npm 
+RUN apk apt nodejs npm 
 
 RUN npm i
 
