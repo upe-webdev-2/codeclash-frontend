@@ -1,6 +1,6 @@
 # syntax=docker/dockerfile:1
 
-FROM centos:8 
+FROM alpine:3.14
 
 RUN mkdir /frontend
 
@@ -8,7 +8,7 @@ WORKDIR /frontend
 
 COPY . /frontend/
 
-RUN dnf install nodejs
+RUN apk add nodejs
 
 RUN npm i
 
