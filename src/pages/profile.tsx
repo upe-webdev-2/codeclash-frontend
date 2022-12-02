@@ -26,7 +26,7 @@ const DOM = () => {
             Welcome back, {user}!
           </div>
           <div className="text-slate-200 mx-9 pr-32 text-lg">
-            Problem solved: 0
+            Problem solved: 21
           </div>
           <div className="text-slate-200 mx-9 pr-32 -mt-4 text-lg">
             Total Problems: 159
