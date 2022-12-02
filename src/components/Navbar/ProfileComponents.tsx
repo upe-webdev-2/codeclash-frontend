@@ -20,12 +20,6 @@ const ProfileOptions = () => {
         </li>
         <li
           className="cursor-pointer hover:text-secondary"
-          onClick={() => Router.push("/settings")}
-        >
-          Settings
-        </li>
-        <li
-          className="cursor-pointer hover:text-secondary"
           onClick={() => {
             signOut({ callbackUrl: "/" });
           }}

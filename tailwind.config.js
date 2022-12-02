@@ -35,7 +35,7 @@ module.exports = {
       gilroy: ["GILROY", "sans-serif"],
       "gilroy-bold": ["GILROY_BOLD", "sans-serif"],
       jetBrains: ["JetBrains Mono", "sans-serif"]
-    }
+    },
   },
   plugins: [
     function ({ addVariant }) {

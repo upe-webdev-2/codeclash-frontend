@@ -44,6 +44,27 @@
   .hide-scroll-bar::-webkit-scrollbar {
     display: none;
   }
+
+  .animated-text {
+    background: linear-gradient(
+      90deg,
+      rgba(107, 68, 217, 1) 0%,
+      rgba(108, 255, 237, 1) 50%,
+      rgba(107, 68, 217, 1) 100%
+    );
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-size: 200%;
+    animation: scroll-background 5s linear infinite;
+  }
+  @keyframes scroll-background {
+    from {
+      background-position: 0%;
+    }
+    to {
+      background-position: 190%;
+    }
+  }
 }
 
 /* ! Do NOT add @layer these three button classes /*
