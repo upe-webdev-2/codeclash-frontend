@@ -12,7 +12,7 @@ const DOM = () => {
   const radialBackground =
     "bg-gradient-radial from-cardGradient-primary to-cardGradient-secondary";
 
-  const user = useSession().data?.user?.name;
+  const user = useSession().data?.user?.name||".....";
   return (
     <>
       <Navbar />
@@ -26,7 +26,7 @@ const DOM = () => {
             Welcome back, {user}!
           </div>
           <div className="text-slate-200 mx-9 pr-32 text-lg">
-            Problem solved: 64
+            Problem solved: 0
           </div>
           <div className="text-slate-200 mx-9 pr-32 -mt-4 text-lg">
             Total Problems: 159
