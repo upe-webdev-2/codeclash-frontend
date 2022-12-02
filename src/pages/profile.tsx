@@ -1,7 +1,5 @@
-import useStore from "@/helpers/store";
-import dynamic from "next/dynamic";
-import { signIn, signOut, useSession } from "next-auth/react";
-import { useRouter } from "next/router";
+import { getSession, useSession } from "next-auth/react";
+import { GetServerSideProps } from "next";
 import Image from "next/image";
 import Navbar from "@/components/Navbar/Navbar";
 import LeaderboardList from "@/components/profile/leaderboard-list";
@@ -137,10 +135,21 @@ export default function leaderboard() {
   );
 }
 
-export async function getStaticProps() {
+export const getServerSideProps: GetServerSideProps = async context => {
+  const session = await getSession(context);
+
+  if (!session?.user) {
+    return {
+      redirect: {
+        destination: "/auth",
+        permanent: false
+      }
+    };
+  }
+
   return {
     props: {
       title: "Profile"
     }
   };
-}
+};
